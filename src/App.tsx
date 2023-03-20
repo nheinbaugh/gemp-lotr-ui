@@ -1,11 +1,16 @@
-import './App.css'
+import './App.css';
 
 function App() {
   return (
     <div className="App">
-    hello world
+      <input
+        className="this is my classname"
+        type="text"
+        placeholder="foobar the world"
+        name="my thing"
+      />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
