@@ -1,6 +1,5 @@
-
 export interface TheOneRingProps {
-    height?: number;
-    width?: number;
-    classes?: string
+  height?: number;
+  width?: number;
+  classes?: string;
 }

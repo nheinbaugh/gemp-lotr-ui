@@ -6,10 +6,7 @@ function Landing() {
   return (
     <div className={styles.landingPage}>
       <TheOneRing classes={styles.oneRing} />
-
-
-
-         <MainForm />
+      <MainForm />
     </div>
   );
 }

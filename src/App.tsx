@@ -1,15 +1,15 @@
-import './App.css';
+import '@fontsource/public-sans';
+import { CssBaseline, CssVarsProvider } from '@mui/joy';
+
+import Landing from './pages/Landing/Landing';
+import themeOverrides from './types/ThemeCustomizations';
 
 function App() {
   return (
-    <div className="App">
-      <input
-        className="this is my classname"
-        type="text"
-        placeholder="foobar the world"
-        name="my thing"
-      />
-    </div>
+    <CssVarsProvider theme={themeOverrides}>
+      <CssBaseline />
+      <Landing />
+    </CssVarsProvider>
   );
 }
 
