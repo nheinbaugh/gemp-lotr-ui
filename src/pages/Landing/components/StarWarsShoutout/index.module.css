@@ -1,0 +1,12 @@
+img {
+    height: 20px;
+}
+
+.starWarsRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 1em;
+    align-items: center;
+    gap: .5em
+}
