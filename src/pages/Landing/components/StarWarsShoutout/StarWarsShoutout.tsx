@@ -8,7 +8,7 @@ function StarWarsShoutout() {
         src="https://res.starwarsccg.org/gemp/lightForce-42.png"
         alt="green lightsaber"
       />
-      <Typography>
+      <Typography textAlign="center">
         Also check out{' '}
         <a
           href="https://gemp.starwarsccg.org/gemp-swccg/"

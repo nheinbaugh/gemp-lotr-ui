@@ -1,11 +1,15 @@
-import { ActionResult } from "./action-result.interface";
+import { ActionResult } from './action-result.interface';
 
-export const createSuccessActionResult = <T>(result: T): ActionResult<T> => ({
-    success: true,
-    result
+export const createSuccessActionResult = <T = boolean>(
+  result: T
+): ActionResult<T> => ({
+  success: true,
+  result,
 });
 
-export const createErrorActionResult = <T>(errorMessage: string): ActionResult<T> => ({
-    success: false,
-    error: errorMessage
+export const createErrorActionResult = <TError>(
+  errorMessage: TError
+): ActionResult<boolean, TError> => ({
+  success: false,
+  error: errorMessage,
 });

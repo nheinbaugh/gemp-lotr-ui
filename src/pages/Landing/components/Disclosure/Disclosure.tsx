@@ -1,8 +1,9 @@
 import { Typography } from '@mui/joy';
+import styles from './index.module.css';
 
 function Disclosure() {
   return (
-    <Typography sx={{ mt: 2 }}>
+    <Typography className={styles.disclosure} sx={{ mt: 2 }}>
       <a
         href="https://wiki.lotrtcgpc.net/wiki/The_Lord_of_the_Rings_TCG"
         target="_blank"

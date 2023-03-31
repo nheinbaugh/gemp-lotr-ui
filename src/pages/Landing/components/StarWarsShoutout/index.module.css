@@ -10,3 +10,7 @@ img {
     align-items: center;
     gap: .5em
 }
+
+.starWarsRow a {
+    text-decoration: underline;
+}
