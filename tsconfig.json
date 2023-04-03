@@ -14,7 +14,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "types": ["vite/client"],
+    "baseUrl": "src",
+    "paths": {
+      "@gemp-assets/*": ["src/assets/*"]
+    }
   },
   "include": ["src", ".eslintrc.cjs", "vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
