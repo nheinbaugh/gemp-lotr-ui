@@ -44,8 +44,9 @@ export const isValidAccount = (
     return errors;
   }
   const isValidLogin = isLoginValid(login);
-  if (!isValidLogin.success) {
-    return defaultRegisrationErrorState();
+  if (!isValidLogin.success && isValidLogin.error) {
+    // this is what bums me out, it should be able to infer that no success means an error is there
+    return isValidLogin.error;
   }
 
   return errors;

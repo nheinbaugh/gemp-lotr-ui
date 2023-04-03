@@ -1,3 +1,13 @@
+import { Typography } from '@mui/joy';
+import { Link } from 'react-router-dom';
+
 export default function GameHall() {
-  return <div>This is the game hall my dudes</div>;
+  return (
+    <>
+      <span>Lets game dudes!</span>
+      <Typography>
+        <Link to="/decks">Manage your Decks</Link>
+      </Typography>
+    </>
+  );
 }
