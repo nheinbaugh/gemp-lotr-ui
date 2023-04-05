@@ -1,13 +1,16 @@
-import dwarven from '@gemp-assets/icons/cultures/dwarven.svg';
+import { getIconByName } from '../../../lotr-common/icons/icon-name.functions';
+import { IconName } from '../../../lotr-common/icons/icons.type';
 
-function GempIcon() {
-  // console.log(dwarven);
+interface GempIconProps {
+  name: IconName;
+}
+
+function GempIcon({ name }: GempIconProps) {
   return (
     <div>
-      <img src={dwarven} alt="dwarves" />
+      <img src={getIconByName(name)} alt="dwarves" />
     </div>
   );
-  // return <>okay....</>;
 }
 
 export default GempIcon;
