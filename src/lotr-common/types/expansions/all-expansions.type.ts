@@ -2,7 +2,7 @@ import {
   deciperSetExpansionMetadata,
   DecipherSets,
 } from './decipher-sets.type';
-import { expansionGroupMetadata } from './expansion-groups.type';
+import { otherFormatMetadata } from './formats.type';
 import { LotrExpansionMetadata } from './lotr-expansion-metadata.interface';
 import {
   PlayersCommitteeErrata,
@@ -23,12 +23,12 @@ export type LotrExpansions =
   | PlayersCommitteeErrata
   | PlaytestSets;
 
-export const allExpansionDisplayNameMappings: Record<
+export const allExpansionsMetadata: Record<
   LotrExpansions,
   LotrExpansionMetadata
 > = {
   ...deciperSetExpansionMetadata,
-  ...expansionGroupMetadata,
+  ...otherFormatMetadata,
   ...playersCommitteeErrataMetadata,
   ...playtestSetExpansionMetadata,
   ...playersCommitteeExpansionMetadata,
