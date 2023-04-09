@@ -1,8 +1,13 @@
 import { lotrCardKeywordTypeMappings } from '../../../../lotr-common/types/filter-types/keyword.types';
 import GempDropdown from '../../GempDropdown/GempDropdown';
 
-function CardTypeSelector() {
-  return <GempDropdown options={lotrCardKeywordTypeMappings} />;
+function KeywordSelector() {
+  return (
+    <GempDropdown
+      placeholder="Filter by Keyword"
+      options={lotrCardKeywordTypeMappings}
+    />
+  );
 }
 
-export default CardTypeSelector;
+export default KeywordSelector;

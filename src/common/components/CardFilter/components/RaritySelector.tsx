@@ -2,7 +2,9 @@ import { rarityMappings } from '../../../../lotr-common/types/filter-types/rarit
 import GempDropdown from '../../GempDropdown/GempDropdown';
 
 function RaritySelector() {
-  return <GempDropdown options={rarityMappings} />;
+  return (
+    <GempDropdown placeholder="Filter by Rarity" options={rarityMappings} />
+  );
 }
 
 export default RaritySelector;

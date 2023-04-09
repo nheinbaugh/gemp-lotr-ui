@@ -2,7 +2,12 @@ import { lotrSortTypeMappings } from '../../../../lotr-common/types/filter-types
 import GempDropdown from '../../GempDropdown/GempDropdown';
 
 function CardTypeSelector() {
-  return <GempDropdown options={lotrSortTypeMappings} />;
+  return (
+    <GempDropdown
+      placeholder="Filter by Card Type"
+      options={lotrSortTypeMappings}
+    />
+  );
 }
 
 export default CardTypeSelector;

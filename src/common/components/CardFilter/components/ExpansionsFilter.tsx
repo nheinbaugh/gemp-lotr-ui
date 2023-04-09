@@ -30,6 +30,7 @@ function ExpansionsFilter() {
   };
   return (
     <Select
+      sx={{ width: '100%' }}
       placeholder="Filter by Set"
       slotProps={{
         listbox: {

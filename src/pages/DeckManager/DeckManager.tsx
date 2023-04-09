@@ -1,17 +1,30 @@
-import { Box } from '@mui/joy';
-import CardFilter from '../../common/components/CardFilter/CardFilter';
-import GempIcon from '../../common/components/GempIcon/GempIcon';
+import Drawer from '@mui/material/Drawer';
+import { useState } from 'react';
+import FiltersList from './components/FilterList/FiltersList';
+import FilterToggle from './components/FilterToggle/FilterToggle';
 
-function DeckManager() {
+export default function TemporaryDrawer() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDrawer =
+    (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event.type === 'keydown' &&
+        ((event as React.KeyboardEvent).key === 'Tab' ||
+          (event as React.KeyboardEvent).key === 'Shift')
+      ) {
+        return;
+      }
+
+      setIsOpen(open);
+    };
+
   return (
-    <Box sx={{ width: '99vw', height: '99vh' }}>
-      This is where you could (I suppose) manage your decks
-      <GempIcon name="dwarven-culture" />
-      <GempIcon name="elven-culture" />
-      <GempIcon name="raider-culture" />
-      <CardFilter />
-    </Box>
+    <>
+      <FilterToggle showFilters={toggleDrawer(true)} />
+      <Drawer anchor="right" open={isOpen} onClose={toggleDrawer(false)}>
+        <FiltersList applyFilters={toggleDrawer(false)} />
+      </Drawer>
+    </>
   );
 }
-
-export default DeckManager;
