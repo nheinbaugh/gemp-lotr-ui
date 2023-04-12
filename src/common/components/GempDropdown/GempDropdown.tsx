@@ -1,20 +1,28 @@
 import { Option, Select } from '@mui/joy';
+import { Mappings } from '../../types/mappings.interface';
 
 interface GempDropdownProps {
-  options: Record<string, string>;
+  options: Mappings[];
   placeholder: string;
+  selectionChanged: (selection: string) => void;
 }
 
-function GempDropdown({ options, placeholder = '' }: GempDropdownProps) {
+function GempDropdown({
+  options,
+  placeholder = '',
+  selectionChanged,
+}: GempDropdownProps) {
   return (
-    <Select sx={{ width: '100%' }} placeholder={placeholder}>
-      {Object.entries(options).map(([displayName, internalName]) => {
-        return (
-          <Option key={internalName} value={internalName}>
-            {displayName}
-          </Option>
-        );
-      })}
+    <Select
+      sx={{ width: '100%' }}
+      placeholder={placeholder}
+      onChange={(_, newValue) => selectionChanged(newValue?.toString() || '')}
+    >
+      {options.map(({ apiName, displayName }) => (
+        <Option key={apiName} value={apiName}>
+          {displayName}
+        </Option>
+      ))}
     </Select>
   );
 }

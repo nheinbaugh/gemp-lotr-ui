@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import CardTypeSelector from './components/CardTypeSelector';
 import ExpansionsFilter from './components/ExpansionsFilter';
 import RaritySelector from './components/RaritySelector';
@@ -7,10 +8,10 @@ function CardFilter() {
   return (
     <div>
       <div>do stuff</div>
-      <SortSelector />
-      <RaritySelector />
-      <CardTypeSelector />
-      <ExpansionsFilter />
+      {/* <SortSelector /> */}
+      {/* <RaritySelector filterChanged={setRarity} /> */}
+      {/* <CardTypeSelector />
+      <ExpansionsFilter /> */}
       <div>did stuff</div>
     </div>
   );

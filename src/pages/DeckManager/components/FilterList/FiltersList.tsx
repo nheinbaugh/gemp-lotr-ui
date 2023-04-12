@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/joy/Button';
 import List from '@mui/material/List';
@@ -16,6 +16,11 @@ interface FiltersListProps {
 }
 
 export default function FiltersList({ applyFilters }: FiltersListProps) {
+  const [rarity, setRarity] = useState<string>('');
+  const [cardType, setCardType] = useState<string>('');
+  const [keyword, setKeyword] = useState<string>('');
+  const [expansions, setExpansions] = useState<string>('');
+  const [sort, setSort] = useState<string>('');
   return (
     <Box sx={{ width: 400, p: 1 }} role="presentation">
       <Typography level="h3">Filters</Typography>
@@ -62,43 +67,20 @@ export default function FiltersList({ applyFilters }: FiltersListProps) {
           </Box>
         </ListItem>
         <ListItem>
-          <RaritySelector />
+          <RaritySelector filterChanged={setRarity} />
         </ListItem>
         <ListItem>
-          <CardTypeSelector />
+          <CardTypeSelector filterChanged={setCardType} />
         </ListItem>
         <ListItem>
-          <KeywordSelector />
+          <KeywordSelector filterChanged={setKeyword} />
         </ListItem>
         <ListItem>
-          <ExpansionsFilter />
+          <ExpansionsFilter filterChanged={setExpansions} />
         </ListItem>
         <ListItem>
-          <SortSelector />
+          <SortSelector filterChanged={setSort} />
         </ListItem>
-        {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}  */}
       </List>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: '.5em' }}>
         <Button color="info" variant="outlined">

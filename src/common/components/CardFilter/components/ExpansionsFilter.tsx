@@ -19,9 +19,9 @@ import {
   playtestSetExpansionMetadata,
   commonFormatsMetadata,
 } from '../../../../lotr-common/types/expansions';
-import GempDropdown from '../../GempDropdown/GempDropdown';
+import { CardFilterDropdownProps } from './CardFilter-props.interface';
 
-function ExpansionsFilter() {
+function ExpansionsFilter({ filterChanged }: CardFilterDropdownProps) {
   const sections = {
     'Common Formats': commonFormatsMetadata,
     'Other Formats': otherFormatMetadata,
@@ -32,6 +32,7 @@ function ExpansionsFilter() {
     <Select
       sx={{ width: '100%' }}
       placeholder="Filter by Set"
+      onChange={(_, newValue) => filterChanged(newValue?.toString() || '')}
       slotProps={{
         listbox: {
           component: 'div',
@@ -43,8 +44,8 @@ function ExpansionsFilter() {
         },
       }}
     >
-      {Object.entries(sections).map(([name, animals], index) => {
-        const rawr = Object.entries(animals);
+      {Object.entries(sections).map(([name, options], index) => {
+        const sectionOptions = Object.entries(options);
         return (
           <React.Fragment key={name}>
             {index !== 0 && <ListDivider role="none" />}
@@ -58,10 +59,10 @@ function ExpansionsFilter() {
                   textTransform="uppercase"
                   letterSpacing="md"
                 >
-                  {name} ({rawr.length})
+                  {name} ({sectionOptions.length})
                 </Typography>
               </ListItem>
-              {rawr.map(([_, option]) => (
+              {sectionOptions.map(([_, option]) => (
                 <Option
                   key={option.value}
                   value={option.displayName}

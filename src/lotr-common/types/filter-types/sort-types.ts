@@ -1,18 +1,21 @@
-export type LotrSortingTypes =
-  | 'Name'
-  | 'Culture'
-  | 'Twilight'
-  | 'Site Number'
-  | 'Strength'
-  | 'Vitality'
-  | 'Card Type';
+import { Mappings } from '../../../common/types/mappings.interface';
 
-export const lotrSortTypeMappings: Record<LotrSortingTypes, string> = {
-  Name: 'name',
-  Culture: 'culture,name',
-  Twilight: 'twilight,name',
-  Strength: 'strength,name',
-  Vitality: 'vitality,name',
-  'Card Type': 'cardType,name',
-  'Site Number': 'siteNumber,name',
+enum LotrSortingTypes {
+  Name = 'Name',
+  Culture = 'Culture',
+  Twilight = 'Twilight',
+  SiteNumber = 'SiteNumber',
+  Strength = 'Strength',
+  Vitality = 'Vitality',
+  CardType = 'CardType',
+}
+
+export const lotrSortTypeMappings: Record<LotrSortingTypes, Mappings> = {
+  Name: { apiName: 'name', displayName: 'Name' },
+  Culture: { apiName: 'culture,name', displayName: 'Culture' },
+  Twilight: { apiName: 'twilight,name', displayName: 'Twilight' },
+  Strength: { apiName: 'strength,name', displayName: 'Strength' },
+  Vitality: { apiName: 'vitality,name', displayName: 'Vitality' },
+  CardType: { apiName: 'cardType,name', displayName: 'Card Type' },
+  SiteNumber: { apiName: 'siteNumber,name', displayName: 'Site Number' },
 };

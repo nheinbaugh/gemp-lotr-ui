@@ -1,80 +1,197 @@
-export type LotrCardKeywords =
-  | 'Archer'
-  | 'Battleground'
-  | 'Besieger'
-  | 'Corsair'
-  | 'Dwelling'
-  | 'Easterling'
-  | 'Enduring'
-  | 'Engine'
-  | 'Fierce'
-  | 'Forest'
-  | 'Fortification'
-  | 'Hunter'
-  | 'Knight'
-  | 'Lurker'
-  | 'Machine'
-  | 'Marsh'
-  | 'Mountain'
-  | 'Muster'
-  | 'Pipeweed'
-  | 'Plains'
-  | 'Ranger'
-  | 'Ring-bound'
-  | 'River'
-  | 'Search'
-  | 'Southron'
-  | 'Spell'
-  | 'Stealth'
-  | 'Tale'
-  | 'Tentacle'
-  | 'Tracker'
-  | 'Twilight'
-  | 'Underground'
-  | 'Unhasty'
-  | 'Valiant'
-  | 'Villager'
-  | 'Warg-rider'
-  | 'Weather'
-  | 'Wise';
+import { Mappings } from '../../../common/types/mappings.interface';
 
-export const lotrCardKeywordTypeMappings: Record<LotrCardKeywords, string> = {
-  Archer: '',
-  Battleground: 'BATTLEGROUND',
-  Besieger: 'BESIEGER',
-  Corsair: 'CORSAIR',
-  Dwelling: 'DWELLING',
-  Easterling: 'EASTERLING',
-  Enduring: 'ENDURING',
-  Engine: 'ENGINE',
-  Fierce: 'FIERCE',
-  Forest: 'FOREST',
-  Fortification: 'FORTIFICATION',
-  Hunter: 'HUNTER',
-  Knight: 'KNIGHT',
-  Lurker: 'LURKER',
-  Machine: 'MACHINE',
-  Marsh: 'MARSH',
-  Mountain: 'MOUNTAIN',
-  Muster: 'MUSTER',
-  Pipeweed: 'PIPEWEED',
-  Plains: 'PLAINS',
-  Ranger: 'RANGER',
-  'Ring-bound': 'RING_BOUND',
-  River: 'RIVER',
-  Search: 'SEARCH',
-  Southron: 'SOUTHRON',
-  Spell: 'SPELL',
-  Stealth: 'STEALTH',
-  Tale: 'TALE',
-  Tentacle: 'TENTACLE',
-  Tracker: 'TRACKER',
-  Twilight: 'TWILIGHT',
-  Underground: 'UNDERGROUND',
-  Unhasty: 'UNHASTY',
-  Valiant: 'VALIANT',
-  Villager: 'VILLAGER',
-  'Warg-rider': 'WARG_RIDER',
-  Weather: 'WEATHER',
-  Wise: 'WISE',
+export enum LotrCardKeywords {
+  Archer = 'Archer',
+  Battleground = 'Battleground',
+  Besieger = 'Besieger',
+  Corsair = 'Corsair',
+  Dwelling = 'Dwelling',
+  Easterling = 'Easterling',
+  Enduring = 'Enduring',
+  Engine = 'Engine',
+  Fierce = 'Fierce',
+  Forest = 'Forest',
+  Fortification = 'Fortification',
+  Hunter = 'Hunter',
+  Knight = 'Knight',
+  Lurker = 'Lurker',
+  Machine = 'Machine',
+  Marsh = 'Marsh',
+  Mountain = 'Mountain',
+  Muster = 'Muster',
+  Pipeweed = 'Pipeweed',
+  Plains = 'Plains',
+  Ranger = 'Ranger',
+  Ringbound = 'RingBound',
+  River = 'River',
+  Search = 'Search',
+  Southron = 'Southron',
+  Spell = 'Spell',
+  Stealth = 'Stealth',
+  Tale = 'Tale',
+  Tentacle = 'Tentacle',
+  Tracker = 'Tracker',
+  Twilight = 'Twilight',
+  Underground = 'Underground',
+  Unhasty = 'Unhasty',
+  Valiant = 'Valiant',
+  Villager = 'Villager',
+  WargRider = 'WargRider',
+  Weather = 'Weather',
+  Wise = 'Wise',
+}
+
+export const lotrCardKeywordTypeMappings: Record<LotrCardKeywords, Mappings> = {
+  Archer: {
+    apiName: 'archer',
+    displayName: 'Archer',
+  },
+  Battleground: {
+    apiName: 'battleground',
+    displayName: 'Battleground',
+  },
+  Besieger: {
+    apiName: 'besieger',
+    displayName: 'Besieger',
+  },
+  Corsair: {
+    apiName: 'corsair',
+    displayName: 'Corsair',
+  },
+  Dwelling: {
+    apiName: 'dwelling',
+    displayName: 'Dwelling',
+  },
+  Easterling: {
+    apiName: 'easterling',
+    displayName: 'Easterling',
+  },
+  Enduring: {
+    apiName: 'enduring',
+    displayName: 'Enduring',
+  },
+  Engine: {
+    apiName: 'engine',
+    displayName: 'Engine',
+  },
+  Fierce: {
+    apiName: 'fierce',
+    displayName: 'Fierce',
+  },
+  Forest: {
+    apiName: 'forest',
+    displayName: 'Forest',
+  },
+  Fortification: {
+    apiName: 'fortification',
+    displayName: 'Fortification',
+  },
+  Hunter: {
+    apiName: 'hunter',
+    displayName: 'Hunter',
+  },
+  Knight: {
+    apiName: 'knight',
+    displayName: 'Knight',
+  },
+  Lurker: {
+    apiName: 'lurker',
+    displayName: 'Lurker',
+  },
+  Machine: {
+    apiName: 'machine',
+    displayName: 'Machine',
+  },
+  Marsh: {
+    apiName: 'marsh',
+    displayName: 'Marsh',
+  },
+  Mountain: {
+    apiName: 'mountain',
+    displayName: 'Mountain',
+  },
+  Muster: {
+    apiName: 'muster',
+    displayName: 'Muster',
+  },
+  Pipeweed: {
+    apiName: 'pipeweed',
+    displayName: 'Pipeweed',
+  },
+  Plains: {
+    apiName: 'plains',
+    displayName: 'Plains',
+  },
+  Ranger: {
+    apiName: 'ranger',
+    displayName: 'Ranger',
+  },
+  RingBound: {
+    apiName: 'ring_bound',
+    displayName: 'Ring-Bound',
+  },
+  River: {
+    apiName: 'river',
+    displayName: 'River',
+  },
+  Search: {
+    apiName: 'search',
+    displayName: 'Search',
+  },
+  Southron: {
+    apiName: 'southron',
+    displayName: 'Southron',
+  },
+  Spell: {
+    apiName: 'spell',
+    displayName: 'Spell',
+  },
+  Stealth: {
+    apiName: 'stealth',
+    displayName: 'Stealth',
+  },
+  Tale: {
+    apiName: 'tale',
+    displayName: 'Tale',
+  },
+  Tentacle: {
+    apiName: 'tentacle',
+    displayName: 'Tentacle',
+  },
+  Tracker: {
+    apiName: 'tracker',
+    displayName: 'Tracker',
+  },
+  Twilight: {
+    apiName: 'twilight',
+    displayName: 'Twilight',
+  },
+  Underground: {
+    apiName: 'underground',
+    displayName: 'Underground',
+  },
+  Unhasty: {
+    apiName: 'unhasty',
+    displayName: 'Unhasty',
+  },
+  Valiant: {
+    apiName: 'valiant',
+    displayName: 'Valiant',
+  },
+  Villager: {
+    apiName: 'villager',
+    displayName: 'Villager',
+  },
+  WargRider: {
+    apiName: 'warg_rider',
+    displayName: 'Warg-Rider',
+  },
+  Weather: {
+    apiName: 'weather',
+    displayName: 'Weather',
+  },
+  Wise: {
+    apiName: 'wise',
+    displayName: 'Wise',
+  },
 };

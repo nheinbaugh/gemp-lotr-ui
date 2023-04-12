@@ -1,20 +1,47 @@
-export type CardRarity =
-  | 'Common'
-  | 'Uncommon'
-  | 'Rare'
-  | 'Rare+'
-  | 'Alternate Image'
-  | 'Promo'
-  | 'Fixed'
-  | "Poorman's";
+import { Mappings } from '../../../common/types/mappings.interface';
 
-export const rarityMappings: Record<CardRarity, string> = {
-  'Alternate Image': 'AI',
-  Common: 'C',
-  Fixed: 'F',
-  Uncommon: 'U',
-  Rare: 'R',
-  'Rare+': 'R+',
-  Promo: 'P',
-  "Poorman's": 'C,U,P,S',
+enum CardRarity {
+  'Common' = 'Common',
+  'Uncommon' = 'Uncommon',
+  'Rare' = 'Rare',
+  'RarePlus' = 'RarePlus',
+  'AlternateImage' = 'AlternateImage',
+  'Promo' = 'Promo',
+  'Fixed' = 'Fixed',
+  'Poormans' = 'Poormans',
+}
+
+export const rarityMappings: Record<CardRarity, Mappings> = {
+  Common: {
+    apiName: 'C',
+    displayName: 'Common',
+  },
+  Uncommon: {
+    apiName: 'U',
+    displayName: 'Uncommon',
+  },
+  Rare: {
+    apiName: 'R',
+    displayName: 'Rare',
+  },
+  RarePlus: {
+    apiName: 'X',
+    displayName: 'Rare+',
+  },
+  AlternateImage: {
+    apiName: 'A',
+    displayName: 'Alternate Image',
+  },
+  Promo: {
+    apiName: 'P',
+    displayName: 'Promo',
+  },
+  Fixed: {
+    apiName: 'S',
+    displayName: 'Fixed',
+  },
+  Poormans: {
+    apiName: 'C,U,P,S',
+    displayName: "Poorman's",
+  },
 };
