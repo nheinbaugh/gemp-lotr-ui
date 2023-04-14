@@ -1,23 +1,21 @@
-import { Side } from "../../types/filter-types/side.type";
-
 export interface CollectionApiParameters {
-  participantId: string;
-  filter: CollectionApiFilters;
+  participantId: string | null;
+  filter: CollectionApiFilterDAO;
   start: number;
   count: number;
 }
 
-export interface CollectionApiFilters {
-  side: Side;
+export interface CollectionApiFilterDAO {
+  side: string;
   type: string;
   rarity: string;
-  sets: string[];
-  words: string[];
-  cardTypes: string[];
-  cultures: string[];
-  keywords: string[];
-  siteNumber: number;
-  races: string[];
-  itemClasses: string[];
-  phases: string[];
+  sets: string;
+  words: string;
+  cardTypes: string;
+  cultures: string;
+  keywords: string;
+  siteNumber: string;
+  races: string;
+  itemClasses: string;
+  phases: string;
 }

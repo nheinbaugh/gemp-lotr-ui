@@ -12,7 +12,19 @@ import KeywordSelector from '../../../../common/components/CardFilter/components
 import GempIcon from '../../../../common/components/GempIcon/GempIcon';
 
 interface FiltersListProps {
-  applyFilters: (e: React.MouseEvent) => void;
+  applyFilters: ({
+    rarity,
+    cardType,
+    keyword,
+    expansions,
+    sort,
+  }: {
+    rarity: string;
+    cardType: string;
+    keyword: string;
+    expansions: string;
+    sort: string;
+  }) => void;
 }
 
 export default function FiltersList({ applyFilters }: FiltersListProps) {
@@ -21,6 +33,11 @@ export default function FiltersList({ applyFilters }: FiltersListProps) {
   const [keyword, setKeyword] = useState<string>('');
   const [expansions, setExpansions] = useState<string>('');
   const [sort, setSort] = useState<string>('');
+
+  const handleSubmitFilters = (e: React.MouseEvent): void => {
+    e.preventDefault();
+    applyFilters({ rarity, cardType, keyword, expansions, sort });
+  };
   return (
     <Box sx={{ width: 400, p: 1 }} role="presentation">
       <Typography level="h3">Filters</Typography>
@@ -86,7 +103,7 @@ export default function FiltersList({ applyFilters }: FiltersListProps) {
         <Button color="info" variant="outlined">
           Reset Filters
         </Button>
-        <Button color="primary" variant="solid" onClick={applyFilters}>
+        <Button color="primary" variant="solid" onClick={handleSubmitFilters}>
           Apply Filters
         </Button>
       </Box>
