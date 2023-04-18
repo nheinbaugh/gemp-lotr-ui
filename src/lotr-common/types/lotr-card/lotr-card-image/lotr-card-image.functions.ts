@@ -2,8 +2,8 @@ import {
   formatCardNumber,
   formatSetNumber,
   getBlueprintByCardId,
-} from './lotr-card-formatting.functions';
-import { mainImageLocation, rulesImageHref } from './lotr-card.constants';
+} from '../lotr-card-formatting.functions';
+import { mainImageLocation, rulesImageHref } from '../lotr-card.constants';
 
 export const generateImageFileName = (
   setNumber: number,

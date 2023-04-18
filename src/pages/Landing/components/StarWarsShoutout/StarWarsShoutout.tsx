@@ -5,6 +5,7 @@ function StarWarsShoutout() {
   return (
     <div className={styles.starWarsRow}>
       <img
+        className={styles.lightsaber}
         src="https://res.starwarsccg.org/gemp/lightForce-42.png"
         alt="green lightsaber"
       />
@@ -23,6 +24,7 @@ function StarWarsShoutout() {
         </a>
       </Typography>
       <img
+        className={styles.lightsaber}
         src="https://res.starwarsccg.org/gemp/darkForce-42.png"
         alt="red lightsaber"
       />

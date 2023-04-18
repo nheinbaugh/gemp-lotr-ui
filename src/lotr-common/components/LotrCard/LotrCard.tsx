@@ -1,4 +1,7 @@
 import GempCard from '../../../common/components/Card/Card';
+import { notFoundImageUrl } from '../../types/image-resolver/types/card-image.constants';
+import { getBlueprintByCardId } from '../../types/lotr-card/lotr-card-formatting.functions';
+import { getCardImage } from '../../types/lotr-card/lotr-card-image';
 
 type LotrCardProps = {
   blueprintId: string;
@@ -10,5 +13,10 @@ type LotrCardProps = {
  * @param param
  */
 export default function LotrCard({ blueprintId }: LotrCardProps) {
-  return <GempCard imageHref="google.com" />;
+  const blueprint = getBlueprintByCardId(blueprintId);
+  const href = getCardImage(blueprintId);
+  if (!blueprint) {
+    return <GempCard imageHref={notFoundImageUrl} title="Unknown Card" />;
+  }
+  return <GempCard imageHref={href ?? 'ruhroh.com'} title="" />;
 }

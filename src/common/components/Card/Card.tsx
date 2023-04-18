@@ -2,6 +2,7 @@ import { Box } from '@mui/joy';
 
 type CardProps = {
   imageHref: string;
+  title: string;
 };
 
 /**
@@ -9,7 +10,7 @@ type CardProps = {
  * @see{LotrCard} for the implementation actually leverages this and does clean separation on top of it
  * @param param
  */
-export default function GempCard({ imageHref }: CardProps) {
+export default function GempCard({ imageHref, title }: CardProps) {
   return (
     <Box
       sx={{
@@ -19,7 +20,7 @@ export default function GempCard({ imageHref }: CardProps) {
         backgroundColor: 'neutral.300',
       }}
     >
-      this is the card with href {imageHref}
+      <img src={imageHref} alt={title} />
     </Box>
   );
 }
