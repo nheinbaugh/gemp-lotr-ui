@@ -14,7 +14,7 @@ import {
 import React from 'react';
 import {
   allExpansionsMetadata,
-  deciperSetExpansionMetadata,
+  decipherSetExpansionMetadata,
   otherFormatMetadata,
   playtestSetExpansionMetadata,
   commonFormatsMetadata,
@@ -25,7 +25,7 @@ function ExpansionsFilter({ filterChanged }: CardFilterDropdownProps) {
   const sections = {
     'Common Formats': commonFormatsMetadata,
     'Other Formats': otherFormatMetadata,
-    'Individual Sets': deciperSetExpansionMetadata,
+    'Individual Sets': decipherSetExpansionMetadata,
     Playtest: playtestSetExpansionMetadata,
   };
   return (

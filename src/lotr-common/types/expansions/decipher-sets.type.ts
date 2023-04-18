@@ -22,7 +22,7 @@ export type DecipherSets =
   | 'TreacheryAndDeceit'
   | 'AgesEnd';
 
-export const deciperSetExpansionMetadata: Record<
+export const decipherSetExpansionMetadata: Record<
   DecipherSets,
   LotrExpansionMetadata
 > = {

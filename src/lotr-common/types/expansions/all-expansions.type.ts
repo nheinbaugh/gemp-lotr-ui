@@ -1,5 +1,5 @@
 import {
-  deciperSetExpansionMetadata,
+  decipherSetExpansionMetadata,
   DecipherSets,
 } from './decipher-sets.type';
 import { otherFormatMetadata } from './formats.type';
@@ -27,7 +27,7 @@ export const allExpansionsMetadata: Record<
   LotrExpansions,
   LotrExpansionMetadata
 > = {
-  ...deciperSetExpansionMetadata,
+  ...decipherSetExpansionMetadata,
   ...otherFormatMetadata,
   ...playersCommitteeErrataMetadata,
   ...playtestSetExpansionMetadata,

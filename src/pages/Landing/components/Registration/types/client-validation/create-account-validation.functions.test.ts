@@ -9,7 +9,7 @@ describe('create-account-validation.functions', () => {
 
       const result = isLoginValid(input);
       expect(result.success).toBeFalsy();
-      expect(result.error).toBe(LoginErrors.invalidLength);
+      expect(result.error.login).toBe(LoginErrors.invalidLength);
     });
 
     it('should return false when the login is more than ten characters', () => {
@@ -17,7 +17,7 @@ describe('create-account-validation.functions', () => {
 
       const result = isLoginValid(input);
       expect(result.success).toBeFalsy();
-      expect(result.error).toBe(LoginErrors.invalidLength);
+      expect(result.error?.login).toBe(LoginErrors.invalidLength);
     });
 
     it('should return false non-allowed chars are used', () => {
@@ -25,7 +25,7 @@ describe('create-account-validation.functions', () => {
 
       const result = isLoginValid(input);
       expect(result.success).toBeFalsy();
-      expect(result.error).toBe(LoginErrors.invalidLoginCharacters);
+      expect(result.error?.login).toBe(LoginErrors.invalidLoginCharacters);
     });
 
     it('should return true when the login containers text and digits', () => {
