@@ -4,6 +4,7 @@ import GameHall from '../../pages/GameHall/GameHall';
 import Login from '../../pages/Landing/components/Login/Login';
 import Registration from '../../pages/Landing/components/Registration/Registration';
 import Landing from '../../pages/Landing/Landing';
+import { gameHallLoader } from '../../pages/GameHall';
 
 export default createBrowserRouter([
   {
@@ -23,6 +24,7 @@ export default createBrowserRouter([
   {
     path: '/hall',
     element: <GameHall />,
+    loader: gameHallLoader,
   },
   {
     path: '/decks',

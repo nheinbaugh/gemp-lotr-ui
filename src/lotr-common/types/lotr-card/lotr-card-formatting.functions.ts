@@ -4,6 +4,7 @@ import {
   allExpansionsMetadata,
   decipherSetExpansionMetadata,
 } from '../expansions';
+import { getImageUrl } from '../image-resolver/image-resolver';
 import { CardBlueprint } from './card-blueprint.interface';
 
 /**
@@ -50,6 +51,7 @@ export const getBlueprintByCardId = (id: string): CardBlueprint => {
     cardNumber,
     formattedCardNumber: formatCardNumber(cardNumber),
     formattedSetNumber: formatSetNumber(setNumber),
+    imageUrl: getImageUrl(id),
   };
 };
 

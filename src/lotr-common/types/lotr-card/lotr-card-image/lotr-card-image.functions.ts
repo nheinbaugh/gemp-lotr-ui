@@ -23,7 +23,7 @@ export const getCardImage = (blueprintId: string): string | undefined => {
   if (blueprintId === 'rules') {
     return rulesImageHref;
   }
-  const { formattedSetNumber, cardNumber } = getBlueprintByCardId(blueprintId);
+  const [setNumber, cardNumber] = blueprintId.split('_');
 
-  return generateImageUrl(Number(formattedSetNumber), cardNumber);
+  return generateImageUrl(Number(setNumber), Number(cardNumber));
 };

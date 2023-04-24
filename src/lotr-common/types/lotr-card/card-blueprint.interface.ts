@@ -5,4 +5,6 @@ export interface CardBlueprint {
   set: DecipherSets | PlayersCommitteeSets;
   formattedCardNumber: string;
   formattedSetNumber: string;
+
+  imageUrl: string;
 }

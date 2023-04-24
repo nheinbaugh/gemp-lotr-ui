@@ -1,5 +1,5 @@
+import { useEffect, useState } from 'react';
 import { Button, FormControl, FormLabel, Input, Typography } from '@mui/joy';
-import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useAxios from 'axios-hooks';
 import styles from './index.module.css';
@@ -20,9 +20,11 @@ function Login() {
     { manual: true }
   );
 
-  if (loginResponse) {
-    navigate('/hall');
-  }
+  useEffect(() => {
+    if (loginResponse) {
+      navigate('/hall');
+    }
+  }, [isLoginLoading, loginResponse, navigate]);
 
   if (loginError?.response) {
     errorMessage = getLoginErrorMessage(loginError.response.status);
