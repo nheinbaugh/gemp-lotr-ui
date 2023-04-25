@@ -13,26 +13,37 @@ import {
 } from '@mui/joy';
 import React from 'react';
 import {
-  allExpansionsMetadata,
   decipherSetExpansionMetadata,
   otherFormatMetadata,
   playtestSetExpansionMetadata,
   commonFormatsMetadata,
+  allExpansionsMetadata,
 } from '../../../../lotr-common/types/expansions';
 import { CardFilterDropdownProps } from './CardFilter-props.interface';
+import { LotrExpansionMetadata } from '../../../../lotr-common/types/expansions/lotr-expansion-metadata.interface';
 
-function ExpansionsFilter({ filterChanged }: CardFilterDropdownProps) {
-  const sections = {
-    'Common Formats': commonFormatsMetadata,
-    'Other Formats': otherFormatMetadata,
-    'Individual Sets': decipherSetExpansionMetadata,
-    Playtest: playtestSetExpansionMetadata,
+const sections = {
+  'Common Formats': commonFormatsMetadata,
+  'Other Formats': otherFormatMetadata,
+  'Individual Sets': decipherSetExpansionMetadata,
+  Playtest: playtestSetExpansionMetadata,
+};
+
+const allOptions = Object.values(allExpansionsMetadata);
+
+function ExpansionsFilter({
+  selectedValue,
+  filterChanged,
+}: CardFilterDropdownProps<LotrExpansionMetadata>) {
+  const handleOnChange = (newValue: string): void => {
+    filterChanged(allOptions.find((option) => option.displayName === newValue));
   };
   return (
     <Select
       sx={{ width: '100%' }}
       placeholder="Filter by Set"
-      onChange={(_, newValue) => filterChanged(newValue?.toString() || '')}
+      value={selectedValue?.displayName}
+      onChange={(e, newValue) => handleOnChange(newValue?.toString() || '')}
       slotProps={{
         listbox: {
           component: 'div',

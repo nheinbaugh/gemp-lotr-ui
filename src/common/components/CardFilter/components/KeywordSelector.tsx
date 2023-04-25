@@ -2,9 +2,13 @@ import { lotrCardKeywordTypeMappings } from '../../../../lotr-common/types/filte
 import GempDropdown from '../../GempDropdown/GempDropdown';
 import { CardFilterDropdownProps } from './CardFilter-props.interface';
 
-function KeywordSelector({ filterChanged }: CardFilterDropdownProps) {
+function KeywordSelector({
+  filterChanged,
+  selectedValue,
+}: CardFilterDropdownProps) {
   return (
     <GempDropdown
+      selectedValue={selectedValue}
       selectionChanged={filterChanged}
       placeholder="Filter by Keyword"
       options={Object.values(lotrCardKeywordTypeMappings)}

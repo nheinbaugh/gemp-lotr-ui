@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import { IconButton } from '@mui/joy';
+import { Box, IconButton } from '@mui/joy';
 import FilterAlt from '@mui/icons-material/FilterAlt';
 
 interface FilterToggleProps {
@@ -8,8 +8,9 @@ interface FilterToggleProps {
 
 function FilterToggle({ showFilters }: FilterToggleProps) {
   return (
-    <Button onClick={showFilters} sx={{ float: 'right' }}>
+    <Box sx={{ float: 'right' }}>
       <IconButton
+        onClick={showFilters}
         variant="solid"
         sx={{
           position: 'fixed',
@@ -23,7 +24,7 @@ function FilterToggle({ showFilters }: FilterToggleProps) {
       >
         <FilterAlt />
       </IconButton>
-    </Button>
+    </Box>
   );
 }
 

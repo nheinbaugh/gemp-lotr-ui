@@ -1,4 +1,22 @@
-import { CollectionApiParameters } from './collection-api-parameters.interface';
+import {
+  CollectionApiFilterDAO,
+  CollectionApiParameters,
+} from './collection-api-parameters.interface';
+
+export const getDefaultCollectionFilterState = (): CollectionApiFilterDAO => ({
+  side: '',
+  type: '',
+  rarity: '',
+  sets: '',
+  words: '',
+  cardTypes: '',
+  cultures: '',
+  keywords: '',
+  siteNumber: '',
+  races: '',
+  itemClasses: '',
+  phases: '',
+});
 
 export const getDefaultCollectionApiParameters =
   (): CollectionApiParameters => {
@@ -6,19 +24,6 @@ export const getDefaultCollectionApiParameters =
       participantId: null,
       count: 18,
       start: 0,
-      filter: {
-        side: '',
-        type: '',
-        rarity: '',
-        sets: '',
-        words: '',
-        cardTypes: '',
-        cultures: '',
-        keywords: '',
-        siteNumber: '',
-        races: '',
-        itemClasses: '',
-        phases: '',
-      },
+      filter: getDefaultCollectionFilterState(),
     };
   };
