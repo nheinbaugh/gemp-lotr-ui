@@ -1,11 +1,14 @@
 import { Mappings } from '../../../common/types/mappings.interface';
 import { LotrExpansionMetadata } from '../../types/expansions/lotr-expansion-metadata.interface';
 
-export interface CollectionApiParameters {
-  participantId: string | null;
-  filter: CollectionApiFilterDAO;
+export interface PageInformation {
   start: number;
   count: number;
+}
+
+export interface CollectionApiParameters extends PageInformation {
+  participantId: string | null;
+  filter: CollectionApiFilterDAO;
 }
 
 export interface CollectionFiltersViewModel {

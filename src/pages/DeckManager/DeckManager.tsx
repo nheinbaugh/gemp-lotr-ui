@@ -1,14 +1,19 @@
-import { Box } from '@mui/joy';
 import Drawer from '@mui/material/Drawer';
 import { useState } from 'react';
+import { Box, Button } from '@mui/joy';
 import FiltersList from './modules/FilterSelector/FilterSelector';
 import FilterToggle from './components/FilterToggle/FilterToggle';
-import SearchResults from './modules/SearchResults/SearchResults';
-import { CollectionFiltersViewModel } from '../../lotr-common/api/collection-api/collection-api-parameters.interface';
+import {
+  CollectionFiltersViewModel,
+  PageInformation,
+} from '../../lotr-common/api/collection-api/collection-api-parameters.interface';
+import { defaultPageInformation } from '../../lotr-common/api/collection-api/collection-api-parameters.functions';
+import PageSelector from './components/PageSelector/PageSelector';
+import CardBank from './modules/CardBank/CardBank';
 
 export default function DeckManager() {
-  const [isOpen, setIsOpen] = useState(false);
   const [filters, setFilters] = useState<CollectionFiltersViewModel>({});
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -32,20 +37,12 @@ export default function DeckManager() {
         ...updatedFilters,
       };
     });
-    toggleDrawer(false);
+    setIsOpen(false);
   };
 
   return (
     <>
-      <Box
-        sx={{
-          width: '50vw',
-          height: '50vh',
-          backgroundColor: 'background.level3',
-        }}
-      >
-        <SearchResults filters={filters} />
-      </Box>
+      <CardBank filter={filters} />
       <FilterToggle showFilters={toggleDrawer(true)} />
       <Drawer anchor="right" open={isOpen} onClose={toggleDrawer(false)}>
         <FiltersList currentFilters={filters} applyFilters={onFilterUpdate} />

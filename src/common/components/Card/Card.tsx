@@ -1,5 +1,6 @@
 /* eslint-disable react/require-default-props -- not sure I care for this rule, but the prop really is optional... */
 import { Box } from '@mui/joy';
+import { useState } from 'react';
 import styles from './index.module.css';
 import { Dimensions } from '../../types/size-and-position';
 import {
@@ -13,6 +14,9 @@ type CardProps = {
   title: string;
   width?: number;
   height?: number;
+  fallbackImage: string;
+  onPrimaryAction: VoidFunction;
+  onSecondaryAction: VoidFunction;
 };
 
 const getCardDimensions = (height?: number, width?: number): Dimensions => {
@@ -36,8 +40,21 @@ export default function GempCard({
   title,
   height,
   width,
+  fallbackImage,
+  onPrimaryAction,
+  onSecondaryAction,
 }: CardProps) {
   const dimensions = getCardDimensions(height, width);
+  const [imageSource, setImageSource] = useState(imageHref);
+
+  const handleCardClick = (event: React.MouseEvent): void => {
+    if (event.type === 'click') {
+      onPrimaryAction();
+    } else if (event.type === 'contextmenu') {
+      onSecondaryAction();
+      event.preventDefault();
+    }
+  };
   return (
     <Box
       sx={{
@@ -45,7 +62,14 @@ export default function GempCard({
         width: dimensions.width,
       }}
     >
-      <img className={styles.cardFace} src={imageHref} alt={title} />
+      <img
+        onClick={handleCardClick}
+        onContextMenu={handleCardClick} // note: this prevents all browser right click actions
+        className={styles.cardFace}
+        onError={() => setImageSource(fallbackImage)}
+        src={imageSource}
+        alt={title}
+      />
     </Box>
   );
 }

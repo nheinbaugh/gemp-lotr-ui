@@ -7,11 +7,11 @@ enum Side {
 
 export const sideMappings: Record<Side, Mappings> = {
   FreePeople: {
-    apiName: '',
+    apiName: 'FREE_PEOPLE',
     displayName: 'Free Peoples',
   },
   Shadow: {
-    apiName: '',
+    apiName: 'SHADOW',
     displayName: 'Shadow',
   },
 };

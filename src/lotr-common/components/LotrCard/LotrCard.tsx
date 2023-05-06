@@ -6,6 +6,8 @@ type LotrCardProps = {
   blueprintId: string;
   height?: number;
   width?: number;
+  onPrimaryAction: VoidFunction;
+  onSecondaryAction: VoidFunction;
 };
 
 /**
@@ -17,17 +19,30 @@ export default function LotrCard({
   blueprintId,
   height,
   width,
+  onPrimaryAction,
+  onSecondaryAction,
 }: LotrCardProps) {
   const blueprint = getBlueprintByCardId(blueprintId);
   if (!blueprint) {
-    return <GempCard imageHref={notFoundImageUrl} title="Unknown Card" />;
+    return (
+      <GempCard
+        onPrimaryAction={onPrimaryAction}
+        onSecondaryAction={onSecondaryAction}
+        imageHref={notFoundImageUrl}
+        fallbackImage={notFoundImageUrl}
+        title="Unknown Card"
+      />
+    );
   }
   return (
     <GempCard
       height={height}
       width={width}
-      imageHref={blueprint.imageUrl ?? 'ruhroh.com'}
+      imageHref={blueprint.imageUrl}
+      fallbackImage={notFoundImageUrl}
       title=""
+      onPrimaryAction={onPrimaryAction}
+      onSecondaryAction={onSecondaryAction}
     />
   );
 }
