@@ -56,5 +56,6 @@ export const convertViewModelToDao = (
     races: '',
     phases: '',
     cultures: input.cultures?.join(',') ?? '',
+    title: input.cardTitle ?? '',
   };
 };

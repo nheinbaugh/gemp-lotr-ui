@@ -23,6 +23,7 @@ interface FiltersListProps {
     keywords,
     sets,
     cultures,
+    cardTitle,
   }: Partial<CollectionFiltersViewModel>) => void;
 }
 
@@ -42,17 +43,22 @@ export default function FiltersList({
   const [sets, setExpansions] = useState<LotrExpansionMetadata | undefined>(
     currentFilters.sets
   );
-  const [freeCultures, setFreeCultures] = useState<string[]>([]);
+  const [cardName, setCardName] = useState<string>(
+    currentFilters.cardTitle ?? ''
+  );
+  const [freeCultures, setFreeCultures] = useState<string[]>(
+    currentFilters.cultures ?? []
+  );
   const [twilightCultures, setTwilightCultures] = useState<string[]>([]);
   const [sort, setSort] = useState<string>('');
-
   const handleSubmitFilters = (): void => {
     applyFilters({
       rarity,
       type,
       keywords,
       sets,
-      cultures: [...freeCultures, ...twilightCultures],
+      cultures: [...freeCultures, ...twilightCultures], // TODO: this shouldn't combine them yet, it makes the culture filter settings weird
+      cardTitle: cardName,
     });
   };
 
@@ -64,13 +70,19 @@ export default function FiltersList({
       <Typography level="h3">Filters</Typography>
       <List>
         <ListItem>
-          <Input sx={{ width: '100%' }} placeholder="Title" />
+          <Input
+            sx={{ width: '100%' }}
+            placeholder="Title"
+            value={cardName}
+            onChange={(e) => setCardName(e.target.value)}
+          />
         </ListItem>
         <ListItem>
           <CultureOptionContainer
             title="Free People Cultures"
             cultures={getCulturesBySelectedSet(sets).freePeople}
             selectionUpdated={setFreeCultures}
+            currentSelectedCultures={[...freeCultures, ...twilightCultures]}
           />
         </ListItem>
         <ListItem>
@@ -78,6 +90,7 @@ export default function FiltersList({
             title="Shadow Cultures"
             cultures={getCulturesBySelectedSet(sets).twilight}
             selectionUpdated={setTwilightCultures}
+            currentSelectedCultures={[...freeCultures, ...twilightCultures]}
           />
         </ListItem>
         <ListItem>

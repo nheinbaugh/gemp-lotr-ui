@@ -1,14 +1,24 @@
 import { AxiosRequestConfig } from 'axios';
+import zIndex from '@mui/material/styles/zIndex';
 import { CollectionApiParameters } from './collection-api-parameters.interface';
 import { getDefaultCollectionApiParameters } from './collection-api-parameters.functions';
 
 const createFilter = (params: CollectionApiParameters): string => {
   let encodedFilter = '';
+  console.log('sending api request', params);
   if (params.filter.rarity) {
     encodedFilter += encodeURIComponent(`rarity:${params.filter.rarity} `);
   }
   if (params.filter.sets) {
     encodedFilter += encodeURIComponent(`set:${params.filter.sets} `);
+  }
+  if (params.filter.title) {
+    encodedFilter += encodeURIComponent(`name:${params.filter.title} `);
+  }
+  if (params.filter.cultures) {
+    encodedFilter += encodeURIComponent(
+      `culture:${params.filter.cultures.toUpperCase()} `
+    );
   }
   return encodedFilter;
 };

@@ -20,7 +20,6 @@ function GempIcon({ iconClicked, name, alt, selected }: GempIconProps) {
       iconClicked();
     }
   };
-  console.log('we rendered this', selected, name);
   return (
     // <Box sx={{ width: '20px', height: '20px;' }}>
     <IconButton

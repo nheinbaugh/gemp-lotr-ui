@@ -23,6 +23,7 @@ export default function LotrCard({
   onSecondaryAction,
 }: LotrCardProps) {
   const blueprint = getBlueprintByCardId(blueprintId);
+
   if (!blueprint) {
     return (
       <GempCard

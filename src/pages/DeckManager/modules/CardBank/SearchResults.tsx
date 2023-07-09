@@ -1,25 +1,14 @@
-import { Box, Button, Grid } from '@mui/joy';
-import { useEffect } from 'react';
-import useAxios from 'axios-hooks';
-import {
-  CollectionApiParameters,
-  CollectionFiltersViewModel,
-  PageInformation,
-} from '../../../../lotr-common/api/collection-api/collection-api-parameters.interface';
-import { collectionApiConfiguration } from '../../../../lotr-common/api/collection-api/collection-api.configuration';
-import {
-  convertViewModelToDao,
-  getDefaultCollectionApiParameters,
-} from '../../../../lotr-common/api/collection-api/collection-api-parameters.functions';
-import {
-  CollectionCardViewModel,
-  convertGetCollectionFromXml,
-} from '../../../../lotr-common/api/collection-api/collection-api-response.functions';
+import { Box, Grid } from '@mui/joy';
+import { useEffect, useRef, useState } from 'react';
+import { CollectionCardViewModel } from '../../../../lotr-common/api/collection-api/collection-api-response.functions';
 import LotrCard from '../../../../lotr-common/components/LotrCard/LotrCard';
 import { useWindowDimensions } from '../../../../common/hooks/useWindowDimensions';
 
 interface SearchResultProps {
   cards: CollectionCardViewModel[];
+
+  onCardPrimaryAction: (blueprintId: string) => void;
+  onCardSecondaryAction: (blueprintId: string) => void;
 }
 
 const getCardWidth = (viewportWidth: number): number => {
@@ -30,28 +19,37 @@ const getCardWidth = (viewportWidth: number): number => {
   return Math.max(minWidth, Math.min(maxWidth, desiredWidth));
 };
 
-function SearchResults({ cards }: SearchResultProps) {
+function SearchResults({
+  cards,
+  onCardPrimaryAction,
+  onCardSecondaryAction,
+}: SearchResultProps) {
   const viewportWidth = useWindowDimensions();
+  const [containerWidth, setContainerWidth] = useState<number>(0);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const addCardToDeck = (blueprintId: string): void => {
-    console.log('card was clicked!', blueprintId);
-  };
-
-  const expandCard = (blueprintId: string): void => {
-    console.log('card was  right clicked!', blueprintId);
-  };
+  useEffect(() => {
+    if (containerRef.current) {
+      const currentWidth = containerRef.current.offsetWidth;
+      if (currentWidth !== containerWidth) {
+        setContainerWidth(currentWidth);
+      }
+    }
+  }, [viewportWidth, containerWidth]);
 
   return (
     <Box>
-      <Grid container spacing={1}>
+      <Grid ref={containerRef} container spacing={1}>
         {cards.map((card) => {
           return (
             <Grid key={card.blueprintId}>
               <LotrCard
                 blueprintId={card.blueprintId}
                 width={getCardWidth(viewportWidth)}
-                onPrimaryAction={() => addCardToDeck(card.blueprintId)}
-                onSecondaryAction={() => expandCard(card.blueprintId)}
+                onPrimaryAction={() => onCardPrimaryAction(card.blueprintId)}
+                onSecondaryAction={() =>
+                  onCardSecondaryAction(card.blueprintId)
+                }
               />
             </Grid>
           );

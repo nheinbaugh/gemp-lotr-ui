@@ -24,6 +24,7 @@ export interface CollectionFiltersViewModel {
   races?: Mappings;
   itemClasses?: Mappings;
   phases?: Mappings;
+  cardTitle?: string;
 }
 
 export interface CollectionApiFilterDAO {
@@ -39,4 +40,5 @@ export interface CollectionApiFilterDAO {
   races: string;
   itemClasses: string;
   phases: string;
+  title: string;
 }

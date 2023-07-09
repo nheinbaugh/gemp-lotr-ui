@@ -21,9 +21,17 @@ import {
 
 type CardBankProps = {
   filter: CollectionFiltersViewModel;
+
+  // yes these prop drills make me want to use a context, but I'm jamming
+  onCardPrimaryAction: (blueprintId: string) => void;
+  onCardSecondaryAction: (blueprintId: string) => void;
 };
 
-function CardBank({ filter }: CardBankProps) {
+function CardBank({
+  filter,
+  onCardPrimaryAction,
+  onCardSecondaryAction,
+}: CardBankProps) {
   const [results, setResults] = useState<CollectionCardViewModel[]>([]);
   const [currentPage, setCurrentPage] = useState<PageInformation>(
     defaultPageInformation()
@@ -35,6 +43,7 @@ function CardBank({ filter }: CardBankProps) {
 
   useEffect(() => {
     async function fetch(dao: CollectionApiParameters) {
+      console.log('execute search', dao, filter);
       const res = await executeSearch(collectionApiConfiguration(dao));
       setResults(convertGetCollectionFromXml(res.data).cards);
     }
@@ -47,7 +56,11 @@ function CardBank({ filter }: CardBankProps) {
 
   return (
     <Box>
-      <SearchResults cards={results} />
+      <SearchResults
+        cards={results}
+        onCardPrimaryAction={onCardPrimaryAction}
+        onCardSecondaryAction={onCardSecondaryAction}
+      />
       <PageSelector pageUpdated={setCurrentPage} />
     </Box>
   );
