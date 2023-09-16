@@ -33,7 +33,6 @@ export function CultureOptionContainer({
   useEffect(() => {
     selectionUpdated(selectedCultures);
   }, [selectedCultures, selectionUpdated]);
-  console.log('selected cultures', selectedCultures);
   // TODO: BUG - the way i'm passing the iconClicked prop is causing unnecessary re-renders
   return (
     <Box

@@ -11,6 +11,9 @@ export interface CollectionApiParameters extends PageInformation {
   filter: CollectionApiFilterDAO;
 }
 
+/**
+ * This is the model we use on the UI with friendly typings to allow swapping to display name etc
+ */
 export interface CollectionFiltersViewModel {
   side?: Mappings;
   type?: Mappings;
@@ -25,8 +28,16 @@ export interface CollectionFiltersViewModel {
   itemClasses?: Mappings;
   phases?: Mappings;
   cardTitle?: string;
+
+
+
+  // garbage be here
+  activeDeckSection: string;
 }
 
+/**
+ * This is the model sent to the API with no syntactic sugar
+ */
 export interface CollectionApiFilterDAO {
   side: string;
   type: string;

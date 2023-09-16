@@ -9,6 +9,12 @@ const createFilter = (params: CollectionApiParameters): string => {
   if (params.filter.rarity) {
     encodedFilter += encodeURIComponent(`rarity:${params.filter.rarity} `);
   }
+  if (params.filter.keywords) {
+    encodedFilter += encodeURIComponent(`keyword:${params.filter.keywords} `);
+  }
+  if (params.filter.cardTypes) {
+    encodedFilter += encodeURIComponent(`cardType:${params.filter.cardTypes} `);
+  }
   if (params.filter.sets) {
     encodedFilter += encodeURIComponent(`set:${params.filter.sets} `);
   }

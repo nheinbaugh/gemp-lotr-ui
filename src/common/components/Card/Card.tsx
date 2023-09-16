@@ -45,7 +45,6 @@ export default function GempCard({
   onSecondaryAction,
 }: CardProps) {
   const dimensions = getCardDimensions(height, width);
-  const [imageSource, setImageSource] = useState(imageHref);
 
   const handleCardClick = (event: React.MouseEvent): void => {
     if (event.type === 'click') {
@@ -55,6 +54,7 @@ export default function GempCard({
       event.preventDefault();
     }
   };
+  console.log('card rerender', imageHref);
   return (
     <Box
       sx={{
@@ -62,14 +62,21 @@ export default function GempCard({
         width: dimensions.width,
       }}
     >
-      <img
+      <object
+        className={styles.cardFace}
+        data={imageHref}
         onClick={handleCardClick}
         onContextMenu={handleCardClick} // note: this prevents all browser right click actions
-        className={styles.cardFace}
-        onError={() => setImageSource(fallbackImage)}
-        src={imageSource}
-        alt={title}
-      />
+      >
+        <img
+          onClick={handleCardClick}
+          onContextMenu={handleCardClick} // note: this prevents all browser right click actions
+          className={styles.cardFace}
+          // onError={(imageHref = fallbackImage)}
+          src={fallbackImage}
+          alt={title}
+        />
+      </object>
     </Box>
   );
 }

@@ -25,6 +25,7 @@ export const getDefaultCollectionFilterState = (
   races: '',
   itemClasses: '',
   phases: '',
+  title: '',
   ...filters,
 });
 
@@ -48,7 +49,7 @@ export const convertViewModelToDao = (
     type: '',
     rarity: input.rarity?.apiName ?? '',
     words: '',
-    cardTypes: '',
+    cardTypes: input.cardTypes?.apiName ?? '',
     siteNumber: '',
     itemClasses: '',
     keywords: input.keywords?.apiName ?? '',
