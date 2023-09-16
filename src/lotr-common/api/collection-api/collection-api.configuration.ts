@@ -26,6 +26,7 @@ const createFilter = (params: CollectionApiParameters): string => {
       `culture:${params.filter.cultures.toUpperCase()} `
     );
   }
+  encodedFilter += encodeURIComponent(`siteNumber:2`);
   return encodedFilter;
 };
 

@@ -1,10 +1,10 @@
-import { deepmerge } from '@mui/utils';
 import { experimental_extendTheme as extendMuiTheme } from '@mui/material/styles';
 import colors from '@mui/joy/colors';
 import {
   extendTheme as extendJoyTheme,
   CssVarsProvider,
 } from '@mui/joy/styles';
+import { deepmerge } from '@mui/utils';
 
 const { unstable_sxConfig: muiSxConfig, ...muiTheme } = extendMuiTheme({
   // This is required to point to `var(--joy-*)` because we are using
@@ -21,7 +21,7 @@ const { unstable_sxConfig: muiSxConfig, ...muiTheme } = extendMuiTheme({
           main: colors.red[500],
         },
         info: {
-          main: colors.purple[500],
+          main: colors.blue[500],
         },
         success: {
           main: colors.green[500],
@@ -50,7 +50,7 @@ const { unstable_sxConfig: muiSxConfig, ...muiTheme } = extendMuiTheme({
           main: colors.red[600],
         },
         info: {
-          main: colors.purple[600],
+          main: colors.blue[600],
         },
         success: {
           main: colors.green[600],

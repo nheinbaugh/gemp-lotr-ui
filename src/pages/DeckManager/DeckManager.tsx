@@ -13,12 +13,22 @@ import {
   createOneRingFilters,
   createRingbearerFilters,
 } from '../../lotr-common/api/collection-api/collection-filter-view-model.functions';
+import DeckManagerMenu from './modules/DeckManagerMenu/DeckManagerMenu';
+import { LotrLocationNames } from '../../common/types/LotrLocations/lotr-locations.type';
+import { isLotrLocation } from '../../common/types/LotrLocations/lotr-locations.type-guard';
+
+// Note to self: this is hot ass garbage, i'm too lazy to figure how I'd rather do this.
+const locationNotBeingUsed = 'no-active-location';
+
+type SiteSelectionOptions = LotrLocationNames | 'no-active-location';
 
 export default function DeckManager() {
   const [filters, setFilters] = useState<CollectionFiltersViewModel>({
     activeDeckSection: '',
   });
   const [isOpen, setIsOpen] = useState(false);
+  const [currentLocation, setCurrentLocation] =
+    useState<SiteSelectionOptions>(locationNotBeingUsed);
   const [currentDeck, setCurrentDeck] = useState<Deck>(createDefaultDeck());
   const [cardModalState, setCardModalState] = useState<{
     isOpen: boolean;
@@ -54,17 +64,34 @@ export default function DeckManager() {
     setIsOpen(false);
   };
 
-  const handleDeckbuilderFilterUpdate = (filterName: string) => {
-    console.log('the deckbuilder wants to filter by: ', filterName);
+  const handleDeckbuilderFilterUpdate = (
+    filterName: string,
+    additionalFilter = ''
+  ) => {
+    console.log(
+      'the deckbuilder wants to filter by: ',
+      filterName,
+      additionalFilter,
+      currentLocation
+    );
+    let newlySelectedLocation = locationNotBeingUsed;
     if (filterName === 'ring') {
       setFilters(createOneRingFilters());
     } else if (filterName === 'ring-bearer') {
       setFilters(createRingbearerFilters());
     } else if (filterName === 'site') {
+      newlySelectedLocation = additionalFilter;
       setFilters(createLocationFilters());
+    }
+    if (
+      currentLocation !== newlySelectedLocation &&
+      isLotrLocation(newlySelectedLocation)
+    ) {
+      setCurrentLocation(newlySelectedLocation);
     }
   };
 
+  // TODO: this should all be moved to a reducer. It's time....
   const handleAddCardToDeck = (blueprintId: string): void => {
     console.log(
       'you would have added card with BP id',
@@ -78,9 +105,13 @@ export default function DeckManager() {
     if (filters.activeDeckSection === 'ring-bearer') {
       setCurrentDeck({ ...currentDeck, ringbearerId: blueprintId });
     }
-    // if (filters.activeDeckSection === 'site') {
-    //   setCurrentDeck({ ...currentDeck, ringId: blueprintId });
-    // }
+    if (filters.activeDeckSection === 'site') {
+      setCurrentDeck({
+        ...currentDeck,
+        ringId: blueprintId,
+        locations: { ...currentDeck.locations, [currentLocation]: blueprintId },
+      });
+    }
   };
 
   const openCardDetails = (blueprintId: string): void => {
@@ -89,6 +120,7 @@ export default function DeckManager() {
 
   return (
     <>
+      <DeckManagerMenu />
       <Grid display="flex" flexDirection="row">
         <Grid sx={{ minWidth: '40%;' }}>
           <Deckbuilder
