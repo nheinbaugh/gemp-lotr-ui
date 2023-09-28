@@ -1,38 +1,27 @@
 import { Box, Button } from '@mui/joy';
-import { useState, useEffect } from 'react';
 import { PageInformation } from '../../../../lotr-common/api/collection-api/collection-api-parameters.interface';
-import { defaultPageInformation } from '../../../../lotr-common/api/collection-api/collection-api-parameters.functions';
+import { useCardQueryStore } from '../../../../lotr-common/state/card-filter.state';
 
 type PageSelectorProps = {
   pageUpdated: (update: PageInformation) => void;
 };
 
 function PageSelector({ pageUpdated }: PageSelectorProps) {
-  const [currentPage, setCurrentPage] = useState<PageInformation>(
-    defaultPageInformation()
-  );
-
-  useEffect(() => {
-    pageUpdated(currentPage);
-  }, [currentPage, pageUpdated]);
+  const { pageInformation } = useCardQueryStore();
 
   const nextPage = (event: React.MouseEvent): void => {
     event.preventDefault();
-    setCurrentPage((previous) => {
-      return {
-        ...previous,
-        start: previous.start + previous.count,
-      };
+    pageUpdated({
+      ...pageInformation,
+      start: pageInformation.start + pageInformation.count,
     });
   };
 
   const previousPage = (event: React.MouseEvent): void => {
     event.preventDefault();
-    setCurrentPage((previous) => {
-      return {
-        ...previous,
-        start: Math.max(previous.start - previous.count, 0),
-      };
+    pageUpdated({
+      ...pageInformation,
+      start: Math.max(pageInformation.start - pageInformation.count, 0),
     });
   };
 

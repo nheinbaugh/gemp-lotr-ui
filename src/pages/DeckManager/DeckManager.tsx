@@ -16,6 +16,7 @@ import {
 import DeckManagerMenu from './modules/DeckManagerMenu/DeckManagerMenu';
 import { LotrLocationNames } from '../../common/types/LotrLocations/lotr-locations.type';
 import { isLotrLocation } from '../../common/types/LotrLocations/lotr-locations.type-guard';
+import { useCardQueryStore } from '../../lotr-common/state/card-filter.state';
 
 // Note to self: this is hot ass garbage, i'm too lazy to figure how I'd rather do this.
 const locationNotBeingUsed = 'no-active-location';
@@ -23,9 +24,8 @@ const locationNotBeingUsed = 'no-active-location';
 type SiteSelectionOptions = LotrLocationNames | 'no-active-location';
 
 export default function DeckManager() {
-  const [filters, setFilters] = useState<CollectionFiltersViewModel>({
-    activeDeckSection: '',
-  });
+  const { updateFilter, filters } = useCardQueryStore();
+
   const [isOpen, setIsOpen] = useState(false);
   const [currentLocation, setCurrentLocation] =
     useState<SiteSelectionOptions>(locationNotBeingUsed);
@@ -55,11 +55,9 @@ export default function DeckManager() {
   const onFilterUpdate = (
     updatedFilters: Partial<CollectionFiltersViewModel>
   ): void => {
-    setFilters((previous: CollectionFiltersViewModel) => {
-      return {
-        ...previous,
-        ...updatedFilters,
-      };
+    updateFilter({
+      ...filters,
+      ...updatedFilters,
     });
     setIsOpen(false);
   };
@@ -76,12 +74,12 @@ export default function DeckManager() {
     );
     let newlySelectedLocation = locationNotBeingUsed;
     if (filterName === 'ring') {
-      setFilters(createOneRingFilters());
+      updateFilter(createOneRingFilters());
     } else if (filterName === 'ring-bearer') {
-      setFilters(createRingbearerFilters());
+      updateFilter(createRingbearerFilters());
     } else if (filterName === 'site') {
       newlySelectedLocation = additionalFilter;
-      setFilters(createLocationFilters());
+      updateFilter(createLocationFilters());
     }
     if (
       currentLocation !== newlySelectedLocation &&
@@ -93,12 +91,6 @@ export default function DeckManager() {
 
   // TODO: this should all be moved to a reducer. It's time....
   const handleAddCardToDeck = (blueprintId: string): void => {
-    console.log(
-      'you would have added card with BP id',
-      blueprintId,
-      filters.activeDeckSection,
-      currentDeck
-    );
     if (filters.activeDeckSection === 'ring') {
       setCurrentDeck({ ...currentDeck, ringId: blueprintId });
     }
@@ -131,7 +123,6 @@ export default function DeckManager() {
         <Grid>
           <Typography level="h3">Available Cards</Typography>
           <CardBank
-            filter={filters}
             onCardPrimaryAction={handleAddCardToDeck}
             onCardSecondaryAction={openCardDetails}
           />

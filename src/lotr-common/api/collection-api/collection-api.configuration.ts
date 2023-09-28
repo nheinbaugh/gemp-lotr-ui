@@ -1,5 +1,4 @@
 import { AxiosRequestConfig } from 'axios';
-import zIndex from '@mui/material/styles/zIndex';
 import { CollectionApiParameters } from './collection-api-parameters.interface';
 import { getDefaultCollectionApiParameters } from './collection-api-parameters.functions';
 
@@ -26,13 +25,17 @@ const createFilter = (params: CollectionApiParameters): string => {
       `culture:${params.filter.cultures.toUpperCase()} `
     );
   }
-  encodedFilter += encodeURIComponent(`siteNumber:2`);
+  if (params.filter.siteNumber) {
+    encodedFilter += encodeURIComponent(
+      `siteNumber:${params.filter.siteNumber} `
+    );
+  }
   return encodedFilter;
 };
 
 export const collectionApiConfiguration = (
   parameters: Partial<CollectionApiParameters>
-): AxiosRequestConfig<CollectionApiParameters> => {
+): [string, AxiosRequestConfig<CollectionApiParameters>] => {
   const finalParams = {
     ...getDefaultCollectionApiParameters(),
     ...parameters,
@@ -41,9 +44,13 @@ export const collectionApiConfiguration = (
   const queryParams = `participantId=null&filter=${createFilter(
     finalParams
   )}&start=${finalParams.start ?? 0}&count=${finalParams.count}`;
-  return {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/xml' },
-    url: `/gemp-lotr-server/collection/default?${queryParams}`,
-  };
+  const url = `/gemp-lotr-server/collection/default?${queryParams}`;
+  return [
+    url,
+    {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/xml' },
+      url,
+    },
+  ];
 };

@@ -29,8 +29,6 @@ export interface CollectionFiltersViewModel {
   phases?: Mappings;
   cardTitle?: string;
 
-
-
   // garbage be here
   activeDeckSection: string;
 }

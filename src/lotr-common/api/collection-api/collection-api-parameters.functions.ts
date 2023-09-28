@@ -5,7 +5,7 @@ import {
   PageInformation,
 } from './collection-api-parameters.interface';
 
-export const defaultPageInformation = (): PageInformation => ({
+export const createDefaultPageInformation = (): PageInformation => ({
   count: 18,
   start: 0,
 });
@@ -31,7 +31,7 @@ export const getDefaultCollectionFilterState = (
 
 export const getDefaultCollectionApiParameters = (
   filters: Partial<CollectionApiFilterDAO> = {},
-  pageInformation = defaultPageInformation()
+  pageInformation = createDefaultPageInformation()
 ): CollectionApiParameters => {
   return {
     participantId: null,

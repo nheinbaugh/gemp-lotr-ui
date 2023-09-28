@@ -54,7 +54,6 @@ export default function GempCard({
       event.preventDefault();
     }
   };
-  console.log('card rerender', imageHref);
   return (
     <Box
       sx={{
