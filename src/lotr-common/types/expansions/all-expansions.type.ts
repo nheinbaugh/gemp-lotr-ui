@@ -4,6 +4,7 @@ import {
 } from './decipher-sets.type';
 import {
   CommonFormats,
+  commonFormatsMetadata,
   otherFormatMetadata,
   OtherFormats,
 } from './formats.type';
@@ -28,6 +29,11 @@ export type LotrExpansions =
   | PlaytestSets;
 
 export type LotrFormats = CommonFormats | OtherFormats;
+
+export const allPlayableFormatsMetadata: Record<
+  LotrFormats,
+  LotrExpansionMetadata
+> = { ...commonFormatsMetadata, ...otherFormatMetadata };
 
 export const allExpansionsMetadata: Record<
   LotrExpansions,

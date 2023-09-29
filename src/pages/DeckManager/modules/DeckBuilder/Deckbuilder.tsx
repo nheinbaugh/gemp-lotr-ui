@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading -- garbage copy/paste */
-import { Grid, Typography } from '@mui/joy';
+import { Grid } from '@mui/joy';
 import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import { Deck } from '../../../../common/types/Deck';
 import PlaceholderCard from '../../../../common/components/PlaceholderCard/PlaceholderCard';
 import SiteSelectionTab from './components/SiteSelectionTab';
+import DeckBuilderMenu from './components/DeckBuilderMenu';
 
 type DeckbuilderProps = {
   currentDeck: Deck;
@@ -29,11 +30,7 @@ function CustomTabPanel(props: TabPanelProps) {
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
 }
@@ -55,7 +52,17 @@ export default function Deckbuilder({
     setCurrentTabIndex(newValue);
   };
   return (
-    <Grid display="flex" flexDirection="row">
+    <Grid
+      display="flex"
+      flexDirection="column"
+      sx={(theme) => ({
+        boxShadow: theme.shadow.lg,
+        backgroundColor: 'neutral.dark',
+        height: '100vh',
+      })}
+    >
+      <DeckBuilderMenu />
+
       <Box>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs
@@ -87,7 +94,7 @@ export default function Deckbuilder({
         <CustomTabPanel value={currentTabIndex} index={1}>
           <SiteSelectionTab
             updateFilteredSites={(siteFilter) =>
-              filterRequest('site', siteFilter)
+              filterRequest('site', siteFilter.toString())
             }
             selectedSites={deck.locations}
           />

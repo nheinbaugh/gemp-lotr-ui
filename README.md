@@ -53,3 +53,12 @@ This app is intended to be standalone, but the API for GEMP still requires/expec
 ## Leagues
 
 ## Admin
+
+## MUI Notes
+* using the box shadows isn't too hard
+```      
+sx={(theme) => ({
+        boxShadow: theme.shadow.lg,
+        backgroundColor: 'neutral.dark',
+      })}
+```

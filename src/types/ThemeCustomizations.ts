@@ -10,6 +10,7 @@ const { unstable_sxConfig: muiSxConfig, ...muiTheme } = extendMuiTheme({
   // This is required to point to `var(--joy-*)` because we are using
   // `CssVarsProvider` from Joy UI.
   cssVarPrefix: 'joy',
+  spacing: 8,
   colorSchemes: {
     light: {
       palette: {

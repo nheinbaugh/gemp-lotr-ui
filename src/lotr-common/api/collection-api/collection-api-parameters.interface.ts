@@ -23,7 +23,7 @@ export interface CollectionFiltersViewModel {
   cardTypes?: Mappings;
   cultures?: string[];
   keywords?: Mappings;
-  siteNumber?: Mappings;
+  siteNumber?: string;
   races?: Mappings;
   itemClasses?: Mappings;
   phases?: Mappings;

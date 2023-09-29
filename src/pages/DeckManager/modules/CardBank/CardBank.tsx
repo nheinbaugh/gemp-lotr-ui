@@ -1,4 +1,4 @@
-import { Box } from '@mui/joy';
+import { Box, Grid, Typography } from '@mui/joy';
 import SearchResults from './SearchResults';
 import PageSelector from '../../components/PageSelector/PageSelector';
 import { useCardQueryStore } from '../../../../lotr-common/state/card-filter.state';
@@ -16,14 +16,26 @@ function CardBank({
   const { results, setCurrentPage } = useCardQueryStore();
 
   return (
-    <Box>
-      <SearchResults
-        cards={results}
-        onCardPrimaryAction={onCardPrimaryAction}
-        onCardSecondaryAction={onCardSecondaryAction}
-      />
-      <PageSelector pageUpdated={setCurrentPage} />
-    </Box>
+    <Grid
+      container
+      display="flex"
+      flexDirection="column"
+      sx={{ height: '100vh', maxHeight: '100vh' }}
+    >
+      <Grid>
+        <Typography level="h3">Available Cards</Typography>
+      </Grid>
+      <Box sx={{ flex: '1', overflowY: 'auto', overflowX: 'hidden' }}>
+        <SearchResults
+          cards={results}
+          onCardPrimaryAction={onCardPrimaryAction}
+          onCardSecondaryAction={onCardSecondaryAction}
+        />
+      </Box>
+      <Grid justifySelf="flex-end" mb={3}>
+        <PageSelector pageUpdated={setCurrentPage} />
+      </Grid>
+    </Grid>
   );
 }
 

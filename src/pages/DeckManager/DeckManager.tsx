@@ -1,6 +1,6 @@
 import Drawer from '@mui/material/Drawer';
 import { useState } from 'react';
-import { Grid, Typography } from '@mui/joy';
+import { Grid } from '@mui/joy';
 import FiltersList from './modules/FilterSelector/FilterSelector';
 import FilterToggle from './components/FilterToggle/FilterToggle';
 import { CollectionFiltersViewModel } from '../../lotr-common/api/collection-api/collection-api-parameters.interface';
@@ -13,9 +13,7 @@ import {
   createOneRingFilters,
   createRingbearerFilters,
 } from '../../lotr-common/api/collection-api/collection-filter-view-model.functions';
-import DeckManagerMenu from './modules/DeckManagerMenu/DeckManagerMenu';
 import { LotrLocationNames } from '../../common/types/LotrLocations/lotr-locations.type';
-import { isLotrLocation } from '../../common/types/LotrLocations/lotr-locations.type-guard';
 import { useCardQueryStore } from '../../lotr-common/state/card-filter.state';
 
 // Note to self: this is hot ass garbage, i'm too lazy to figure how I'd rather do this.
@@ -79,13 +77,13 @@ export default function DeckManager() {
       updateFilter(createRingbearerFilters());
     } else if (filterName === 'site') {
       newlySelectedLocation = additionalFilter;
-      updateFilter(createLocationFilters());
-    }
-    if (
-      currentLocation !== newlySelectedLocation &&
-      isLotrLocation(newlySelectedLocation)
-    ) {
-      setCurrentLocation(newlySelectedLocation);
+      updateFilter(createLocationFilters(additionalFilter));
+      if (currentLocation !== newlySelectedLocation) {
+        // TODO: this is really crappy, but whatever, i'm not in the mood for type gymnaastics
+        setCurrentLocation(
+          newlySelectedLocation as unknown as LotrLocationNames
+        );
+      }
     }
   };
 
@@ -97,10 +95,9 @@ export default function DeckManager() {
     if (filters.activeDeckSection === 'ring-bearer') {
       setCurrentDeck({ ...currentDeck, ringbearerId: blueprintId });
     }
-    if (filters.activeDeckSection === 'site') {
+    if (filters.activeDeckSection === 'location') {
       setCurrentDeck({
         ...currentDeck,
-        ringId: blueprintId,
         locations: { ...currentDeck.locations, [currentLocation]: blueprintId },
       });
     }
@@ -112,7 +109,6 @@ export default function DeckManager() {
 
   return (
     <>
-      <DeckManagerMenu />
       <Grid display="flex" flexDirection="row">
         <Grid sx={{ minWidth: '40%;' }}>
           <Deckbuilder
@@ -120,8 +116,11 @@ export default function DeckManager() {
             filterRequest={handleDeckbuilderFilterUpdate}
           />
         </Grid>
-        <Grid>
-          <Typography level="h3">Available Cards</Typography>
+        <Grid
+          sx={{
+            width: '100%',
+          }}
+        >
           <CardBank
             onCardPrimaryAction={handleAddCardToDeck}
             onCardSecondaryAction={openCardDetails}

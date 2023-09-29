@@ -1,13 +1,13 @@
 export enum LotrLocationNames {
-  SiteOne = 'siteOne',
-  SiteTwo = 'siteTwo',
-  SiteThree = 'siteThree',
-  SiteFour = 'siteFour',
-  SiteFive = 'siteFive',
-  SiteSix = 'siteSix',
-  SiteSeven = 'siteSeven',
-  SiteEight = 'siteEight',
-  SiteNine = 'siteNine',
+  SiteOne = 1,
+  SiteTwo = 2,
+  SiteThree = 3,
+  SiteFour = 4,
+  SiteFive = 5,
+  SiteSix = 6,
+  SiteSeven = 7,
+  SiteEight = 8,
+  SiteNine = 9,
 }
 
 export type LotrLocations = Record<LotrLocationNames, string>;

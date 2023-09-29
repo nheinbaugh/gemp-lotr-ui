@@ -38,24 +38,20 @@ function SearchResults({
   }, [viewportWidth, containerWidth]);
 
   return (
-    <Box>
-      <Grid ref={containerRef} container spacing={1}>
-        {cards.map((card) => {
-          return (
-            <Grid key={card.blueprintId}>
-              <LotrCard
-                blueprintId={card.blueprintId}
-                width={getCardWidth(viewportWidth)}
-                onPrimaryAction={() => onCardPrimaryAction(card.blueprintId)}
-                onSecondaryAction={() =>
-                  onCardSecondaryAction(card.blueprintId)
-                }
-              />
-            </Grid>
-          );
-        })}
-      </Grid>
-    </Box>
+    <Grid ref={containerRef} container spacing={1}>
+      {cards.map((card) => {
+        return (
+          <Grid key={card.blueprintId}>
+            <LotrCard
+              blueprintId={card.blueprintId}
+              width={getCardWidth(viewportWidth)}
+              onPrimaryAction={() => onCardPrimaryAction(card.blueprintId)}
+              onSecondaryAction={() => onCardSecondaryAction(card.blueprintId)}
+            />
+          </Grid>
+        );
+      })}
+    </Grid>
   );
 }
 

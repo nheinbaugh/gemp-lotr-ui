@@ -50,7 +50,7 @@ export const convertViewModelToDao = (
     rarity: input.rarity?.apiName ?? '',
     words: '',
     cardTypes: input.cardTypes?.apiName ?? '',
-    siteNumber: '',
+    siteNumber: input.siteNumber ?? '',
     itemClasses: '',
     keywords: input.keywords?.apiName ?? '',
     sets: input.sets?.value ?? '',

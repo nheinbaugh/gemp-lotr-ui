@@ -24,11 +24,14 @@ export const createRingbearerFilters = (): CollectionFiltersViewModel => ({
   },
 });
 
-export const createLocationFilters = (): CollectionFiltersViewModel => ({
+export const createLocationFilters = (
+  siteNumber: string
+): CollectionFiltersViewModel => ({
   ...createDefaultCollectionViewModel(),
   activeDeckSection: 'location',
   cardTypes: {
     displayName: 'location',
     apiName: 'SITE',
   },
+  siteNumber,
 });
