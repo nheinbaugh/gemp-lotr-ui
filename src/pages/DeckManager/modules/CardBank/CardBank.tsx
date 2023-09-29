@@ -20,12 +20,12 @@ function CardBank({
       container
       display="flex"
       flexDirection="column"
-      sx={{ height: '100vh', maxHeight: '100vh' }}
+      sx={{ height: '100%', maxHeight: '100%' }}
     >
       <Grid>
         <Typography level="h3">Available Cards</Typography>
       </Grid>
-      <Box sx={{ flex: '1', overflowY: 'auto', overflowX: 'hidden' }}>
+      <Box sx={{ flex: '1 1 1px', overflowY: 'auto', overflowX: 'hidden' }}>
         <SearchResults
           cards={results}
           onCardPrimaryAction={onCardPrimaryAction}

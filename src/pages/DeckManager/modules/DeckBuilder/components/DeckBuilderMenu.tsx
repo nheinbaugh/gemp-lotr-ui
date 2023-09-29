@@ -18,8 +18,10 @@ export default function DeckBuilderMenu() {
       flexDirection="row"
       sx={{
         display: 'flex',
-        fleexDirection: 'row',
+        flexDirection: 'row',
+        flex: '0 0 50px',
         gap: '8px',
+        maxHeight: '40px',
         marginTop: '8px',
         marginLeft: '8px',
       }}
@@ -44,15 +46,17 @@ export default function DeckBuilderMenu() {
           <ImportExport />
         </IconButton>
       </Tooltip>
-      <GempDropdown
-        selectionChanged={formatChanged}
-        placeholder="Selected Format"
-        options={Object.values(allPlayableFormatsMetadata).map((item) => ({
-          apiName: item.value,
-          displayName: item.displayName,
-        }))}
-        selectedValue={selectedValue}
-      />
+      <Box alignSelf="center" sx={{ width: '200px' }}>
+        <GempDropdown
+          selectionChanged={formatChanged}
+          placeholder="Selected Format"
+          options={Object.values(allPlayableFormatsMetadata).map((item) => ({
+            apiName: item.value,
+            displayName: item.displayName,
+          }))}
+          selectedValue={selectedValue}
+        />
+      </Box>
       <span>Deck Title</span>
     </Box>
   );

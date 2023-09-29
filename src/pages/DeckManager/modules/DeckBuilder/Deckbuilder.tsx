@@ -58,11 +58,9 @@ export default function Deckbuilder({
       sx={(theme) => ({
         boxShadow: theme.shadow.lg,
         backgroundColor: 'neutral.dark',
-        height: '100vh',
+        height: '100%',
       })}
     >
-      <DeckBuilderMenu />
-
       <Box>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs
