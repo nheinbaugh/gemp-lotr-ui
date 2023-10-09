@@ -4,7 +4,6 @@ import { getDefaultCollectionApiParameters } from './collection-api-parameters.f
 
 const createFilter = (params: CollectionApiParameters): string => {
   let encodedFilter = '';
-  console.log('sending api request', params);
   if (params.filter.rarity) {
     encodedFilter += encodeURIComponent(`rarity:${params.filter.rarity} `);
   }
@@ -14,8 +13,8 @@ const createFilter = (params: CollectionApiParameters): string => {
   if (params.filter.cardTypes) {
     encodedFilter += encodeURIComponent(`cardType:${params.filter.cardTypes} `);
   }
-  if (params.filter.sets) {
-    encodedFilter += encodeURIComponent(`set:${params.filter.sets} `);
+  if (params.filter.format) {
+    encodedFilter += encodeURIComponent(`set:${params.filter.format} `);
   }
   if (params.filter.title) {
     encodedFilter += encodeURIComponent(`name:${params.filter.title} `);

@@ -1,8 +1,9 @@
-import { Box, Grid } from '@mui/joy';
+import { Grid } from '@mui/joy';
 import { useEffect, useRef, useState } from 'react';
 import { CollectionCardViewModel } from '../../../../lotr-common/api/collection-api/collection-api-response.functions';
 import LotrCard from '../../../../lotr-common/components/LotrCard/LotrCard';
 import { useWindowDimensions } from '../../../../common/hooks/useWindowDimensions';
+import { useCardQueryStore } from '../../../../lotr-common/state/card-filter.state';
 
 interface SearchResultProps {
   cards: CollectionCardViewModel[];
@@ -25,9 +26,10 @@ function SearchResults({
   onCardSecondaryAction,
 }: SearchResultProps) {
   const viewportWidth = useWindowDimensions();
+  const filters = useCardQueryStore();
   const [containerWidth, setContainerWidth] = useState<number>(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
-
+  let displayCardsAsHorizontal = false;
   useEffect(() => {
     if (containerRef.current) {
       const currentWidth = containerRef.current.offsetWidth;
@@ -36,6 +38,9 @@ function SearchResults({
       }
     }
   }, [viewportWidth, containerWidth]);
+  if (filters.filters.cardTypes?.displayName === 'location') {
+    displayCardsAsHorizontal = true;
+  }
 
   return (
     <Grid ref={containerRef} container spacing={1}>
@@ -45,6 +50,7 @@ function SearchResults({
             <LotrCard
               blueprintId={card.blueprintId}
               width={getCardWidth(viewportWidth)}
+              isHorizontal={displayCardsAsHorizontal}
               onPrimaryAction={() => onCardPrimaryAction(card.blueprintId)}
               onSecondaryAction={() => onCardSecondaryAction(card.blueprintId)}
             />

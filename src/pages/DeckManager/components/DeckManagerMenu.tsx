@@ -2,23 +2,19 @@ import { Add, Home } from '@mui/icons-material';
 import { Button, Grid } from '@mui/joy';
 import { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
-import { DeckManagerSections } from '../types/deck-manager-sections.type';
 
 const deckManagerActions: {
   title: string;
-  section: DeckManagerSections;
   icon: ReactElement;
   href: string;
 }[] = [
   {
     title: 'New Deck',
-    section: 'deck-builder',
     icon: <Add />,
     href: '/new',
   },
   {
     title: 'Open Deck',
-    section: 'deck-list',
     icon: <Home />,
     href: '/list',
   },
@@ -44,7 +40,7 @@ export default function DeckManagerMenu() {
       </Grid>
       <Grid>
         <Grid>
-          Down here we can show recently modified decks as stored inA
+          Down here we can show recently modified decks as stored in
           LocalStorage
         </Grid>
       </Grid>

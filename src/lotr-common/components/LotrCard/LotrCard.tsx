@@ -8,6 +8,7 @@ type LotrCardProps = {
   width?: number;
   onPrimaryAction: VoidFunction;
   onSecondaryAction: VoidFunction;
+  isHorizontal?: boolean;
 };
 
 /**
@@ -21,6 +22,7 @@ export default function LotrCard({
   width,
   onPrimaryAction,
   onSecondaryAction,
+  isHorizontal = false,
 }: LotrCardProps) {
   const blueprint = getBlueprintByCardId(blueprintId);
 
@@ -29,16 +31,19 @@ export default function LotrCard({
       <GempCard
         onPrimaryAction={onPrimaryAction}
         onSecondaryAction={onSecondaryAction}
+        isHorizontal={isHorizontal}
         imageHref={notFoundImageUrl}
         fallbackImage={notFoundImageUrl}
         title="Unknown Card"
       />
     );
   }
+
   return (
     <GempCard
       height={height}
       width={width}
+      isHorizontal={isHorizontal}
       imageHref={blueprint.imageUrl}
       fallbackImage={notFoundImageUrl}
       title=""

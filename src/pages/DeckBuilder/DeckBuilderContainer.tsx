@@ -65,20 +65,17 @@ export default function DeckBuilderContainer() {
     filterName: string,
     additionalFilter = ''
   ) => {
-    console.log(
-      'the deckbuilder wants to filter by: ',
-      filterName,
-      additionalFilter,
-      currentLocation
-    );
     let newlySelectedLocation = locationNotBeingUsed;
     if (filterName === 'ring') {
-      updateFilter(createOneRingFilters());
+      updateFilter({ ...createOneRingFilters(), format: filters.format });
     } else if (filterName === 'ring-bearer') {
-      updateFilter(createRingbearerFilters());
+      updateFilter({ ...createRingbearerFilters(), format: filters.format });
     } else if (filterName === 'site') {
       newlySelectedLocation = additionalFilter;
-      updateFilter(createLocationFilters(additionalFilter));
+      updateFilter({
+        ...createLocationFilters(additionalFilter),
+        format: filters.format,
+      });
       if (currentLocation !== newlySelectedLocation) {
         // TODO: this is really crappy, but whatever, i'm not in the mood for type gymnaastics
         setCurrentLocation(
@@ -135,7 +132,12 @@ export default function DeckBuilderContainer() {
             />
             <FilterToggle showFilters={toggleDrawer(true)} />
           </Grid>
-          <Drawer anchor="right" open={isOpen} onClose={toggleDrawer(false)}>
+          <Drawer
+            sx={{ zIndex: '900' }} // this zIndex hack is because the dropdowns are getting a zindex of 1000, but the drawer was 1200 by default.
+            anchor="right"
+            open={isOpen}
+            onClose={toggleDrawer(false)}
+          >
             <FiltersList
               currentFilters={filters}
               applyFilters={onFilterUpdate}

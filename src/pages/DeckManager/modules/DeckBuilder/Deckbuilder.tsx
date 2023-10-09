@@ -7,7 +7,6 @@ import Box from '@mui/material/Box';
 import { Deck } from '../../../../common/types/Deck';
 import PlaceholderCard from '../../../../common/components/PlaceholderCard/PlaceholderCard';
 import SiteSelectionTab from './components/SiteSelectionTab';
-import DeckBuilderMenu from './components/DeckBuilderMenu';
 
 type DeckbuilderProps = {
   currentDeck: Deck;

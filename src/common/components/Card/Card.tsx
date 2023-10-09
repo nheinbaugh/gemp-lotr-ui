@@ -4,6 +4,7 @@ import { useState } from 'react';
 import styles from './index.module.css';
 import { Dimensions } from '../../types/size-and-position';
 import {
+  determineCardDimensions,
   getCardHeightByWidth,
   getCardWidthByHeight,
   getDefaultCardDimensions,
@@ -17,17 +18,7 @@ type CardProps = {
   fallbackImage: string;
   onPrimaryAction: VoidFunction;
   onSecondaryAction: VoidFunction;
-};
-
-const getCardDimensions = (height?: number, width?: number): Dimensions => {
-  if (height) {
-    return getCardWidthByHeight(height);
-  }
-  if (width) {
-    return getCardHeightByWidth(width);
-  }
-
-  return getDefaultCardDimensions();
+  isHorizontal: boolean;
 };
 
 /**
@@ -43,9 +34,9 @@ export default function GempCard({
   fallbackImage,
   onPrimaryAction,
   onSecondaryAction,
+  isHorizontal,
 }: CardProps) {
-  const dimensions = getCardDimensions(height, width);
-
+  const dimensions = determineCardDimensions(isHorizontal, height, width);
   const handleCardClick = (event: React.MouseEvent): void => {
     if (event.type === 'click') {
       onPrimaryAction();

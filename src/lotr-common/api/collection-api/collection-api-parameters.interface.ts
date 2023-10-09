@@ -15,6 +15,7 @@ export interface CollectionApiParameters extends PageInformation {
  * This is the model we use on the UI with friendly typings to allow swapping to display name etc
  */
 export interface CollectionFiltersViewModel {
+  format?: Mappings;
   side?: Mappings;
   type?: Mappings;
   rarity?: Mappings;
@@ -37,10 +38,10 @@ export interface CollectionFiltersViewModel {
  * This is the model sent to the API with no syntactic sugar
  */
 export interface CollectionApiFilterDAO {
+  format: string;
   side: string;
   type: string;
   rarity: string;
-  sets: string;
   words: string;
   cardTypes: string;
   cultures: string;

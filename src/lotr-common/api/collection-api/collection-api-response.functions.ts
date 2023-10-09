@@ -39,7 +39,6 @@ export const convertGetCollectionFromXml = (
     xmlMode: true,
   });
   const cardsElements = data('collection').children('card');
-
   return {
     count: Number(data('collection').attr('count')),
     cards: convertCardsToViewModel(cardsElements),

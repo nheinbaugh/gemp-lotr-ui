@@ -13,10 +13,10 @@ export const createDefaultPageInformation = (): PageInformation => ({
 export const getDefaultCollectionFilterState = (
   filters: Partial<CollectionApiFilterDAO> = {}
 ): CollectionApiFilterDAO => ({
+  format: '',
   side: '',
   type: '',
   rarity: '',
-  sets: '',
   words: '',
   cardTypes: '',
   cultures: '',
@@ -45,6 +45,7 @@ export const convertViewModelToDao = (
   input: CollectionFiltersViewModel
 ): CollectionApiFilterDAO => {
   return {
+    format: input.format?.apiName ?? '',
     side: '',
     type: '',
     rarity: input.rarity?.apiName ?? '',
@@ -53,7 +54,6 @@ export const convertViewModelToDao = (
     siteNumber: input.siteNumber ?? '',
     itemClasses: '',
     keywords: input.keywords?.apiName ?? '',
-    sets: input.sets?.value ?? '',
     races: '',
     phases: '',
     cultures: input.cultures?.join(',') ?? '',

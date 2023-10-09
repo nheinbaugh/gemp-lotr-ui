@@ -28,7 +28,7 @@ interface FiltersListProps {
 }
 
 export default function FiltersList({
-  currentFilters = {},
+  currentFilters = { activeDeckSection: 'locations' },
   applyFilters,
 }: FiltersListProps) {
   const [rarity, setRarity] = useState<Mappings | undefined>(
