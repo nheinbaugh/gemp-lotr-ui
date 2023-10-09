@@ -1,10 +1,12 @@
 import { Box } from '@mui/joy';
 import LotrCard from '../../../lotr-common/components/LotrCard/LotrCard';
+import { determineCardDimensions } from '../Card/types/card-dimension.functions';
 
 type CardPlaceholderProps = {
   blueprintId?: string;
   placeholder: string;
   vertical?: boolean;
+  height?: number;
   onSelect: VoidFunction;
 };
 
@@ -17,20 +19,29 @@ type CardPlaceholderProps = {
 export default function PlaceholderCard({
   placeholder,
   vertical = true,
+  height = 220,
   onSelect,
   blueprintId,
 }: CardPlaceholderProps) {
-  const longSide = '190px';
-  const shortSide = '140px';
-  const width = vertical ? shortSide : longSide;
-  const height = vertical ? longSide : shortSide;
+  let dimensions = determineCardDimensions(vertical, height, undefined);
+  if (vertical) {
+    dimensions = {
+      width: Math.min(dimensions.height, dimensions.width),
+      height: Math.max(dimensions.height, dimensions.width),
+    };
+  } else {
+    dimensions = {
+      width: Math.max(dimensions.height, dimensions.width),
+      height: Math.min(dimensions.height, dimensions.width),
+    };
+  }
   if (!blueprintId) {
     return (
       <Box
         onClick={onSelect}
         sx={{
-          width,
-          height,
+          width: `${dimensions.width}px`,
+          height: `${dimensions.height}px`,
           backgroundColor: 'lightgray',
           display: 'flex',
           justifyContent: 'center',
@@ -45,7 +56,12 @@ export default function PlaceholderCard({
   return (
     <LotrCard
       blueprintId={blueprintId}
-      width={140}
+      width={
+        vertical
+          ? Math.min(dimensions.height, dimensions.width)
+          : Math.max(dimensions.height, dimensions.width)
+      }
+      isHorizontal={!vertical}
       onPrimaryAction={onSelect}
       onSecondaryAction={() => {}}
     />

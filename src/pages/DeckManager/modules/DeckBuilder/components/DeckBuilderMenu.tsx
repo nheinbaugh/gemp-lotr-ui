@@ -3,9 +3,16 @@ import { Tooltip, IconButton, Box } from '@mui/joy';
 import GempDropdown from '../../../../../common/components/GempDropdown/GempDropdown';
 import { allPlayableFormatsMetadata } from '../../../../../lotr-common/types/expansions';
 import { useCardQueryStore } from '../../../../../lotr-common/state/card-filter.state';
+import { Mappings } from '../../../../../common/types/mappings.interface';
 
 export default function DeckBuilderMenu() {
-  const { filters, setFormat } = useCardQueryStore();
+  const { filters, updateFilter } = useCardQueryStore();
+
+  const setFormat = (format: Mappings | undefined) =>
+    updateFilter({
+      ...filters,
+      format,
+    });
 
   return (
     <Box

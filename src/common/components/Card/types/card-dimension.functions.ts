@@ -35,7 +35,7 @@ export const getDefaultCardDimensions = (): Dimensions => ({
 export const determineCardDimensions = (
   isHorizontal: boolean,
   height?: number,
-  width?: number,
+  width?: number
 ): Dimensions => {
   let dimensions: Dimensions = { height: 0, width: 0 };
   if (height) {

@@ -59,6 +59,7 @@ export default function SiteSelectionTab(props: SiteSelectionTabProps) {
             placeholder={location.title}
             blueprintId={selectedSites[location.site]}
             vertical={false}
+            height={180}
             onSelect={() => updateFilteredSites(location.site)}
           />
         </Grid>

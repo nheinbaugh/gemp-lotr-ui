@@ -29,7 +29,6 @@ interface CardQueryState {
 interface CardQueryActions {
   updateFilter: (filter: CollectionFiltersViewModel) => void;
   setCurrentPage: (pageNumber: PageInformation) => void;
-  setFormat: (format: Mappings | undefined) => void;
 }
 
 type CardQueryStore = CardQueryState & CardQueryActions;
@@ -78,15 +77,6 @@ export const useCardQueryStore = create(
         }),
       updateFilter: async (filters: CollectionFiltersViewModel) =>
         set(async (prevState) => doUpdateFilter(filters, prevState, set)),
-      setFormat: (format: Mappings | undefined) => {
-        set((state) => ({
-          format,
-          filters: {
-            ...state.filters,
-            format,
-          },
-        }));
-      },
     }))
   )
 );
