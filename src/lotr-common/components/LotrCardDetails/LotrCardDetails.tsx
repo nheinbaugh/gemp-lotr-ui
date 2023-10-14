@@ -1,9 +1,10 @@
-import { Modal, ModalClose, Sheet, Typography } from '@mui/joy';
+import { Button, Modal, ModalClose, Sheet, Typography } from '@mui/joy';
+import { useState } from 'react';
 import LotrCard from '../LotrCard/LotrCard';
 import { useWindowDimensions } from '../../../common/hooks/useWindowDimensions';
+import { useCardDetailStore } from './card-details.state';
 
 interface LotrCardDetailsProps {
-  blueprintId: string;
   isOpen: boolean;
   onClose: VoidFunction;
 }
@@ -15,15 +16,12 @@ const determineModalWidth = (screenWidth: number): number => {
   if (screenWidth < 1300) {
     return screenWidth * 0.5;
   }
-  return screenWidth * 0.25;
+  return screenWidth * 0.5;
 };
 
-function LotrCardDetails({
-  blueprintId,
-  isOpen,
-  onClose,
-}: LotrCardDetailsProps) {
+function LotrCardDetails({ isOpen, onClose }: LotrCardDetailsProps) {
   const screenWidth = useWindowDimensions();
+  const { displayedCardId, updateCurrentCard } = useCardDetailStore();
 
   return (
     <Modal
@@ -60,11 +58,13 @@ function LotrCardDetails({
           Card Information
         </Typography>
         <LotrCard
-          blueprintId={blueprintId}
+          blueprintId={displayedCardId}
           width={determineModalWidth(screenWidth)}
           onPrimaryAction={() => {}}
           onSecondaryAction={() => {}}
         />
+        <Button onClick={() => updateCurrentCard('next')}>Next</Button>
+        <Button onClick={() => updateCurrentCard('previous')}>Previous</Button>
       </Sheet>
     </Modal>
   );

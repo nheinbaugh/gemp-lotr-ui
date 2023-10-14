@@ -8,7 +8,7 @@ import Routes from './common/providers/Routes.provider';
 
 function App() {
   return (
-    <CssVarsProvider theme={themeOverrides}>
+    <CssVarsProvider theme={themeOverrides} defaultMode="dark">
       <CssBaseline />
       <RouterProvider router={Routes} />
     </CssVarsProvider>

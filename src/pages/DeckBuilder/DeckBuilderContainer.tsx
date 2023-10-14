@@ -16,6 +16,7 @@ import CardBank from '../DeckManager/modules/CardBank/CardBank';
 import Deckbuilder from '../DeckManager/modules/DeckBuilder/Deckbuilder';
 import FiltersList from '../DeckManager/modules/FilterSelector/FilterSelector';
 import DeckBuilderMenu from '../DeckManager/modules/DeckBuilder/components/DeckBuilderMenu';
+import { useCardDetailStore } from '../../lotr-common/components/LotrCardDetails/card-details.state';
 
 // Note to self: this is hot ass garbage, i'm too lazy to figure how I'd rather do this.
 const locationNotBeingUsed = 'no-active-location';
@@ -23,7 +24,7 @@ const locationNotBeingUsed = 'no-active-location';
 type SiteSelectionOptions = LotrLocationNames | 'no-active-location';
 
 export default function DeckBuilderContainer() {
-  const { updateFilter, filters } = useCardQueryStore();
+  const { updateFilter, filters, results } = useCardQueryStore();
 
   const [isOpen, setIsOpen] = useState(false);
   const [currentLocation, setCurrentLocation] =
@@ -32,10 +33,13 @@ export default function DeckBuilderContainer() {
   const [cardModalState, setCardModalState] = useState<{
     isOpen: boolean;
     cardId: string;
-  }>({ isOpen: false, cardId: '' });
+    availableCards: Array<string>;
+  }>({ isOpen: false, cardId: '', availableCards: [] });
+
+  const { iniatlizeModal } = useCardDetailStore();
 
   const closeModal = (): void => {
-    setCardModalState({ isOpen: false, cardId: '' });
+    setCardModalState({ isOpen: false, cardId: '', availableCards: [] });
   };
 
   const toggleDrawer =
@@ -102,7 +106,9 @@ export default function DeckBuilderContainer() {
   };
 
   const openCardDetails = (blueprintId: string): void => {
-    setCardModalState({ isOpen: true, cardId: blueprintId });
+    const availableCards = results.map((card) => card.blueprintId);
+    iniatlizeModal(blueprintId, availableCards);
+    setCardModalState({ isOpen: true, cardId: blueprintId, availableCards });
   };
 
   return (
@@ -148,7 +154,8 @@ export default function DeckBuilderContainer() {
       <LotrCardDetails
         isOpen={cardModalState.isOpen}
         onClose={closeModal}
-        blueprintId={cardModalState.cardId}
+        // blueprintId={cardModalState.cardId}
+        // availableCards={cardModalState.availableCards}
       />
     </>
   );

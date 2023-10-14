@@ -5,7 +5,7 @@ const DEFAULT_WIDTH = 67;
 const DEFAULT_HEIGHT = 88;
 
 // this is based off the images I randomly checked.... could be wrong
-const MAX_ALLOWED_WIDTH = 375;
+const MAX_ALLOWED_WIDTH = 515; // it was 375
 
 export const getCardHeightByWidth = (width: number): Dimensions => {
   let actualWidth = width;

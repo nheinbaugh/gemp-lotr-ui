@@ -45,6 +45,9 @@ This app is intended to be standalone, but the API for GEMP still requires/expec
 * We gotta display cards
 * We gotta filter cards
 * I need to come up with the UI/UX for this, but using the same general patterns as MECCG deckbuilder was suggested
+[] Allow sorting of the deck contents based on things like twilight cost, name etc
+[] determine the best pattern for zooming in on cards
+[] add a way to change the card scale size in the "card bank" or deck veiw
 
 ## Game History
 

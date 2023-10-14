@@ -42,7 +42,7 @@ export default function PlaceholderCard({
         sx={{
           width: `${dimensions.width}px`,
           height: `${dimensions.height}px`,
-          backgroundColor: 'lightgray',
+          backgroundColor: 'neutral.light',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
