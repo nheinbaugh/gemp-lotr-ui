@@ -29,6 +29,7 @@ export default function LotrCard({
   if (!blueprint) {
     return (
       <GempCard
+        cardId={blueprintId}
         onPrimaryAction={onPrimaryAction}
         onSecondaryAction={onSecondaryAction}
         isHorizontal={isHorizontal}
@@ -41,6 +42,7 @@ export default function LotrCard({
 
   return (
     <GempCard
+      cardId={blueprintId}
       height={height}
       width={width}
       isHorizontal={isHorizontal}

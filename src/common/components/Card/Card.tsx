@@ -1,16 +1,11 @@
 /* eslint-disable react/require-default-props -- not sure I care for this rule, but the prop really is optional... */
 import { Box } from '@mui/joy';
-import { useState } from 'react';
 import styles from './index.module.css';
-import { Dimensions } from '../../types/size-and-position';
-import {
-  determineCardDimensions,
-  getCardHeightByWidth,
-  getCardWidthByHeight,
-  getDefaultCardDimensions,
-} from './types/card-dimension.functions';
+import { determineCardDimensions } from './types/card-dimension.functions';
+import { useCardDetailStore } from '../../../lotr-common/components/LotrCardDetails/card-details.state';
 
 type CardProps = {
+  cardId: string;
   imageHref: string;
   title: string;
   width?: number;
@@ -27,6 +22,7 @@ type CardProps = {
  * @param param
  */
 export default function GempCard({
+  cardId,
   imageHref,
   title,
   height,
@@ -37,6 +33,7 @@ export default function GempCard({
   isHorizontal,
 }: CardProps) {
   const dimensions = determineCardDimensions(isHorizontal, height, width);
+  const { setHoverImage } = useCardDetailStore();
   const handleCardClick = (event: React.MouseEvent): void => {
     if (event.type === 'click') {
       onPrimaryAction();
@@ -60,6 +57,8 @@ export default function GempCard({
       >
         <img
           onClick={handleCardClick}
+          onMouseEnter={() => setHoverImage(cardId)}
+          onMouseLeave={() => setHoverImage(null)}
           onContextMenu={handleCardClick} // note: this prevents all browser right click actions
           className={styles.cardFace}
           // onError={(imageHref = fallbackImage)}

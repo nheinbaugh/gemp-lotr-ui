@@ -36,7 +36,7 @@ export default function DeckBuilderContainer() {
     availableCards: Array<string>;
   }>({ isOpen: false, cardId: '', availableCards: [] });
 
-  const { iniatlizeModal } = useCardDetailStore();
+  const { iniatlizeModal, hoverImage } = useCardDetailStore();
 
   const closeModal = (): void => {
     setCardModalState({ isOpen: false, cardId: '', availableCards: [] });
