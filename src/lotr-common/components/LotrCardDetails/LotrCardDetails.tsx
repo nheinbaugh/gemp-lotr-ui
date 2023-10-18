@@ -1,5 +1,4 @@
 import { Button, Modal, ModalClose, Sheet, Typography } from '@mui/joy';
-import { useState } from 'react';
 import LotrCard from '../LotrCard/LotrCard';
 import { useWindowDimensions } from '../../../common/hooks/useWindowDimensions';
 import { useCardDetailStore } from './card-details.state';

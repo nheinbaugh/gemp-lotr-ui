@@ -1,6 +1,6 @@
 import Drawer from '@mui/material/Drawer';
 import { useState } from 'react';
-import { Grid } from '@mui/joy';
+import { Box, Grid, Typography } from '@mui/joy';
 import { CollectionFiltersViewModel } from '../../lotr-common/api/collection-api/collection-api-parameters.interface';
 import LotrCardDetails from '../../lotr-common/components/LotrCardDetails/LotrCardDetails';
 import { Deck, createDefaultDeck } from '../../common/types/Deck';
@@ -17,6 +17,9 @@ import Deckbuilder from '../DeckManager/modules/DeckBuilder/Deckbuilder';
 import FiltersList from '../DeckManager/modules/FilterSelector/FilterSelector';
 import DeckBuilderMenu from '../DeckManager/modules/DeckBuilder/components/DeckBuilderMenu';
 import { useCardDetailStore } from '../../lotr-common/components/LotrCardDetails/card-details.state';
+import LotrCard, {
+  NonInteractiveLotrCard,
+} from '../../lotr-common/components/LotrCard/LotrCard';
 
 // Note to self: this is hot ass garbage, i'm too lazy to figure how I'd rather do this.
 const locationNotBeingUsed = 'no-active-location';
@@ -157,6 +160,23 @@ export default function DeckBuilderContainer() {
         // blueprintId={cardModalState.cardId}
         // availableCards={cardModalState.availableCards}
       />
+      {hoverImage && (
+        <Box
+          sx={{
+            position: 'absolute',
+            left: '100px',
+            top: '100px',
+            height: '300px',
+            width: '300px',
+          }}
+        >
+          <NonInteractiveLotrCard
+            blueprintId={hoverImage}
+            height={400}
+            allowHover={false}
+          />
+        </Box>
+      )}
     </>
   );
 }

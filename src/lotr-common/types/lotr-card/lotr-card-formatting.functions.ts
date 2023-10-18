@@ -36,23 +36,28 @@ export const formatSetNumber = (setNumber: number): string => {
  * Given a card ID from the API convert it into the CardBlueprint viewmodel
  */
 export const getBlueprintByCardId = (id: string): CardBlueprint => {
-  const separator = '_';
-  const sections = id.split(separator);
+  try {
+    const separator = '_';
+    const sections = id.split(separator);
 
-  const cardNumber = Number(sections[1]);
-  const setNumber = Number(sections[0]);
-  const set = Object.entries(decipherSetExpansionMetadata).find(
-    ([, metadata]) => {
-      return Number(metadata.value) === setNumber;
-    }
-  )?.[0] as DecipherSets | PlayersCommitteeSets;
-  return {
-    set,
-    cardNumber,
-    formattedCardNumber: formatCardNumber(cardNumber),
-    formattedSetNumber: formatSetNumber(setNumber),
-    imageUrl: getImageUrl(id),
-  };
+    const cardNumber = Number(sections[1]);
+    const setNumber = Number(sections[0]);
+    const set = Object.entries(decipherSetExpansionMetadata).find(
+      ([, metadata]) => {
+        return Number(metadata.value) === setNumber;
+      }
+    )?.[0] as DecipherSets | PlayersCommitteeSets;
+    return {
+      set,
+      cardNumber,
+      formattedCardNumber: formatCardNumber(cardNumber),
+      formattedSetNumber: formatSetNumber(setNumber),
+      imageUrl: getImageUrl(id),
+    };
+  } catch (e) {
+    // debugger;
+  }
+  return {} as CardBlueprint;
 };
 
 /**

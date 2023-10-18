@@ -9,13 +9,9 @@ type LotrCardProps = {
   onPrimaryAction: VoidFunction;
   onSecondaryAction: VoidFunction;
   isHorizontal?: boolean;
+  allowHover: boolean;
 };
 
-/**
- * This is the (essentially) abstract card that displays an image from a URL.
- * @see{LotrCard} for the implementation actually leverages this and does clean separation on top of it
- * @param param
- */
 export default function LotrCard({
   blueprintId,
   height,
@@ -23,6 +19,7 @@ export default function LotrCard({
   onPrimaryAction,
   onSecondaryAction,
   isHorizontal = false,
+  allowHover = false,
 }: LotrCardProps) {
   const blueprint = getBlueprintByCardId(blueprintId);
 
@@ -35,6 +32,7 @@ export default function LotrCard({
         isHorizontal={isHorizontal}
         imageHref={notFoundImageUrl}
         fallbackImage={notFoundImageUrl}
+        allowHover={allowHover}
         title="Unknown Card"
       />
     );
@@ -51,6 +49,24 @@ export default function LotrCard({
       title=""
       onPrimaryAction={onPrimaryAction}
       onSecondaryAction={onSecondaryAction}
+      allowHover={allowHover}
+    />
+  );
+}
+
+export function NonInteractiveLotrCard({
+  blueprintId,
+  height,
+  width,
+}: Partial<LotrCardProps>) {
+  return (
+    <LotrCard
+      blueprintId={blueprintId ?? ''}
+      height={height}
+      width={width}
+      onPrimaryAction={() => {}}
+      onSecondaryAction={() => {}}
+      allowHover={false}
     />
   );
 }

@@ -1,5 +1,6 @@
 /* eslint-disable react/require-default-props -- not sure I care for this rule, but the prop really is optional... */
 import { Box } from '@mui/joy';
+import { useCallback } from 'react';
 import styles from './index.module.css';
 import { determineCardDimensions } from './types/card-dimension.functions';
 import { useCardDetailStore } from '../../../lotr-common/components/LotrCardDetails/card-details.state';
@@ -14,6 +15,7 @@ type CardProps = {
   onPrimaryAction: VoidFunction;
   onSecondaryAction: VoidFunction;
   isHorizontal: boolean;
+  allowHover: boolean;
 };
 
 /**
@@ -31,6 +33,7 @@ export default function GempCard({
   onPrimaryAction,
   onSecondaryAction,
   isHorizontal,
+  allowHover = false,
 }: CardProps) {
   const dimensions = determineCardDimensions(isHorizontal, height, width);
   const { setHoverImage } = useCardDetailStore();
@@ -42,23 +45,35 @@ export default function GempCard({
       event.preventDefault();
     }
   };
+
+  const bob = useCallback(
+    (hoverCardId: string | null) => {
+      console.log('bob');
+      if (!allowHover) {
+        return;
+      }
+      setHoverImage(hoverCardId);
+    },
+    [allowHover, setHoverImage]
+  );
   return (
     <Box
       sx={{
         height: dimensions.height,
         width: dimensions.width,
       }}
+      data-cardid={cardId}
     >
       <object
         className={styles.cardFace}
+        onMouseOver={() => setHoverImage(cardId)}
+        onMouseLeave={() => setHoverImage(null)}
         data={imageHref}
         onClick={handleCardClick}
         onContextMenu={handleCardClick} // note: this prevents all browser right click actions
       >
         <img
           onClick={handleCardClick}
-          onMouseEnter={() => setHoverImage(cardId)}
-          onMouseLeave={() => setHoverImage(null)}
           onContextMenu={handleCardClick} // note: this prevents all browser right click actions
           className={styles.cardFace}
           // onError={(imageHref = fallbackImage)}

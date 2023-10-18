@@ -1,7 +1,6 @@
 import {
   formatCardNumber,
   formatSetNumber,
-  getBlueprintByCardId,
 } from '../lotr-card-formatting.functions';
 import { mainImageLocation, rulesImageHref } from '../lotr-card.constants';
 
