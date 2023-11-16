@@ -21,7 +21,6 @@ function GempIcon({ iconClicked, name, alt, selected }: GempIconProps) {
     }
   };
   return (
-    // <Box sx={{ width: '20px', height: '20px;' }}>
     <IconButton
       variant={selected ? 'solid' : 'outlined'}
       onClick={iconClicked}

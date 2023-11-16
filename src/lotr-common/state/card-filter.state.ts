@@ -18,7 +18,6 @@ import {
   convertViewModelToDao,
   createDefaultPageInformation,
 } from '../api/collection-api/collection-api-parameters.functions';
-import { Mappings } from '../../common/types/mappings.interface';
 
 interface CardQueryState {
   filters: CollectionFiltersViewModel;
@@ -53,8 +52,11 @@ const doUpdateFilter = async (
       count: 18,
     } // currentPage
   );
-  const rawr = collectionApiConfiguration(dao);
-  const result = await axios.get(rawr[0], rawr[1]);
+  const filterApiConfiguration = collectionApiConfiguration(dao);
+  const result = await axios.get(
+    filterApiConfiguration[0],
+    filterApiConfiguration[1]
+  );
   const results = convertGetCollectionFromXml(result.data).cards;
   set({ filters, results });
 };

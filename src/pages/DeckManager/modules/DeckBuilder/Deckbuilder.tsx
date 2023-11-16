@@ -1,9 +1,14 @@
-/* eslint-disable react/jsx-props-no-spreading -- garbage copy/paste */
-import { Grid } from '@mui/joy';
+import {
+  Grid,
+  IconButton,
+  Tab,
+  TabList,
+  TabPanel,
+  Tabs,
+  Typography,
+} from '@mui/joy';
 import * as React from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
+import { Warning } from '@mui/icons-material';
 import { Deck } from '../../../../common/types/Deck';
 import PlaceholderCard from '../../../../common/components/PlaceholderCard/PlaceholderCard';
 import SiteSelectionTab from './components/SiteSelectionTab';
@@ -13,42 +18,17 @@ type DeckbuilderProps = {
   filterRequest: (filterName: string, additionalFilter?: string) => void;
 };
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </div>
-  );
-}
-
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
 export default function Deckbuilder({
   currentDeck: deck,
   filterRequest,
 }: DeckbuilderProps) {
   const [currentTabIndex, setCurrentTabIndex] = React.useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setCurrentTabIndex(newValue);
+  const handleChange = (
+    _: React.SyntheticEvent | null,
+    newValue: string | number | null
+  ) => {
+    setCurrentTabIndex(+(newValue ?? 0));
   };
   return (
     <Grid
@@ -60,20 +40,21 @@ export default function Deckbuilder({
         height: '100%',
       })}
     >
-      <Box>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs
-            value={currentTabIndex}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-          >
-            <Tab label="Required Cards 0/2" {...a11yProps(0)} />
-            <Tab label="Locations 0/9" {...a11yProps(1)} />
-            <Tab label="Free Peoples" {...a11yProps(2)} />
-            <Tab label="Twilight" {...a11yProps(3)} />
-          </Tabs>
-        </Box>
-        <CustomTabPanel value={currentTabIndex} index={0}>
+      <Tabs
+        defaultValue={currentTabIndex}
+        onChange={handleChange}
+        aria-label="basic tabs example"
+      >
+        <TabList>
+          <Tab>
+            <Typography>Ring and Ring-Bearer</Typography>
+            <Warning />
+          </Tab>
+          <Tab>Locations 0/9</Tab>
+          <Tab>Free Peoples</Tab>
+          <Tab>Twilight</Tab>
+        </TabList>
+        <TabPanel value={0}>
           <Grid display="flex" direction="row" gap="1rem">
             <PlaceholderCard
               blueprintId={deck.ringId}
@@ -87,22 +68,18 @@ export default function Deckbuilder({
               onSelect={() => filterRequest('ring-bearer')}
             />
           </Grid>
-        </CustomTabPanel>
-        <CustomTabPanel value={currentTabIndex} index={1}>
+        </TabPanel>
+        <TabPanel value={1}>
           <SiteSelectionTab
             updateFilteredSites={(siteFilter) =>
               filterRequest('site', siteFilter.toString())
             }
             selectedSites={deck.locations}
           />
-        </CustomTabPanel>
-        <CustomTabPanel value={currentTabIndex} index={2}>
-          Free Peoples Cards
-        </CustomTabPanel>
-        <CustomTabPanel value={currentTabIndex} index={3}>
-          Twilight Cards
-        </CustomTabPanel>
-      </Box>
+        </TabPanel>
+        <TabPanel value={2}>Freeps</TabPanel>
+        <TabPanel value={3}>Twilight</TabPanel>
+      </Tabs>
     </Grid>
   );
 }

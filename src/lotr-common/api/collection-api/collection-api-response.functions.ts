@@ -3,6 +3,8 @@ import { Cheerio, load, Element } from 'cheerio';
 export interface CollectionCardViewModel {
   side: string;
   blueprintId: string;
+
+  /** Either the number of this card that exists in the current collection call OR the number of copies of this card available */
   count: number;
 }
 
