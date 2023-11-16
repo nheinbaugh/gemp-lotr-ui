@@ -49,7 +49,7 @@ const locations = [
   },
 ];
 
-export default function SiteSelectionTab(props: SiteSelectionTabProps) {
+export default function SiteSection(props: SiteSelectionTabProps) {
   const { updateFilteredSites, selectedSites } = props;
   return (
     <Grid gap="1rem" container>

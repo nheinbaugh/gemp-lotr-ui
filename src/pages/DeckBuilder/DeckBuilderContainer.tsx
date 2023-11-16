@@ -1,6 +1,6 @@
 import Drawer from '@mui/material/Drawer';
 import { useState } from 'react';
-import { Box, Grid, Typography } from '@mui/joy';
+import { Box, Grid } from '@mui/joy';
 import { CollectionFiltersViewModel } from '../../lotr-common/api/collection-api/collection-api-parameters.interface';
 import LotrCardDetails from '../../lotr-common/components/LotrCardDetails/LotrCardDetails';
 import { Deck, createDefaultDeck } from '../../common/types/Deck';
@@ -13,13 +13,11 @@ import { LotrLocationNames } from '../../common/types/LotrLocations/lotr-locatio
 import { useCardQueryStore } from '../../lotr-common/state/card-filter.state';
 import FilterToggle from '../DeckManager/components/FilterToggle/FilterToggle';
 import CardBank from '../DeckManager/modules/CardBank/CardBank';
-import Deckbuilder from '../DeckManager/modules/DeckBuilder/Deckbuilder';
 import FiltersList from '../DeckManager/modules/FilterSelector/FilterSelector';
-import DeckBuilderMenu from '../DeckManager/modules/DeckBuilder/components/DeckBuilderMenu';
 import { useCardDetailStore } from '../../lotr-common/components/LotrCardDetails/card-details.state';
-import LotrCard, {
-  NonInteractiveLotrCard,
-} from '../../lotr-common/components/LotrCard/LotrCard';
+import { NonInteractiveLotrCard } from '../../lotr-common/components/LotrCard/LotrCard';
+import DeckSections from './modules/DeckSections/DeckSections';
+import DeckBuilderMenu from './components/DeckBuilderMenu';
 
 // Note to self: this is hot ass garbage, i'm too lazy to figure how I'd rather do this.
 const locationNotBeingUsed = 'no-active-location';
@@ -124,7 +122,7 @@ export default function DeckBuilderContainer() {
         <DeckBuilderMenu />
         <Grid display="flex" flexDirection="row" sx={{ height: '100%' }}>
           <Grid sx={{ minWidth: '40%;', height: '100%' }}>
-            <Deckbuilder
+            <DeckSections
               currentDeck={currentDeck}
               filterRequest={handleDeckbuilderFilterUpdate}
             />
@@ -154,12 +152,7 @@ export default function DeckBuilderContainer() {
           </Drawer>
         </Grid>
       </Grid>
-      <LotrCardDetails
-        isOpen={cardModalState.isOpen}
-        onClose={closeModal}
-        // blueprintId={cardModalState.cardId}
-        // availableCards={cardModalState.availableCards}
-      />
+      <LotrCardDetails isOpen={cardModalState.isOpen} onClose={closeModal} />
       {hoverImage && (
         <Box
           sx={{

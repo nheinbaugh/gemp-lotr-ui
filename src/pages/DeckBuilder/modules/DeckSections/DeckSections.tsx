@@ -1,24 +1,16 @@
-import {
-  Grid,
-  IconButton,
-  Tab,
-  TabList,
-  TabPanel,
-  Tabs,
-  Typography,
-} from '@mui/joy';
+import { Grid, Tab, TabList, TabPanel, Tabs, Typography } from '@mui/joy';
 import * as React from 'react';
 import { Warning } from '@mui/icons-material';
 import { Deck } from '../../../../common/types/Deck';
 import PlaceholderCard from '../../../../common/components/PlaceholderCard/PlaceholderCard';
-import SiteSelectionTab from './components/SiteSelectionTab';
+import SiteSection from './components/SiteSectionTab';
 
 type DeckbuilderProps = {
   currentDeck: Deck;
   filterRequest: (filterName: string, additionalFilter?: string) => void;
 };
 
-export default function Deckbuilder({
+export default function DeckSections({
   currentDeck: deck,
   filterRequest,
 }: DeckbuilderProps) {
@@ -70,7 +62,7 @@ export default function Deckbuilder({
           </Grid>
         </TabPanel>
         <TabPanel value={1}>
-          <SiteSelectionTab
+          <SiteSection
             updateFilteredSites={(siteFilter) =>
               filterRequest('site', siteFilter.toString())
             }

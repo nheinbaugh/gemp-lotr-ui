@@ -14,7 +14,6 @@ function CardBank({
   onCardSecondaryAction,
 }: CardBankProps) {
   const { results, setCurrentPage } = useCardQueryStore();
-  console.log('results', results);
   return (
     <Grid
       container

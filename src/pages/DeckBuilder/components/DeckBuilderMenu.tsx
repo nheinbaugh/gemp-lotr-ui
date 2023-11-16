@@ -1,9 +1,9 @@
 import { Add, Save, ContentCopy, ImportExport } from '@mui/icons-material';
 import { Tooltip, IconButton, Box } from '@mui/joy';
-import GempDropdown from '../../../../../common/components/GempDropdown/GempDropdown';
-import { allPlayableFormatsMetadata } from '../../../../../lotr-common/types/expansions';
-import { useCardQueryStore } from '../../../../../lotr-common/state/card-filter.state';
-import { Mappings } from '../../../../../common/types/mappings.interface';
+import { useCardQueryStore } from '../../../lotr-common/state/card-filter.state';
+import { Mappings } from '../../../common/types/mappings.interface';
+import GempDropdown from '../../../common/components/GempDropdown/GempDropdown';
+import { allPlayableFormatsMetadata } from '../../../lotr-common/types/expansions';
 
 export default function DeckBuilderMenu() {
   const { filters, updateFilter } = useCardQueryStore();
