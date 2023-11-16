@@ -22,7 +22,7 @@ export const getCardHeightByWidth = (width: number): Dimensions => {
 export const getCardWidthByHeight = (height: number): Dimensions => {
   return {
     height,
-    width: Math.round(height / WIDTH_TO_HEIGHT),
+    width: Math.round(height * WIDTH_TO_HEIGHT),
   };
 };
 
@@ -31,6 +31,8 @@ export const getDefaultCardDimensions = (): Dimensions => ({
   height: DEFAULT_HEIGHT,
 });
 
+// TODO: this could turn into a hook.... oh, i think i might understand react at some point
+
 // TODO: WRITE UTs for this biatch. It's janky and gross
 export const determineCardDimensions = (
   isHorizontal: boolean,
@@ -38,6 +40,9 @@ export const determineCardDimensions = (
   width?: number
 ): Dimensions => {
   let dimensions: Dimensions = { height: 0, width: 0 };
+  if (height && width) {
+    return { height, width };
+  }
   if (height) {
     dimensions = getCardWidthByHeight(height);
   }

@@ -1,5 +1,5 @@
 import { Button, Modal, ModalClose, Sheet, Typography } from '@mui/joy';
-import LotrCard from '../LotrCard/LotrCard';
+import { NonInteractiveLotrCard } from '../LotrCard/LotrCard';
 import { useWindowDimensions } from '../../../common/hooks/useWindowDimensions';
 import { useCardDetailStore } from './card-details.state';
 
@@ -56,11 +56,9 @@ function LotrCardDetails({ isOpen, onClose }: LotrCardDetailsProps) {
         >
           Card Information
         </Typography>
-        <LotrCard
+        <NonInteractiveLotrCard
           blueprintId={displayedCardId}
           width={determineModalWidth(screenWidth)}
-          onPrimaryAction={() => {}}
-          onSecondaryAction={() => {}}
         />
         <Button onClick={() => updateCurrentCard('next')}>Next</Button>
         <Button onClick={() => updateCurrentCard('previous')}>Previous</Button>

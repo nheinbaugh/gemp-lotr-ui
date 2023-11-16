@@ -46,9 +46,8 @@ export default function GempCard({
     }
   };
 
-  const bob = useCallback(
+  const doSetHoverImage = useCallback(
     (hoverCardId: string | null) => {
-      console.log('bob');
       if (!allowHover) {
         return;
       }
@@ -62,17 +61,17 @@ export default function GempCard({
         height: dimensions.height,
         width: dimensions.width,
       }}
-      data-cardid={cardId}
     >
       <object
         className={styles.cardFace}
-        onMouseOver={() => setHoverImage(cardId)}
-        onMouseLeave={() => setHoverImage(null)}
+        onMouseOver={() => doSetHoverImage(cardId)}
+        onMouseLeave={() => doSetHoverImage(null)}
         data={imageHref}
         onClick={handleCardClick}
         onContextMenu={handleCardClick} // note: this prevents all browser right click actions
       >
         <img
+          data-blueprint-id={cardId}
           onClick={handleCardClick}
           onContextMenu={handleCardClick} // note: this prevents all browser right click actions
           className={styles.cardFace}

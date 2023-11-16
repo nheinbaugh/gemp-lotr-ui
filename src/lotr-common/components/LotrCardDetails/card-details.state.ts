@@ -46,7 +46,6 @@ export const useCardDetailStore = create<CardDetailModalStore>()((set) => ({
   hoverImage: null,
   setHoverImage: (cardId: string | null) =>
     set((state) => {
-      console.log(cardId, 'updated the card id');
       return { ...state, hoverImage: cardId };
     }),
   iniatlizeModal: (cardId: string, availableCardIds: Array<string>) =>

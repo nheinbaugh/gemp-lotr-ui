@@ -23,7 +23,7 @@ export default function PlaceholderCard({
   onSelect,
   blueprintId,
 }: CardPlaceholderProps) {
-  let dimensions = determineCardDimensions(vertical, height, undefined);
+  let dimensions = determineCardDimensions(!vertical, height, undefined);
   if (vertical) {
     dimensions = {
       width: Math.min(dimensions.height, dimensions.width),
@@ -43,6 +43,8 @@ export default function PlaceholderCard({
           width: `${dimensions.width}px`,
           height: `${dimensions.height}px`,
           backgroundColor: 'neutral.light',
+          border: 1,
+          borderColor: 'neutral.main',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -56,11 +58,9 @@ export default function PlaceholderCard({
   return (
     <LotrCard
       blueprintId={blueprintId}
-      width={
-        vertical
-          ? Math.min(dimensions.height, dimensions.width)
-          : Math.max(dimensions.height, dimensions.width)
-      }
+      width={dimensions.width}
+      height={dimensions.height}
+      allowHover
       isHorizontal={!vertical}
       onPrimaryAction={onSelect}
       onSecondaryAction={() => {}}

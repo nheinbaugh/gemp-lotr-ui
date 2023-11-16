@@ -53,6 +53,7 @@ function SearchResults({
               isHorizontal={displayCardsAsHorizontal}
               onPrimaryAction={() => onCardPrimaryAction(card.blueprintId)}
               onSecondaryAction={() => onCardSecondaryAction(card.blueprintId)}
+              allowHover
             />
           </Grid>
         );

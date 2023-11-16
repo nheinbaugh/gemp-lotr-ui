@@ -164,10 +164,9 @@ export default function DeckBuilderContainer() {
         <Box
           sx={{
             position: 'absolute',
-            left: '100px',
-            top: '100px',
-            height: '300px',
-            width: '300px',
+            left: '25px',
+            bottom: '40px',
+            height: '400px',
           }}
         >
           <NonInteractiveLotrCard
