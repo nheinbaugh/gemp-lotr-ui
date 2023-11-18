@@ -3,7 +3,8 @@ import * as React from 'react';
 import { Warning } from '@mui/icons-material';
 import { Deck } from '../../../../common/types/Deck';
 import PlaceholderCard from '../../../../common/components/PlaceholderCard/PlaceholderCard';
-import SiteSection from './components/SiteSectionTab';
+import LocationDeckSection from './components/LocationDeckSection/LocationDeckSection';
+import RingBearerDeckSection from './components/RingBearerDeckSection';
 
 type DeckbuilderProps = {
   currentDeck: Deck;
@@ -47,24 +48,16 @@ export default function DeckSections({
           <Tab>Twilight</Tab>
         </TabList>
         <TabPanel value={0}>
-          <Grid display="flex" direction="row" gap="1rem">
-            <PlaceholderCard
-              blueprintId={deck.ringId}
-              placeholder="The One Ring"
-              onSelect={() => filterRequest('ring')}
-            />
-
-            <PlaceholderCard
-              blueprintId={deck.ringbearerId}
-              placeholder="The Ring-Bearer"
-              onSelect={() => filterRequest('ring-bearer')}
-            />
-          </Grid>
+          <RingBearerDeckSection
+            ring={deck.ringId ?? ''}
+            ringBearer={deck.ringbearerId ?? ''}
+            updateFilter={filterRequest}
+          />
         </TabPanel>
         <TabPanel value={1}>
-          <SiteSection
+          <LocationDeckSection
             updateFilteredSites={(siteFilter) =>
-              filterRequest('site', siteFilter.toString())
+              filterRequest('site', siteFilter)
             }
             selectedSites={deck.locations}
           />
