@@ -1,10 +1,11 @@
-import { Grid, Tab, TabList, TabPanel, Tabs, Typography } from '@mui/joy';
+import { Grid, TabList, TabPanel, Tabs } from '@mui/joy';
 import * as React from 'react';
-import { Warning } from '@mui/icons-material';
-import { Deck } from '../../../../common/types/Deck';
-import PlaceholderCard from '../../../../common/components/PlaceholderCard/PlaceholderCard';
+import { Deck } from '../../../../common/types/deck/Deck';
 import LocationDeckSection from './components/LocationDeckSection/LocationDeckSection';
 import RingBearerDeckSection from './components/RingBearerDeckSection';
+import TabWithStatus from './components/TabWithStatus';
+import useLotrDeckValidity from '../../../../lotr-common/types/deck-validity/useLotrDeckValidity';
+import { DeckValidityStatus } from '../../../../common/types/deck/deck-validity-status.type';
 
 type DeckbuilderProps = {
   currentDeck: Deck;
@@ -16,6 +17,7 @@ export default function DeckSections({
   filterRequest,
 }: DeckbuilderProps) {
   const [currentTabIndex, setCurrentTabIndex] = React.useState(0);
+  const bob = useLotrDeckValidity(deck);
 
   const handleChange = (
     _: React.SyntheticEvent | null,
@@ -39,13 +41,16 @@ export default function DeckSections({
         aria-label="basic tabs example"
       >
         <TabList>
-          <Tab>
-            <Typography>Ring and Ring-Bearer</Typography>
-            <Warning />
-          </Tab>
-          <Tab>Locations 0/9</Tab>
-          <Tab>Free Peoples</Tab>
-          <Tab>Twilight</Tab>
+          <TabWithStatus
+            tabName="Ring and Ring-Bearer"
+            status={bob.deckValidity.ringbearer.status}
+          />
+          <TabWithStatus tabName="Site Path" status={DeckValidityStatus.Ok} />
+          <TabWithStatus
+            tabName="Free Peoples"
+            status={DeckValidityStatus.Ok}
+          />
+          <TabWithStatus tabName="Twilight" status={DeckValidityStatus.Ok} />
         </TabList>
         <TabPanel value={0}>
           <RingBearerDeckSection

@@ -56,6 +56,7 @@ export default function RingBearerDeckSection(
     <DeckSectionTemplate
       sections={formattedSections}
       onSectionChange={updateFilter}
+      placeholderWidth="large"
     />
   );
 }

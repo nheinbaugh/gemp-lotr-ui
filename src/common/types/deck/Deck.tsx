@@ -1,5 +1,5 @@
-import { createDefaultLocations } from './LotrLocations/lotr-location-functions';
-import { LotrLocations } from './LotrLocations/lotr-locations.type';
+import { createDefaultLocations } from '../LotrLocations/lotr-location-functions';
+import { LotrLocations } from '../LotrLocations/lotr-locations.type';
 
 export interface Deck {
   name?: string;

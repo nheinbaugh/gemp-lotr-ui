@@ -34,6 +34,7 @@ export default function LocationDeckSection(props: LocationDeckSectionProps) {
     <DeckSectionTemplate
       sections={formattedSelections}
       onSectionChange={doSelectionChanged}
+      placeholderWidth="small"
     />
   );
 }

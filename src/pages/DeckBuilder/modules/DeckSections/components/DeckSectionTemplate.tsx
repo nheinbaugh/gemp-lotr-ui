@@ -5,22 +5,27 @@ import { FilterableDeckSection } from '../types/filterable-deck-section.interfac
 interface DeckSectionProps {
   sections: FilterableDeckSection[];
   onSectionChange: (section: string) => void;
+  placeholderWidth: 'small' | 'large';
 }
 
 const getDefaultDeckSectionProps = (): DeckSectionProps => ({
   sections: [],
   onSectionChange: () => {},
+  placeholderWidth: 'small',
 });
 
 export default function DeckSectionTemplate(
   props: DeckSectionProps = getDefaultDeckSectionProps()
 ) {
-  const { onSectionChange, sections } = props;
+  const { onSectionChange, sections, placeholderWidth } = props;
 
   return (
     <Grid gap="1rem" container>
       {(sections ?? []).map((section) => (
-        <Grid md={3} key={section.placeholder}>
+        <Grid
+          md={placeholderWidth === 'small' ? 3 : 5}
+          key={section.placeholder}
+        >
           <PlaceholderCard
             placeholder={section.placeholder}
             blueprintId={section.cardId}

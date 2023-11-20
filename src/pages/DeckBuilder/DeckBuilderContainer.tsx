@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Box, Grid } from '@mui/joy';
 import { CollectionFiltersViewModel } from '../../lotr-common/api/collection-api/collection-api-parameters.interface';
 import LotrCardDetails from '../../lotr-common/components/LotrCardDetails/LotrCardDetails';
-import { Deck, createDefaultDeck } from '../../common/types/Deck';
+import { Deck, createDefaultDeck } from '../../common/types/deck/Deck';
 import {
   createLocationFilters,
   createOneRingFilters,
