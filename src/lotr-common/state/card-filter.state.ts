@@ -37,8 +37,6 @@ const doUpdateFilter = async (
   previousState: CardQueryState,
   set: (updatedState: Partial<CardQueryState>) => void
 ): Promise<void> => {
-  console.log('filters', newFilters, previousState.filters);
-  // TODO: Convert to use immer
   const updatedFilters = {
     ...previousState.filters,
     ...newFilters,

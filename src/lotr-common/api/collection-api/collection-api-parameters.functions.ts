@@ -47,7 +47,7 @@ export const convertViewModelToDao = (
   return {
     format: input.format?.apiName ?? '',
     side: '',
-    type: '',
+    type: input.type?.apiName ?? '',
     rarity: input.rarity?.apiName ?? '',
     words: '',
     cardTypes: input.cardTypes?.apiName ?? '',

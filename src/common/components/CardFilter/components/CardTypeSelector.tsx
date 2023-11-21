@@ -1,12 +1,9 @@
 import { lotrCardTypeFilterMappings } from '../../../../lotr-common/types/filter-types/card-types';
-import { lotrSortTypeMappings } from '../../../../lotr-common/types/filter-types/sort-types';
 import GempDropdown from '../../GempDropdown/GempDropdown';
 import { CardFilterDropdownProps } from './CardFilter-props.interface';
 
-function CardTypeSelector({
-  filterChanged,
-  selectedValue,
-}: CardFilterDropdownProps) {
+function CardTypeSelector(props: CardFilterDropdownProps) {
+  const { selectedValue, filterChanged } = props;
   return (
     <GempDropdown
       selectedValue={selectedValue}

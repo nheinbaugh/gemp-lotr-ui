@@ -70,6 +70,7 @@ export default function DeckBuilderContainer() {
     filterName: string,
     additionalFilter = ''
   ) => {
+    console.log('we are automatically hitting an update');
     let newlySelectedLocation = locationNotBeingUsed;
     if (filterName === 'ring') {
       updateFilter({ ...createOneRingFilters(), format: filters.format });
