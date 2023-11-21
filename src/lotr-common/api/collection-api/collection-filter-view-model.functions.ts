@@ -1,7 +1,10 @@
+import { commonFormatsMetadata } from '../../types/expansions';
+import { lotrCardTypeFilterMappings } from '../../types/filter-types/card-types';
 import { CollectionFiltersViewModel } from './collection-api-parameters.interface';
 
 export const createDefaultCollectionViewModel =
   (): CollectionFiltersViewModel => ({
+    format: commonFormatsMetadata.All,
     activeDeckSection: '',
     cultures: [],
   });
@@ -9,19 +12,13 @@ export const createDefaultCollectionViewModel =
 export const createOneRingFilters = (): CollectionFiltersViewModel => ({
   ...createDefaultCollectionViewModel(),
   activeDeckSection: 'ring',
-  cardTypes: {
-    displayName: 'The One Ring',
-    apiName: 'THE_ONE_RING',
-  },
+  cardTypes: lotrCardTypeFilterMappings.OneRing,
 });
 
 export const createRingbearerFilters = (): CollectionFiltersViewModel => ({
   ...createDefaultCollectionViewModel(),
   activeDeckSection: 'ring-bearer',
-  keywords: {
-    displayName: 'Can Start with Ring',
-    apiName: 'CAN_START_WITH_RING',
-  },
+  keywords: lotrCardTypeFilterMappings.RingBearer,
 });
 
 export const createLocationFilters = (

@@ -12,6 +12,8 @@ enum LotrCardTypes {
   Followers = 'Followers',
   Minions = 'Minions',
   Possessions = 'Possessions',
+  OneRing = 'OneRing',
+  RingBearer = 'RingBearer',
 }
 
 export const lotrCardTypeFilterMappings: Record<LotrCardTypes, Mappings> = {
@@ -26,4 +28,12 @@ export const lotrCardTypeFilterMappings: Record<LotrCardTypes, Mappings> = {
   Followers: { apiName: 'FOLLOWER', displayName: 'Followers' },
   Minions: { apiName: 'MINION', displayName: 'Minions' },
   Possessions: { apiName: 'POSSESSION', displayName: 'Possessions' },
+  OneRing: {
+    displayName: 'The One Ring',
+    apiName: 'THE_ONE_RING',
+  },
+  RingBearer: {
+    displayName: 'Can Start with Ring',
+    apiName: 'CAN_START_WITH_RING',
+  },
 };

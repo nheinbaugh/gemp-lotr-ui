@@ -33,20 +33,22 @@ interface CardQueryActions {
 type CardQueryStore = CardQueryState & CardQueryActions;
 
 const doUpdateFilter = async (
-  filters: CollectionFiltersViewModel,
+  newFilters: CollectionFiltersViewModel,
   previousState: CardQueryState,
   set: (updatedState: Partial<CardQueryState>) => void
 ): Promise<void> => {
+  console.log('filters', newFilters, previousState.filters);
   // TODO: Convert to use immer
-  const previousFilters = {
-    ...filters,
+  const updatedFilters = {
+    ...previousState.filters,
+    ...newFilters,
   };
-  if (!previousFilters.format) {
-    previousFilters.format = previousState.filters.format;
+  if (!updatedFilters.format) {
+    updatedFilters.format = previousState.filters.format;
   }
 
   const dao = getDefaultCollectionApiParameters(
-    convertViewModelToDao(filters),
+    convertViewModelToDao(newFilters),
     {
       start: 0,
       count: 18,
@@ -58,7 +60,7 @@ const doUpdateFilter = async (
     filterApiConfiguration[1]
   );
   const results = convertGetCollectionFromXml(result.data).cards;
-  set({ filters, results });
+  set({ filters: newFilters, results });
 };
 
 export const useCardQueryStore = create(

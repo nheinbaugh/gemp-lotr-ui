@@ -68,6 +68,7 @@ export default function FiltersList({
   const handleResetFilters = (): void => {
     // basically set back to inital state....
   };
+
   return (
     <Box sx={{ width: 400, p: 1 }} role="presentation">
       <Typography level="h3">Filters</Typography>
@@ -97,10 +98,16 @@ export default function FiltersList({
           />
         </ListItem>
         <ListItem>
-          <RaritySelector selectedValue={rarity} filterChanged={setRarity} />
+          <RaritySelector
+            selectedValue={currentFilters.rarity}
+            filterChanged={setRarity}
+          />
         </ListItem>
         <ListItem>
-          <CardTypeSelector selectedValue={type} filterChanged={setCardType} />
+          <CardTypeSelector
+            selectedValue={currentFilters.cardTypes}
+            filterChanged={setCardType}
+          />
         </ListItem>
         <ListItem>
           <KeywordSelector

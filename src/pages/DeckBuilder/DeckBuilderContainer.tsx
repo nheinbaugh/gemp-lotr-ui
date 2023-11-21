@@ -13,7 +13,7 @@ import { LotrLocationNames } from '../../common/types/LotrLocations/lotr-locatio
 import { useCardQueryStore } from '../../lotr-common/state/card-filter.state';
 import FilterToggle from '../DeckManager/components/FilterToggle/FilterToggle';
 import CardBank from '../DeckManager/modules/CardBank/CardBank';
-import FiltersList from '../DeckManager/modules/FilterSelector/FilterSelector';
+import FiltersList from '../DeckManager/modules/FilterSelector/FilterList';
 import { useCardDetailStore } from '../../lotr-common/components/LotrCardDetails/card-details.state';
 import { NonInteractiveLotrCard } from '../../lotr-common/components/LotrCard/LotrCard';
 import DeckSections from './modules/DeckSections/DeckSections';
