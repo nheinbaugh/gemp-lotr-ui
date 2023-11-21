@@ -38,11 +38,11 @@ const doUpdateFilter = async (
   set: (updatedState: Partial<CardQueryState>) => void
 ): Promise<void> => {
   // TODO: Convert to use immer
-  const bob = {
+  const previousFilters = {
     ...filters,
   };
-  if (!bob.format) {
-    bob.format = previousState.filters.format;
+  if (!previousFilters.format) {
+    previousFilters.format = previousState.filters.format;
   }
 
   const dao = getDefaultCollectionApiParameters(

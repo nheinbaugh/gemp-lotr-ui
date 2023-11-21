@@ -1,4 +1,4 @@
-import { LotrExpansionMetadata } from './lotr-expansion-metadata.interface';
+import { LotrFormatMetadata } from './lotr-expansion-metadata.interface';
 
 export type PlayersCommitteeErrata =
   | 'AgesEndErrata'
@@ -15,38 +15,44 @@ export type PlayersCommitteeErrata =
 
 export const playersCommitteeErrataMetadata: Record<
   PlayersCommitteeErrata,
-  LotrExpansionMetadata
+  LotrFormatMetadata
 > = {
-  AgesEndErrata: { displayName: '19E - Ages End (PC Errata)', value: '69' },
+  AgesEndErrata: { displayName: '19E - Ages End (PC Errata)', apiName: '69' },
   BloodlinesErrata: {
     displayName: '13E - Bloodlines (PC Errata)',
-    value: '63',
+    apiName: '63',
   },
   ElfLordsErrata: {
     displayName: '03E - Realms of the Elf-lords (PC Errata)',
-    value: '53',
+    apiName: '53',
   },
   FellowshipErrata: {
     displayName: '01E - The Fellowship of the Ring (PC Errata)',
-    value: '51',
+    apiName: '51',
   },
-  HuntersErrata: { displayName: '15E - The Hunters (PC Errata)', value: '65' },
-  MoriaErrata: { displayName: '02E - Mines of Moria (PC Errata)', value: '52' },
+  HuntersErrata: {
+    displayName: '15E - The Hunters (PC Errata)',
+    apiName: '65',
+  },
+  MoriaErrata: {
+    displayName: '02E - Mines of Moria (PC Errata)',
+    apiName: '52',
+  },
   ReflectionsErrata: {
     displayName: '09E - Reflections (PC Errata)',
-    value: '59',
+    apiName: '59',
   },
   ReturnOfTheKingErrata: {
     displayName: '07E - The Return of the King (PC Errata)',
-    value: '57',
+    apiName: '57',
   },
-  ShadowsErrata: { displayName: '11E - Shadows (PC Errata)', value: '61' },
+  ShadowsErrata: { displayName: '11E - Shadows (PC Errata)', apiName: '61' },
   SiegeOfGondorErrata: {
     displayName: '08E - Siege of Gondor (PC Errata)',
-    value: '58',
+    apiName: '58',
   },
   TwoTowerErrata: {
     displayName: '04E - The Two Towers (PC Errata)',
-    value: '54',
+    apiName: '54',
   },
 };

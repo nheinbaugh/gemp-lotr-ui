@@ -1,22 +1,17 @@
-import { useState, useEffect } from 'react';
 import { Deck } from '../../../common/types/deck/Deck';
-import { DeckValidationResult } from './deck-validity-function.type';
-import { DeckValidityStatus } from '../../../common/types/deck/deck-validity-status.type';
+import { LotrFormatMetadata } from '../expansions/lotr-expansion-metadata.interface';
 import { isRingbearerSectionValid } from './ringbearer-section-validity.funciton';
+import { useIsDeckSectionValid } from './useIsDeckSectionValid';
 
-const defaultValidityState: DeckValidationResult = {
-  status: DeckValidityStatus.NotStarted,
-  message: '',
-};
-
-export default function useLotrDeckValidity(deck: Deck) {
-  const [ringbearerValidity, setRingbearerValidity] =
-    useState(defaultValidityState);
-  console.log('this hook ran again');
-  useEffect(() => {
-    setRingbearerValidity(isRingbearerSectionValid(deck));
-    console.log('this hook effect ran again');
-  }, [deck]);
+export default function useLotrDeckValidity(
+  deck: Deck,
+  format: LotrFormatMetadata
+) {
+  const ringbearerValidity = useIsDeckSectionValid(
+    deck,
+    format,
+    isRingbearerSectionValid
+  );
   return {
     isDeckValid: false,
     deckValidity: {

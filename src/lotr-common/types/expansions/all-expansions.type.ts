@@ -8,7 +8,7 @@ import {
   otherFormatMetadata,
   OtherFormats,
 } from './formats.type';
-import { LotrExpansionMetadata } from './lotr-expansion-metadata.interface';
+import { LotrFormatMetadata } from './lotr-expansion-metadata.interface';
 import {
   PlayersCommitteeErrata,
   playersCommitteeErrataMetadata,
@@ -32,16 +32,14 @@ export type LotrFormats = CommonFormats | OtherFormats;
 
 export const allPlayableFormatsMetadata: Record<
   LotrFormats,
-  LotrExpansionMetadata
+  LotrFormatMetadata
 > = { ...commonFormatsMetadata, ...otherFormatMetadata };
 
-export const allExpansionsMetadata: Record<
-  LotrExpansions,
-  LotrExpansionMetadata
-> = {
-  ...decipherSetExpansionMetadata,
-  ...otherFormatMetadata,
-  ...playersCommitteeErrataMetadata,
-  ...playtestSetExpansionMetadata,
-  ...playersCommitteeExpansionMetadata,
-};
+export const allExpansionsMetadata: Record<LotrExpansions, LotrFormatMetadata> =
+  {
+    ...decipherSetExpansionMetadata,
+    ...otherFormatMetadata,
+    ...playersCommitteeErrataMetadata,
+    ...playtestSetExpansionMetadata,
+    ...playersCommitteeExpansionMetadata,
+  };

@@ -1,18 +1,27 @@
 import { Add, Save, ContentCopy, ImportExport } from '@mui/icons-material';
 import { Tooltip, IconButton, Box } from '@mui/joy';
 import { useCardQueryStore } from '../../../lotr-common/state/card-filter.state';
-import { Mappings } from '../../../common/types/mappings.interface';
 import GempDropdown from '../../../common/components/GempDropdown/GempDropdown';
-import { allPlayableFormatsMetadata } from '../../../lotr-common/types/expansions';
+import {
+  allPlayableFormatsMetadata,
+  commonFormatsMetadata,
+} from '../../../lotr-common/types/expansions';
+import { LotrFormatMetadata } from '../../../lotr-common/types/expansions/lotr-expansion-metadata.interface';
+import { Mappings } from '../../../common/types/mappings.interface';
 
 export default function DeckBuilderMenu() {
   const { filters, updateFilter } = useCardQueryStore();
 
-  const setFormat = (format: Mappings | undefined) =>
+  const setFormat = (input: Mappings | undefined) => {
+    let format = input as LotrFormatMetadata;
+    if (!input) {
+      format = commonFormatsMetadata.All;
+    }
     updateFilter({
       ...filters,
       format,
     });
+  };
 
   return (
     <Box
@@ -52,7 +61,7 @@ export default function DeckBuilderMenu() {
           selectionChanged={setFormat}
           placeholder="Selected Format"
           options={Object.values(allPlayableFormatsMetadata).map((item) => ({
-            apiName: item.value,
+            apiName: item.apiName,
             displayName: item.displayName,
           }))}
           selectedValue={filters.format}

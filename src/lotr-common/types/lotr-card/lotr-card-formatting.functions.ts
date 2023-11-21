@@ -44,7 +44,7 @@ export const getBlueprintByCardId = (id: string): CardBlueprint => {
     const setNumber = Number(sections[0]);
     const set = Object.entries(decipherSetExpansionMetadata).find(
       ([, metadata]) => {
-        return Number(metadata.value) === setNumber;
+        return Number(metadata.apiName) === setNumber;
       }
     )?.[0] as DecipherSets | PlayersCommitteeSets;
     return {
@@ -67,6 +67,6 @@ export const getBlueprintByCardId = (id: string): CardBlueprint => {
  */
 export const getCardNumber = (blueprint: CardBlueprint): string => {
   return `${formatSetNumber(
-    Number(allExpansionsMetadata[blueprint.set].value)
+    Number(allExpansionsMetadata[blueprint.set].apiName)
   )}${formatCardNumber(blueprint.cardNumber)}`;
 };

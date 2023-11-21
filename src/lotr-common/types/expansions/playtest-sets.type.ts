@@ -1,4 +1,4 @@
-import { LotrExpansionMetadata } from './lotr-expansion-metadata.interface';
+import { LotrFormatMetadata } from './lotr-expansion-metadata.interface';
 
 export type PlaytestSets =
   | 'AllPlaytest'
@@ -8,22 +8,22 @@ export type PlaytestSets =
 
 export const playtestSetExpansionMetadata: Record<
   PlaytestSets,
-  LotrExpansionMetadata
+  LotrFormatMetadata
 > = {
   AllPlaytest: {
     displayName: "All Player's Council Playtest Cards",
-    value: '70-89,100,150-200',
+    apiName: '70-89,100,150-200',
   },
   ExpandedPlaytest: {
     displayName: 'PLAYTEST - Expanded (PC)',
-    value: 'test_pc_fotr_block',
+    apiName: 'test_pc_fotr_block',
   },
   FellowshipPlaytest: {
     displayName: 'PLAYTEST - Fellowship Block (PC)',
-    value: 'test_pc_fotr',
+    apiName: 'test_pc_fotr',
   },
   MovieBlockPlaytest: {
     displayName: 'PLAYTEST - Movie Block (PC)',
-    value: 'test_pc_movie',
+    apiName: 'test_pc_movie',
   },
 };

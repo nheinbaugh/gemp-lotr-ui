@@ -125,6 +125,7 @@ export default function DeckBuilderContainer() {
             <DeckSections
               currentDeck={currentDeck}
               filterRequest={handleDeckbuilderFilterUpdate}
+              selectedFormat={filters.format}
             />
           </Grid>
           <Grid

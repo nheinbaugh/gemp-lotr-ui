@@ -4,7 +4,6 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { Input, Typography } from '@mui/joy';
 import CardTypeSelector from '../../../../common/components/CardFilter/components/CardTypeSelector';
-import SortSelector from '../../../../common/components/CardFilter/components/SortSelector';
 import RaritySelector from '../../../../common/components/CardFilter/components/RaritySelector';
 import ExpansionsFilter from '../../../../common/components/CardFilter/components/ExpansionsFilter';
 import KeywordSelector from '../../../../common/components/CardFilter/components/KeywordSelector';
@@ -13,7 +12,8 @@ import { CultureOptionContainer } from './components/CultureOptionContainer/Cult
 import { getCulturesBySelectedSet } from '../../../../lotr-common/types/cultures/culture.functions';
 import { FilterActions } from './components/FilterActions/FilterActions';
 import { Mappings } from '../../../../common/types/mappings.interface';
-import { LotrExpansionMetadata } from '../../../../lotr-common/types/expansions/lotr-expansion-metadata.interface';
+import { LotrFormatMetadata } from '../../../../lotr-common/types/expansions/lotr-expansion-metadata.interface';
+import { commonFormatsMetadata } from '../../../../lotr-common/types/expansions';
 
 interface FiltersListProps {
   currentFilters: CollectionFiltersViewModel;
@@ -21,14 +21,17 @@ interface FiltersListProps {
     rarity,
     type,
     keywords,
-    sets,
+    format,
     cultures,
     cardTitle,
   }: Partial<CollectionFiltersViewModel>) => void;
 }
 
 export default function FiltersList({
-  currentFilters = { activeDeckSection: 'locations' },
+  currentFilters = {
+    format: commonFormatsMetadata.All,
+    activeDeckSection: 'required',
+  },
   applyFilters,
 }: FiltersListProps) {
   const [rarity, setRarity] = useState<Mappings | undefined>(
@@ -40,9 +43,9 @@ export default function FiltersList({
   const [keywords, setKeyword] = useState<Mappings | undefined>(
     currentFilters.keywords
   );
-  const [sets, setExpansions] = useState<LotrExpansionMetadata | undefined>(
-    currentFilters.sets
-  );
+  const [currentFormat, setCurrentFormat] = useState<
+    LotrFormatMetadata | undefined
+  >(currentFilters.format);
   const [cardName, setCardName] = useState<string>(
     currentFilters.cardTitle ?? ''
   );
@@ -56,7 +59,7 @@ export default function FiltersList({
       rarity,
       type,
       keywords,
-      sets,
+      format: currentFormat,
       cultures: [...freeCultures, ...twilightCultures], // TODO: this shouldn't combine them yet, it makes the culture filter settings weird
       cardTitle: cardName,
     });
@@ -80,7 +83,7 @@ export default function FiltersList({
         <ListItem>
           <CultureOptionContainer
             title="Free People Cultures"
-            cultures={getCulturesBySelectedSet(sets).freePeople}
+            cultures={getCulturesBySelectedSet(currentFormat).freePeople}
             selectionUpdated={setFreeCultures}
             currentSelectedCultures={[...freeCultures, ...twilightCultures]}
           />
@@ -88,7 +91,7 @@ export default function FiltersList({
         <ListItem>
           <CultureOptionContainer
             title="Shadow Cultures"
-            cultures={getCulturesBySelectedSet(sets).twilight}
+            cultures={getCulturesBySelectedSet(currentFormat).twilight}
             selectionUpdated={setTwilightCultures}
             currentSelectedCultures={[...freeCultures, ...twilightCultures]}
           />
@@ -107,8 +110,8 @@ export default function FiltersList({
         </ListItem>
         <ListItem>
           <ExpansionsFilter
-            selectedValue={sets}
-            filterChanged={setExpansions}
+            selectedValue={currentFormat}
+            filterChanged={setCurrentFormat}
           />
         </ListItem>
         {/* <ListItem>

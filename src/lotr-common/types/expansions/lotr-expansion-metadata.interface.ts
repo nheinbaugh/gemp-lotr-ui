@@ -1,4 +1,4 @@
-export interface LotrExpansionMetadata {
+export interface LotrFormatMetadata {
   displayName: string;
-  value: string;
+  apiName: string;
 }
