@@ -1,6 +1,7 @@
 import { Mappings } from '../../../common/types/mappings.interface';
 
 export enum LotrCardKeywords {
+  All = 'All',
   Archer = 'Archer',
   Battleground = 'Battleground',
   Besieger = 'Besieger',
@@ -39,9 +40,14 @@ export enum LotrCardKeywords {
   WargRider = 'WargRider',
   Weather = 'Weather',
   Wise = 'Wise',
+  RingBearer = 'RingBearer',
 }
 
 export const lotrCardKeywordTypeMappings: Record<LotrCardKeywords, Mappings> = {
+  All: {
+    apiName: '',
+    displayName: 'All',
+  },
   Archer: {
     apiName: 'archer',
     displayName: 'Archer',
@@ -193,5 +199,9 @@ export const lotrCardKeywordTypeMappings: Record<LotrCardKeywords, Mappings> = {
   Wise: {
     apiName: 'wise',
     displayName: 'Wise',
+  },
+  RingBearer: {
+    apiName: 'CAN_START_WITH_RING',
+    displayName: 'Ring-Bearer',
   },
 };

@@ -17,7 +17,7 @@ export interface CollectionApiParameters extends PageInformation {
 export interface CollectionFiltersViewModel {
   format: LotrFormatMetadata;
   side?: Mappings;
-  type?: Mappings;
+
   rarity?: Mappings;
   words?: Mappings;
   cardTypes?: Mappings;
@@ -27,7 +27,10 @@ export interface CollectionFiltersViewModel {
   races?: Mappings;
   itemClasses?: Mappings;
   phases?: Mappings;
-  cardTitle?: string;
+  cardName?: string;
+
+  // This is commented out until we support grabbing packs, foils, AIs etc
+  // type?: Mappings;
 
   // garbage be here
   activeDeckSection: string;

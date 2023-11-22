@@ -2,7 +2,6 @@ import { create } from 'zustand';
 import axios from 'axios';
 import { devtools } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
-import { prev } from 'cheerio/lib/api/traversing';
 import {
   CollectionFiltersViewModel,
   PageInformation,

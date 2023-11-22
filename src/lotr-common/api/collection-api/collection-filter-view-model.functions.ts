@@ -1,5 +1,6 @@
 import { commonFormatsMetadata } from '../../types/expansions';
 import { lotrCardTypeFilterMappings } from '../../types/filter-types/card-types';
+import { lotrCardKeywordTypeMappings } from '../../types/filter-types/keyword.types';
 import { CollectionFiltersViewModel } from './collection-api-parameters.interface';
 
 export const createDefaultCollectionViewModel =
@@ -9,12 +10,7 @@ export const createDefaultCollectionViewModel =
     cultures: [],
   });
 
-export const createOneRingFilters = (
-  _previousFilters: Partial<CollectionFiltersViewModel>
-): CollectionFiltersViewModel => {
-  // Note: this needs to replace the following filters:
-  // card type
-  //
+export const createOneRingFilters = (): CollectionFiltersViewModel => {
   return {
     ...createDefaultCollectionViewModel(),
     activeDeckSection: 'ring',
@@ -25,8 +21,7 @@ export const createOneRingFilters = (
 export const createRingbearerFilters = (): CollectionFiltersViewModel => ({
   ...createDefaultCollectionViewModel(),
   activeDeckSection: 'ring-bearer',
-  cardTypes: lotrCardTypeFilterMappings.RingBearer,
-  keywords: lotrCardTypeFilterMappings.RingBearer,
+  keywords: lotrCardKeywordTypeMappings.RingBearer,
 });
 
 export const createLocationFilters = (

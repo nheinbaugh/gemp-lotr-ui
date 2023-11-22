@@ -4,7 +4,7 @@ import { Mappings } from '../../types/mappings.interface';
 interface GempDropdownProps {
   options: Mappings[];
   placeholder: string;
-  selectionChanged: (selection: Mappings | undefined) => void;
+  selectionChanged: (selection: Mappings) => void;
   selectedValue?: Mappings;
 }
 
@@ -15,7 +15,9 @@ function GempDropdown({
   selectedValue,
 }: GempDropdownProps) {
   const handleOnChange = (newValue: string): void => {
-    selectionChanged(options.find((option) => option.apiName === newValue));
+    const index = options.findIndex((option) => option.apiName === newValue);
+    if (index === -1) return;
+    selectionChanged(options[index]);
   };
   return (
     <Select

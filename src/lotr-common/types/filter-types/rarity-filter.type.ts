@@ -1,6 +1,7 @@
 import { Mappings } from '../../../common/types/mappings.interface';
 
 enum CardRarity {
+  'All' = 'All',
   'Common' = 'Common',
   'Uncommon' = 'Uncommon',
   'Rare' = 'Rare',
@@ -11,7 +12,7 @@ enum CardRarity {
   'Poormans' = 'Poormans',
 }
 
-export const rarityMappings: Record<CardRarity & 'All', Mappings> = {
+export const rarityMappings: Record<CardRarity, Mappings> = {
   All: {
     apiName: '',
     displayName: 'All',

@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { Input, Typography } from '@mui/joy';
+import { useEffect } from 'react';
 import CardTypeSelector from '../../../../common/components/CardFilter/components/CardTypeSelector';
 import RaritySelector from '../../../../common/components/CardFilter/components/RaritySelector';
 import ExpansionsFilter from '../../../../common/components/CardFilter/components/ExpansionsFilter';
@@ -11,59 +11,48 @@ import { CollectionFiltersViewModel } from '../../../../lotr-common/api/collecti
 import { CultureOptionContainer } from './components/CultureOptionContainer/CultureOptionContainer';
 import { getCulturesBySelectedSet } from '../../../../lotr-common/types/cultures/culture.functions';
 import { FilterActions } from './components/FilterActions/FilterActions';
-import { Mappings } from '../../../../common/types/mappings.interface';
-import { LotrFormatMetadata } from '../../../../lotr-common/types/expansions/lotr-expansion-metadata.interface';
-import { commonFormatsMetadata } from '../../../../lotr-common/types/expansions';
+import { useFilterListState } from './types/useFilterListState';
 
 interface FiltersListProps {
-  currentFilters: CollectionFiltersViewModel;
+  appliedFilters: CollectionFiltersViewModel;
   applyFilters: ({
     rarity,
-    type,
+    cardTypes,
     keywords,
     format,
     cultures,
-    cardTitle,
+    cardName,
   }: Partial<CollectionFiltersViewModel>) => void;
 }
 
-export default function FiltersList({
-  currentFilters = {
-    format: commonFormatsMetadata.All,
-    activeDeckSection: 'required',
-  },
-  applyFilters,
-}: FiltersListProps) {
-  const [rarity, setRarity] = useState<Mappings | undefined>(
-    currentFilters.rarity
-  );
-  const [type, setCardType] = useState<Mappings | undefined>(
-    currentFilters.type
-  );
-  const [keywords, setKeyword] = useState<Mappings | undefined>(
-    currentFilters.keywords
-  );
-  const [currentFormat, setCurrentFormat] = useState<
-    LotrFormatMetadata | undefined
-  >(currentFilters.format);
-  const [cardName, setCardName] = useState<string>(
-    currentFilters.cardTitle ?? ''
-  );
-  const [freeCultures, setFreeCultures] = useState<string[]>(
-    currentFilters.cultures ?? []
-  );
-  const [twilightCultures, setTwilightCultures] = useState<string[]>([]);
-  const [sort, setSort] = useState<string>('');
+export default function FiltersList(props: FiltersListProps) {
+  const { appliedFilters, applyFilters } = props;
+  const {
+    cardName,
+    cardTypes,
+    format,
+    freeCultures,
+    keywords,
+    rarity,
+    twilightCultures,
+    setPreviousFilters,
+    updateFilter,
+  } = useFilterListState(appliedFilters);
+
   const handleSubmitFilters = (): void => {
     applyFilters({
-      rarity,
-      type,
+      cardName,
+      cardTypes,
+      format,
       keywords,
-      format: currentFormat,
-      cultures: [...freeCultures, ...twilightCultures], // TODO: this shouldn't combine them yet, it makes the culture filter settings weird
-      cardTitle: cardName,
+      rarity,
+      cultures: [...freeCultures, ...twilightCultures],
     });
   };
+
+  useEffect(() => {
+    setPreviousFilters(appliedFilters);
+  }, [appliedFilters, setPreviousFilters]);
 
   const handleResetFilters = (): void => {
     // basically set back to inital state....
@@ -78,47 +67,49 @@ export default function FiltersList({
             sx={{ width: '100%' }}
             placeholder="Title"
             value={cardName}
-            onChange={(e) => setCardName(e.target.value)}
+            onChange={(e) => updateFilter('cardName', e.target.value)}
           />
         </ListItem>
         <ListItem>
           <CultureOptionContainer
             title="Free People Cultures"
-            cultures={getCulturesBySelectedSet(currentFormat).freePeople}
-            selectionUpdated={setFreeCultures}
+            cultures={getCulturesBySelectedSet(format).freePeople}
+            selectionUpdated={(update) => updateFilter('freeCultures', update)}
             currentSelectedCultures={[...freeCultures, ...twilightCultures]}
           />
         </ListItem>
         <ListItem>
           <CultureOptionContainer
             title="Shadow Cultures"
-            cultures={getCulturesBySelectedSet(currentFormat).twilight}
-            selectionUpdated={setTwilightCultures}
+            cultures={getCulturesBySelectedSet(format).twilight}
+            selectionUpdated={(update) =>
+              updateFilter('twilightCultures', update)
+            }
             currentSelectedCultures={[...freeCultures, ...twilightCultures]}
           />
         </ListItem>
         <ListItem>
           <RaritySelector
-            selectedValue={currentFilters.rarity}
-            filterChanged={setRarity}
+            selectedValue={appliedFilters.rarity}
+            filterChanged={(update) => updateFilter('rarity', update)}
           />
         </ListItem>
         <ListItem>
           <CardTypeSelector
-            selectedValue={currentFilters.cardTypes}
-            filterChanged={setCardType}
+            selectedValue={appliedFilters.cardTypes}
+            filterChanged={(update) => updateFilter('cardTypes', update)}
           />
         </ListItem>
         <ListItem>
           <KeywordSelector
             selectedValue={keywords}
-            filterChanged={setKeyword}
+            filterChanged={(update) => updateFilter('keywords', update)}
           />
         </ListItem>
         <ListItem>
           <ExpansionsFilter
-            selectedValue={currentFormat}
-            filterChanged={setCurrentFormat}
+            selectedValue={format}
+            filterChanged={(update) => updateFilter('format', update)}
           />
         </ListItem>
         {/* <ListItem>

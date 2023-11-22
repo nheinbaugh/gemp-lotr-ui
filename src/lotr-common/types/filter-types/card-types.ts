@@ -1,6 +1,7 @@
 import { Mappings } from '../../../common/types/mappings.interface';
 
 enum LotrCardTypes {
+  All = 'All',
   Characters = 'Characters',
   Items = 'Items',
   Sites = 'Sites',
@@ -13,10 +14,10 @@ enum LotrCardTypes {
   Minions = 'Minions',
   Possessions = 'Possessions',
   OneRing = 'OneRing',
-  RingBearer = 'RingBearer',
 }
 
 export const lotrCardTypeFilterMappings: Record<LotrCardTypes, Mappings> = {
+  All: { apiName: '', displayName: 'Card Types' },
   Characters: { apiName: 'COMPANION,ALLY,MINION', displayName: 'Characters' },
   Items: { apiName: 'POSSESSION,ARTIFACT', displayName: 'Items' },
   Sites: { apiName: 'SITE', displayName: 'Sites' },
@@ -31,9 +32,5 @@ export const lotrCardTypeFilterMappings: Record<LotrCardTypes, Mappings> = {
   OneRing: {
     displayName: 'The One Ring',
     apiName: 'THE_ONE_RING',
-  },
-  RingBearer: {
-    displayName: 'Can Start with Ring',
-    apiName: 'CAN_START_WITH_RING',
   },
 };

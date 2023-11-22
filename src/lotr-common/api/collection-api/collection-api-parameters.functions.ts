@@ -46,17 +46,18 @@ export const convertViewModelToDao = (
 ): CollectionApiFilterDAO => {
   return {
     format: input.format?.apiName ?? '',
-    side: '',
-    type: input.type?.apiName ?? '',
     rarity: input.rarity?.apiName ?? '',
-    words: '',
     cardTypes: input.cardTypes?.apiName ?? '',
     siteNumber: input.siteNumber ?? '',
-    itemClasses: '',
     keywords: input.keywords?.apiName ?? '',
+    cultures: input.cultures?.join(',') ?? '',
+    title: input.cardName ?? '',
+    // not yet supported props
+    side: '',
+    words: '',
+    itemClasses: '',
     races: '',
     phases: '',
-    cultures: input.cultures?.join(',') ?? '',
-    title: input.cardTitle ?? '',
+    type: '',
   };
 };
