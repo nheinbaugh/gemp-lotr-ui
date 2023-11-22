@@ -11,7 +11,11 @@ enum CardRarity {
   'Poormans' = 'Poormans',
 }
 
-export const rarityMappings: Record<CardRarity, Mappings> = {
+export const rarityMappings: Record<CardRarity & 'All', Mappings> = {
+  All: {
+    apiName: '',
+    displayName: 'All',
+  },
   Common: {
     apiName: 'C',
     displayName: 'Common',

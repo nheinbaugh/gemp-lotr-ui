@@ -35,11 +35,7 @@ export default function DeckSections(props: DeckbuilderProps) {
         height: '100%',
       })}
     >
-      <Tabs
-        defaultValue={currentTabIndex}
-        onChange={handleChange}
-        aria-label="basic tabs example"
-      >
+      <Tabs defaultValue={currentTabIndex} onChange={handleChange}>
         <TabList>
           <TabWithStatus
             tabName="Ring and Ring-Bearer"

@@ -9,15 +9,23 @@ export const createDefaultCollectionViewModel =
     cultures: [],
   });
 
-export const createOneRingFilters = (): CollectionFiltersViewModel => ({
-  ...createDefaultCollectionViewModel(),
-  activeDeckSection: 'ring',
-  cardTypes: lotrCardTypeFilterMappings.OneRing,
-});
+export const createOneRingFilters = (
+  _previousFilters: Partial<CollectionFiltersViewModel>
+): CollectionFiltersViewModel => {
+  // Note: this needs to replace the following filters:
+  // card type
+  //
+  return {
+    ...createDefaultCollectionViewModel(),
+    activeDeckSection: 'ring',
+    cardTypes: lotrCardTypeFilterMappings.OneRing,
+  };
+};
 
 export const createRingbearerFilters = (): CollectionFiltersViewModel => ({
   ...createDefaultCollectionViewModel(),
   activeDeckSection: 'ring-bearer',
+  cardTypes: lotrCardTypeFilterMappings.RingBearer,
   keywords: lotrCardTypeFilterMappings.RingBearer,
 });
 
@@ -26,9 +34,6 @@ export const createLocationFilters = (
 ): CollectionFiltersViewModel => ({
   ...createDefaultCollectionViewModel(),
   activeDeckSection: 'location',
-  cardTypes: {
-    displayName: 'location',
-    apiName: 'SITE',
-  },
+  cardTypes: lotrCardTypeFilterMappings.Sites,
   siteNumber,
 });
