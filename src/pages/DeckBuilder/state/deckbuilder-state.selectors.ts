@@ -7,6 +7,6 @@ export const getCurrentDeck = (state: DeckBuilderStore): Deck => {
     ring,
     ringBearer,
     sites,
-    cards: [...freePeople, ...shadow],
+    cards: [...freePeople.values(), ...shadow.values()], // BUGTODO: this does not account for the duplciates caused by count :)
   };
 };

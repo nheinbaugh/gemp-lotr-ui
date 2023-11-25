@@ -8,6 +8,7 @@ import useLotrDeckValidity from '../../../../lotr-common/types/deck-validity/use
 import { DeckValidityStatus } from '../../../../common/types/deck/deck-validity-status.type';
 import { LotrFormatMetadata } from '../../../../lotr-common/types/expansions/lotr-expansion-metadata.interface';
 import { useDeckBuilderStore } from '../../state/deckbuilder-state';
+import { FreePeopleDeckSection } from './components/FreePeopleDeckSection';
 
 type DeckbuilderProps = {
   deck: Deck;
@@ -38,7 +39,7 @@ export default function DeckSections(props: DeckbuilderProps) {
         height: '100%',
       })}
     >
-      <Tabs defaultValue={currentTabIndex} onChange={handleChange}>
+      <Tabs value={currentTabIndex} onChange={handleChange}>
         <TabList>
           <TabWithStatus
             tabName="Ring and Ring-Bearer"
@@ -66,7 +67,9 @@ export default function DeckSections(props: DeckbuilderProps) {
             selectedSites={sites}
           />
         </TabPanel>
-        <TabPanel value={2}>Freeps</TabPanel>
+        <TabPanel value={2}>
+          <FreePeopleDeckSection />
+        </TabPanel>
         <TabPanel value={3}>Twilight</TabPanel>
       </Tabs>
     </Grid>
