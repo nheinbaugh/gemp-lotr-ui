@@ -27,10 +27,8 @@ function SearchResults({
   onCardSecondaryAction,
 }: SearchResultProps) {
   const viewportWidth = useWindowDimensions();
-  const filters = useCardQueryStore();
   const [containerWidth, setContainerWidth] = useState<number>(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  let displayCardsAsHorizontal = false;
   useEffect(() => {
     if (containerRef.current) {
       const currentWidth = containerRef.current.offsetWidth;
@@ -39,9 +37,6 @@ function SearchResults({
       }
     }
   }, [viewportWidth, containerWidth]);
-  if (filters.filters.cardTypes?.displayName === 'location') {
-    displayCardsAsHorizontal = true;
-  }
 
   return (
     <Grid ref={containerRef} container spacing={1}>
@@ -52,7 +47,6 @@ function SearchResults({
               <LotrCard
                 card={card}
                 width={getCardWidth(viewportWidth)}
-                isHorizontal={displayCardsAsHorizontal}
                 onPrimaryAction={() => {
                   onCardPrimaryAction(card.cardBlueprintId);
                 }}

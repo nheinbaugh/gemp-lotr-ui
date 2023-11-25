@@ -8,7 +8,7 @@ import useLotrDeckValidity from '../../../../lotr-common/types/deck-validity/use
 import { DeckValidityStatus } from '../../../../common/types/deck/deck-validity-status.type';
 import { LotrFormatMetadata } from '../../../../lotr-common/types/expansions/lotr-expansion-metadata.interface';
 import { useDeckBuilderStore } from '../../state/deckbuilder-state';
-import { FreePeopleDeckSection } from './components/FreePeopleDeckSection';
+import { PlayerSideDeckSection } from './components/PlayerSideDeckSection';
 
 type DeckbuilderProps = {
   deck: Deck;
@@ -21,8 +21,7 @@ export default function DeckSections(props: DeckbuilderProps) {
   const [currentTabIndex, setCurrentTabIndex] = React.useState(0);
   const { filterRequest, selectedFormat } = props;
   const isValid = useLotrDeckValidity(deck, selectedFormat);
-  const { ring, ringBearer, sites } = useDeckBuilderStore();
-  console.log('ring', ring, sites);
+  const { ring, ringBearer, sites, freePeople, shadow } = useDeckBuilderStore();
   const handleChange = (
     _: React.SyntheticEvent | null,
     newValue: string | number | null
@@ -39,7 +38,11 @@ export default function DeckSections(props: DeckbuilderProps) {
         height: '100%',
       })}
     >
-      <Tabs value={currentTabIndex} onChange={handleChange}>
+      <Tabs
+        value={currentTabIndex}
+        onChange={handleChange}
+        sx={{ height: '100%' }}
+      >
         <TabList>
           <TabWithStatus
             tabName="Ring and Ring-Bearer"
@@ -68,9 +71,11 @@ export default function DeckSections(props: DeckbuilderProps) {
           />
         </TabPanel>
         <TabPanel value={2}>
-          <FreePeopleDeckSection />
+          <PlayerSideDeckSection cards={freePeople} />
         </TabPanel>
-        <TabPanel value={3}>Twilight</TabPanel>
+        <TabPanel value={3}>
+          <PlayerSideDeckSection cards={shadow} />
+        </TabPanel>
       </Tabs>
     </Grid>
   );

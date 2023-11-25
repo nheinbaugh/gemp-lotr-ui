@@ -62,7 +62,6 @@ export default function PlaceholderCard({
       width={dimensions.width}
       height={dimensions.height}
       allowHover
-      isHorizontal={!vertical}
       onPrimaryAction={onSelect}
       onSecondaryAction={() => {}}
     />

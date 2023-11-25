@@ -18,7 +18,6 @@ interface CardProps {
   fallbackImage: string;
   onPrimaryAction: () => void;
   onSecondaryAction: () => void;
-  isHorizontal: boolean;
   allowHover: boolean;
 }
 

@@ -64,7 +64,11 @@ export const getBlueprintByCardId = (
       imageUrl: getImageUrl(id),
     };
     if (siteNumber) {
-      return { ...cardBlueprint, siteNumber } as CardBlueprint;
+      return {
+        ...cardBlueprint,
+        isHorizontal: true,
+        siteNumber,
+      } as CardBlueprint;
     }
     return cardBlueprint;
   } catch (e) {

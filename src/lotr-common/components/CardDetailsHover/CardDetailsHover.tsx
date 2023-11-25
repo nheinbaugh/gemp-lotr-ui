@@ -20,7 +20,7 @@ export function CardDetailsHover(props: CardDetailsHoverProps) {
         height: '400px',
       }}
     >
-      <NonInteractiveLotrCard card={card} isHorizontal={false} height={400} />
+      <NonInteractiveLotrCard card={card} height={400} />
     </Box>
   ) : (
     <span />

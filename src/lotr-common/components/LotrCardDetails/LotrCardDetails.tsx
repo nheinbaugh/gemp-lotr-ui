@@ -63,7 +63,6 @@ function LotrCardDetails({ isOpen, onClose }: LotrCardDetailsProps) {
           <NonInteractiveLotrCard
             card={card}
             width={determineModalWidth(screenWidth)}
-            isHorizontal={false}
           />
         )}
         <Button onClick={() => updateCurrentCard('next')}>Next</Button>

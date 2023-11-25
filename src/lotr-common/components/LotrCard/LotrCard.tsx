@@ -8,7 +8,6 @@ type LotrCardProps = {
   width?: number;
   onPrimaryAction: () => void;
   onSecondaryAction: () => void;
-  isHorizontal: boolean;
   allowHover: boolean;
 };
 
@@ -29,7 +28,6 @@ export default function LotrCard(props: LotrCardProps) {
 }
 
 type NonInteractiveLotrCardProps = {
-  isHorizontal: boolean;
   card: CardBlueprint;
   height?: number;
   width?: number;
