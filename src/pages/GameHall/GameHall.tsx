@@ -1,10 +1,11 @@
 import { Box, Button, Grid } from '@mui/joy';
 import { Link, useLoaderData } from 'react-router-dom';
-import LotrCard from '../../lotr-common/components/LotrCard/LotrCard';
+import { NonInteractiveLotrCard } from '../../lotr-common/components/LotrCard/LotrCard';
 import { useWindowDimensions } from '../../common/hooks/useWindowDimensions';
 import { LoaderData } from '../../common/types/react-router/loader-data.type';
 import { gameHallLoader } from './types';
 import { useClientHeartbeat } from '../../lotr-common/api/hall-api/heartbeat/hall-heartbeat';
+import { useCardBlueprintStore } from '../../lotr-common/state/card-state';
 
 const getCardWidth = (viewportWidth: number): number => {
   const minWidth = 75; // YEA these are rough and suck...
@@ -15,7 +16,13 @@ const getCardWidth = (viewportWidth: number): number => {
 };
 
 export default function GameHall() {
-  const cards = ['2_16', '10_6', '101_3', '15_45'];
+  const cardStore = useCardBlueprintStore();
+  const cards = [
+    cardStore.cardBlueprints.get('2_16'),
+    cardStore.cardBlueprints.get('10_6'),
+    cardStore.cardBlueprints.get('101_3'),
+    cardStore.cardBlueprints.get('15_45'),
+  ];
   const viewportWidth = useWindowDimensions();
   const loaderData = useLoaderData() as LoaderData<typeof gameHallLoader>;
 
@@ -28,14 +35,17 @@ export default function GameHall() {
       </Button>
       {/* <Button onClick={() => beater?.stop()}>Stop!</Button> */}
       <Grid container spacing={1}>
-        {cards.map((cardId) => (
-          <Grid key={cardId}>
-            <LotrCard
-              blueprintId={cardId}
-              width={getCardWidth(viewportWidth)}
-            />
-          </Grid>
-        ))}
+        {cards
+          .filter((card) => card !== undefined)
+          .map((card) => (
+            <Grid key={card?.cardNumber}>
+              <NonInteractiveLotrCard
+                card={card}
+                width={getCardWidth(viewportWidth)}
+                isHorizontal={false}
+              />
+            </Grid>
+          ))}
       </Grid>
     </Box>
   );

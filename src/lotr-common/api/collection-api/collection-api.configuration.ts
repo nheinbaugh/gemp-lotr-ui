@@ -1,6 +1,16 @@
-import { AxiosRequestConfig } from 'axios';
-import { CollectionApiParameters } from './collection-api-parameters.interface';
-import { getDefaultCollectionApiParameters } from './collection-api-parameters.functions';
+import axios, { AxiosRequestConfig } from 'axios';
+import {
+  CollectionApiParameters,
+  CollectionFiltersViewModel,
+} from './collection-api-parameters.interface';
+import {
+  convertViewModelToDao,
+  getDefaultCollectionApiParameters,
+} from './collection-api-parameters.functions';
+import {
+  CollectionCardViewModel,
+  convertGetCollectionFromXml,
+} from './collection-api-response.functions';
 
 const createFilter = (params: CollectionApiParameters): string => {
   let encodedFilter = '';
@@ -52,4 +62,22 @@ export const collectionApiConfiguration = (
       url,
     },
   ];
+};
+
+export const executeGetCollectionByFilterRequest = async (
+  filters: CollectionFiltersViewModel
+): Promise<CollectionCardViewModel[]> => {
+  const dao = getDefaultCollectionApiParameters(
+    convertViewModelToDao(filters),
+    {
+      start: 0,
+      count: 18,
+    } // currentPage
+  );
+  const filterApiConfiguration = collectionApiConfiguration(dao);
+  const result = await axios.get(
+    filterApiConfiguration[0],
+    filterApiConfiguration[1]
+  );
+  return convertGetCollectionFromXml(result.data, filters.siteNumber).cards;
 };

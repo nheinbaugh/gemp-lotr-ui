@@ -12,7 +12,7 @@ export const formatSiteSelections = (
       placeholder: `Location ${key}`,
       filterName: key,
       isVertical: false,
-      cardId: selections[key as unknown as LotrLocationNames],
+      cardBlueprint: selections[key as unknown as LotrLocationNames],
     };
   });
 };

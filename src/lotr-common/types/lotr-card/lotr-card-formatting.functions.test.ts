@@ -14,17 +14,25 @@ describe('card-formatting.functions', () => {
       expect(
         getCardNumber({
           set: 'TheTwoTowers',
+          cardBlueprintId: '4_23',
           cardNumber: 23,
           formattedCardNumber: '023',
+          group: 'site',
           formattedSetNumber: '04',
+          isHorizontal: false,
+          imageUrl: 'https://lotrtcgwiki.com/images/lotr04023.jpg',
         })
       ).toEqual('04023');
       expect(
         getCardNumber({
+          cardBlueprintId: '13_432',
           set: 'Bloodlines',
           cardNumber: 423,
+          group: 'fp',
           formattedCardNumber: '423',
           formattedSetNumber: '13',
+          isHorizontal: false,
+          imageUrl: 'https://lotrtcgwiki.com/images/lotr04023.jpg',
         })
       ).toEqual('13423');
     });
@@ -65,24 +73,34 @@ describe('card-formatting.functions', () => {
   describe('getBlueprintByCardId', () => {
     it('should return a blueprint with set 1 and card 1 when passed 1_1', () => {
       const input = '1_1';
+      const group = 'fp';
       const expected: CardBlueprint = {
+        cardBlueprintId: '1_1',
+        group,
         set: 'FellowshipOfTheRing',
         cardNumber: 1,
         formattedCardNumber: '001',
         formattedSetNumber: '01',
+        isHorizontal: false,
+        imageUrl: 'https://i.lotrtcgpc.net/decipher/LOTR01001.jpg',
       };
-      expect(getBlueprintByCardId(input)).toStrictEqual(expected);
+      expect(getBlueprintByCardId(input, group)).toStrictEqual(expected);
     });
 
     it('should return a blueprint with set 1 and card 1 when passed 0000001_0000001s', () => {
       const input = '0000001_0000001';
+      const group = 'shadow';
       const expected: CardBlueprint = {
+        cardBlueprintId: '0000001_0000001',
+        group,
         set: 'FellowshipOfTheRing',
         cardNumber: 1,
         formattedCardNumber: '001',
         formattedSetNumber: '01',
+        isHorizontal: false,
+        imageUrl: 'https://lotrtcgwiki.com/images/lotr01001.jpg',
       };
-      expect(getBlueprintByCardId(input)).toStrictEqual(expected);
+      expect(getBlueprintByCardId(input, group)).toStrictEqual(expected);
     });
   });
 });

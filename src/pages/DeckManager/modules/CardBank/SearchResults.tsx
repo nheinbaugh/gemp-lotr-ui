@@ -4,12 +4,13 @@ import { CollectionCardViewModel } from '../../../../lotr-common/api/collection-
 import LotrCard from '../../../../lotr-common/components/LotrCard/LotrCard';
 import { useWindowDimensions } from '../../../../common/hooks/useWindowDimensions';
 import { useCardQueryStore } from '../../../../lotr-common/state/card-filter.state';
+import { CardId } from '../../../../lotr-common/types/lotr-card/card-blueprint.interface';
 
 interface SearchResultProps {
   cards: CollectionCardViewModel[];
 
-  onCardPrimaryAction: (blueprintId: string) => void;
-  onCardSecondaryAction: (blueprintId: string) => void;
+  onCardPrimaryAction: (blueprintId: CardId) => void;
+  onCardSecondaryAction: (blueprintId: CardId) => void;
 }
 
 const getCardWidth = (viewportWidth: number): number => {
@@ -44,20 +45,28 @@ function SearchResults({
 
   return (
     <Grid ref={containerRef} container spacing={1}>
-      {cards.map((card) => {
-        return (
-          <Grid key={card.blueprintId}>
-            <LotrCard
-              blueprintId={card.blueprintId}
-              width={getCardWidth(viewportWidth)}
-              isHorizontal={displayCardsAsHorizontal}
-              onPrimaryAction={() => onCardPrimaryAction(card.blueprintId)}
-              onSecondaryAction={() => onCardSecondaryAction(card.blueprintId)}
-              allowHover
-            />
-          </Grid>
-        );
-      })}
+      {cards.length > 0 ? (
+        cards.map((card) => {
+          return (
+            <Grid key={card.cardBlueprintId}>
+              <LotrCard
+                card={card}
+                width={getCardWidth(viewportWidth)}
+                isHorizontal={displayCardsAsHorizontal}
+                onPrimaryAction={() => {
+                  onCardPrimaryAction(card.cardBlueprintId);
+                }}
+                onSecondaryAction={() =>
+                  onCardSecondaryAction(card.cardBlueprintId)
+                }
+                allowHover
+              />
+            </Grid>
+          );
+        })
+      ) : (
+        <span>No cards found</span>
+      )}
     </Grid>
   );
 }

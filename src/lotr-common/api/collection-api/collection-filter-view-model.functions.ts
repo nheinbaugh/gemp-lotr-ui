@@ -6,21 +6,18 @@ import { CollectionFiltersViewModel } from './collection-api-parameters.interfac
 export const createDefaultCollectionViewModel =
   (): CollectionFiltersViewModel => ({
     format: commonFormatsMetadata.All,
-    activeDeckSection: '',
     cultures: [],
   });
 
 export const createOneRingFilters = (): CollectionFiltersViewModel => {
   return {
     ...createDefaultCollectionViewModel(),
-    activeDeckSection: 'ring',
     cardTypes: lotrCardTypeFilterMappings.OneRing,
   };
 };
 
 export const createRingbearerFilters = (): CollectionFiltersViewModel => ({
   ...createDefaultCollectionViewModel(),
-  activeDeckSection: 'ring-bearer',
   keywords: lotrCardKeywordTypeMappings.RingBearer,
 });
 
@@ -28,7 +25,6 @@ export const createLocationFilters = (
   siteNumber: string
 ): CollectionFiltersViewModel => ({
   ...createDefaultCollectionViewModel(),
-  activeDeckSection: 'location',
   cardTypes: lotrCardTypeFilterMappings.Sites,
   siteNumber,
 });

@@ -22,6 +22,7 @@ module.exports = {
   rules: {
     'react/require-default-props': 0, // since we are using typescript no need to redefine props again
     'react/react-in-jsx-scope': 0,
+    'react/jsx-props-no-spreading': 0,
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
     'import/prefer-default-export': 0,
     'no-plusplus': 0,

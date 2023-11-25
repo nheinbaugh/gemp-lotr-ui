@@ -12,7 +12,6 @@ type LocationDeckSectionProps = {
 
 export default function LocationDeckSection(props: LocationDeckSectionProps) {
   const { updateFilteredSites, selectedSites } = props;
-
   const [formattedSelections, setFormattedSelections] = useState<
     FilterableDeckSection[]
   >([]);
@@ -32,7 +31,7 @@ export default function LocationDeckSection(props: LocationDeckSectionProps) {
   };
   return (
     <DeckSectionTemplate
-      sections={formattedSelections}
+      selections={formattedSelections}
       onSectionChange={doSelectionChanged}
       placeholderWidth="small"
     />

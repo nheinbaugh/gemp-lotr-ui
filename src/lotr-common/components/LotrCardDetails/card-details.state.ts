@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { CardId } from '../../types/lotr-card/card-blueprint.interface';
 
 function doUpdateCurrentCard(state: CardDetailModalStore, pointer: string) {
   const currentIndex = state.displayedCardId
@@ -26,16 +27,16 @@ function doUpdateCurrentCard(state: CardDetailModalStore, pointer: string) {
 }
 
 interface CardDetailModalState {
-  availableCardIds: Array<string>;
-  displayedCardId: string;
-  hoverImage: string | null;
+  availableCardIds: Array<CardId>;
+  displayedCardId: CardId;
+  hoverImage: CardId | null;
 }
 
 interface CardDetailModalActions {
   updateCurrentCard: (pointer: 'next' | 'previous') => void;
-  iniatlizeModal: (cardId: string, cardIds: Array<string>) => void;
+  iniatlizeModal: (cardId: CardId, cardIds: Array<CardId>) => void;
 
-  setHoverImage(cardId: string | null): void;
+  setHoverImage(cardId: CardId | null): void;
 }
 
 type CardDetailModalStore = CardDetailModalState & CardDetailModalActions;
@@ -44,11 +45,11 @@ export const useCardDetailStore = create<CardDetailModalStore>()((set) => ({
   availableCardIds: [],
   displayedCardId: '',
   hoverImage: null,
-  setHoverImage: (cardId: string | null) =>
+  setHoverImage: (cardId: CardId | null) =>
     set((state) => {
       return { ...state, hoverImage: cardId };
     }),
-  iniatlizeModal: (cardId: string, availableCardIds: Array<string>) =>
+  iniatlizeModal: (cardId: CardId, availableCardIds: Array<CardId>) =>
     set((state) => ({ ...state, displayedCardId: cardId, availableCardIds })),
   updateCurrentCard: (pointer: 'next' | 'previous') =>
     set((state) => {

@@ -3,13 +3,13 @@ import PlaceholderCard from '../../../../../common/components/PlaceholderCard/Pl
 import { FilterableDeckSection } from '../types/filterable-deck-section.interface';
 
 interface DeckSectionProps {
-  sections: FilterableDeckSection[];
+  selections: FilterableDeckSection[];
   onSectionChange: (section: string) => void;
   placeholderWidth: 'small' | 'large';
 }
 
 const getDefaultDeckSectionProps = (): DeckSectionProps => ({
-  sections: [],
+  selections: [],
   onSectionChange: () => {},
   placeholderWidth: 'small',
 });
@@ -17,18 +17,18 @@ const getDefaultDeckSectionProps = (): DeckSectionProps => ({
 export default function DeckSectionTemplate(
   props: DeckSectionProps = getDefaultDeckSectionProps()
 ) {
-  const { onSectionChange, sections, placeholderWidth } = props;
+  const { onSectionChange, selections, placeholderWidth } = props;
 
   return (
     <Grid gap="1rem" container>
-      {(sections ?? []).map((section) => (
+      {(selections ?? []).map((section) => (
         <Grid
           md={placeholderWidth === 'small' ? 3 : 5}
           key={section.placeholder}
         >
           <PlaceholderCard
             placeholder={section.placeholder}
-            blueprintId={section.cardId}
+            card={section.cardBlueprint}
             vertical={section.isVertical}
             height={section.isVertical ? 240 : 180}
             onSelect={() => onSectionChange(section.filterName)}

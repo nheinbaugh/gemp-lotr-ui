@@ -1,3 +1,4 @@
+import { lotrCardTypeFilterMappings } from '../../types/filter-types/card-types';
 import {
   CollectionApiFilterDAO,
   CollectionApiParameters,
@@ -41,6 +42,16 @@ export const getDefaultCollectionApiParameters = (
   };
 };
 
+const determineSiteNumber = ({
+  siteNumber,
+  cardTypes,
+}: CollectionFiltersViewModel): string => {
+  if (cardTypes?.apiName !== lotrCardTypeFilterMappings.Sites.apiName) {
+    return '';
+  }
+  return siteNumber ?? '';
+};
+
 export const convertViewModelToDao = (
   input: CollectionFiltersViewModel
 ): CollectionApiFilterDAO => {
@@ -48,7 +59,7 @@ export const convertViewModelToDao = (
     format: input.format?.apiName ?? '',
     rarity: input.rarity?.apiName ?? '',
     cardTypes: input.cardTypes?.apiName ?? '',
-    siteNumber: input.siteNumber ?? '',
+    siteNumber: determineSiteNumber(input),
     keywords: input.keywords?.apiName ?? '',
     cultures: input.cultures?.join(',') ?? '',
     title: input.cardName ?? '',

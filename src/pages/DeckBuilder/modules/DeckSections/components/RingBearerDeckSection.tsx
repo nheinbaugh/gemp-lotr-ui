@@ -1,27 +1,28 @@
-import { useEffect, useState } from 'react';
 import { FilterableDeckSection } from '../types/filterable-deck-section.interface';
 import DeckSectionTemplate from './DeckSectionTemplate';
+import { CardBlueprint } from '../../../../../lotr-common/types/lotr-card/card-blueprint.interface';
 
-const sections: FilterableDeckSection[] = [
+const getDefaultDeckSectionProps = (
+  ring: CardBlueprint | undefined,
+  ringBearer: CardBlueprint | undefined
+): FilterableDeckSection[] => [
   {
     placeholder: 'Ring-Bearer',
     filterName: 'ring-bearer',
-    cardId: '',
+    cardBlueprint: ringBearer,
     isVertical: true,
   },
   {
     placeholder: 'The One Ring',
     filterName: 'ring',
-    cardId: '',
+    cardBlueprint: ring,
     isVertical: true,
   },
 ];
 
-const getDefaultDeckSectionProps = (): FilterableDeckSection[] => sections;
-
 interface RingBearerDeckSectionProps {
-  ring: string;
-  ringBearer: string;
+  ring?: CardBlueprint;
+  ringBearer?: CardBlueprint;
   updateFilter: (filterName: string) => void;
 }
 
@@ -30,31 +31,9 @@ export default function RingBearerDeckSection(
 ) {
   const { ring, ringBearer, updateFilter } = props;
 
-  const [formattedSections, setFormattedSections] =
-    useState<FilterableDeckSection[]>(sections);
-
-  useEffect(() => {
-    const formatted = getDefaultDeckSectionProps().map((section) => {
-      if (section.filterName === 'ring') {
-        return {
-          ...section,
-          cardId: ring,
-        };
-      }
-      if (section.filterName === 'ring-bearer') {
-        return {
-          ...section,
-          cardId: ringBearer,
-        };
-      }
-      return false;
-    });
-    setFormattedSections(formatted.filter(Boolean) as FilterableDeckSection[]);
-  }, [ring, ringBearer, setFormattedSections]);
-
   return (
     <DeckSectionTemplate
-      sections={formattedSections}
+      selections={getDefaultDeckSectionProps(ring, ringBearer)}
       onSectionChange={updateFilter}
       placeholderWidth="large"
     />

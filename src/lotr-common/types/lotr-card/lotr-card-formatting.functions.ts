@@ -1,3 +1,4 @@
+import { LotrCollectionCardGroups } from '../card/lotr-card-collection-groups.type';
 import {
   DecipherSets,
   PlayersCommitteeSets,
@@ -5,7 +6,7 @@ import {
   decipherSetExpansionMetadata,
 } from '../expansions';
 import { getImageUrl } from '../image-resolver/image-resolver';
-import { CardBlueprint } from './card-blueprint.interface';
+import { CardBlueprint, CardId } from './card-blueprint.interface';
 
 /**
  * Given a card number format it into a properly padded ID
@@ -35,7 +36,12 @@ export const formatSetNumber = (setNumber: number): string => {
 /**
  * Given a card ID from the API convert it into the CardBlueprint viewmodel
  */
-export const getBlueprintByCardId = (id: string): CardBlueprint => {
+export const getBlueprintByCardId = (
+  cardId: CardId,
+  group: LotrCollectionCardGroups,
+  siteNumber?: string
+): CardBlueprint => {
+  const id = cardId.toString();
   try {
     const separator = '_';
     const sections = id.split(separator);
@@ -47,13 +53,20 @@ export const getBlueprintByCardId = (id: string): CardBlueprint => {
         return Number(metadata.apiName) === setNumber;
       }
     )?.[0] as DecipherSets | PlayersCommitteeSets;
-    return {
+    const cardBlueprint = {
       set,
+      cardBlueprintId: cardId,
+      group,
+      isHorizontal: false,
       cardNumber,
       formattedCardNumber: formatCardNumber(cardNumber),
       formattedSetNumber: formatSetNumber(setNumber),
       imageUrl: getImageUrl(id),
     };
+    if (siteNumber) {
+      return { ...cardBlueprint, siteNumber } as CardBlueprint;
+    }
+    return cardBlueprint;
   } catch (e) {
     // debugger;
   }
@@ -68,5 +81,5 @@ export const getBlueprintByCardId = (id: string): CardBlueprint => {
 export const getCardNumber = (blueprint: CardBlueprint): string => {
   return `${formatSetNumber(
     Number(allExpansionsMetadata[blueprint.set].apiName)
-  )}${formatCardNumber(blueprint.cardNumber)}`;
+  )}${formatCardNumber(+blueprint.cardNumber)}`;
 };

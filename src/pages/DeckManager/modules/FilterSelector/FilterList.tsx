@@ -90,13 +90,13 @@ export default function FiltersList(props: FiltersListProps) {
         </ListItem>
         <ListItem>
           <RaritySelector
-            selectedValue={appliedFilters.rarity}
+            selectedValue={rarity}
             filterChanged={(update) => updateFilter('rarity', update)}
           />
         </ListItem>
         <ListItem>
           <CardTypeSelector
-            selectedValue={appliedFilters.cardTypes}
+            selectedValue={cardTypes}
             filterChanged={(update) => updateFilter('cardTypes', update)}
           />
         </ListItem>

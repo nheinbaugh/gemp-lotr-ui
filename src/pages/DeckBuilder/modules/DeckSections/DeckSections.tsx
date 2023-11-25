@@ -7,18 +7,21 @@ import TabWithStatus from './components/TabWithStatus';
 import useLotrDeckValidity from '../../../../lotr-common/types/deck-validity/useLotrDeckValidity';
 import { DeckValidityStatus } from '../../../../common/types/deck/deck-validity-status.type';
 import { LotrFormatMetadata } from '../../../../lotr-common/types/expansions/lotr-expansion-metadata.interface';
+import { useDeckBuilderStore } from '../../state/deckbuilder-state';
 
 type DeckbuilderProps = {
-  currentDeck: Deck;
+  deck: Deck;
   selectedFormat: LotrFormatMetadata;
   filterRequest: (filterName: string, additionalFilter?: string) => void;
 };
 
 export default function DeckSections(props: DeckbuilderProps) {
+  const { deck } = props;
   const [currentTabIndex, setCurrentTabIndex] = React.useState(0);
-  const { currentDeck: deck, filterRequest, selectedFormat } = props;
+  const { filterRequest, selectedFormat } = props;
   const isValid = useLotrDeckValidity(deck, selectedFormat);
-
+  const { ring, ringBearer, sites } = useDeckBuilderStore();
+  console.log('ring', ring, sites);
   const handleChange = (
     _: React.SyntheticEvent | null,
     newValue: string | number | null
@@ -50,8 +53,8 @@ export default function DeckSections(props: DeckbuilderProps) {
         </TabList>
         <TabPanel value={0}>
           <RingBearerDeckSection
-            ring={deck.ringId ?? ''}
-            ringBearer={deck.ringbearerId ?? ''}
+            ring={ring}
+            ringBearer={ringBearer}
             updateFilter={filterRequest}
           />
         </TabPanel>
@@ -60,7 +63,7 @@ export default function DeckSections(props: DeckbuilderProps) {
             updateFilteredSites={(siteFilter) =>
               filterRequest('site', siteFilter)
             }
-            selectedSites={deck.locations}
+            selectedSites={sites}
           />
         </TabPanel>
         <TabPanel value={2}>Freeps</TabPanel>

@@ -1,5 +1,5 @@
 import Drawer from '@mui/material/Drawer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Grid } from '@mui/joy';
 import { CollectionFiltersViewModel } from '../../lotr-common/api/collection-api/collection-api-parameters.interface';
 import LotrCardDetails from '../../lotr-common/components/LotrCardDetails/LotrCardDetails';
@@ -18,6 +18,12 @@ import { useCardDetailStore } from '../../lotr-common/components/LotrCardDetails
 import { NonInteractiveLotrCard } from '../../lotr-common/components/LotrCard/LotrCard';
 import DeckSections from './modules/DeckSections/DeckSections';
 import DeckBuilderMenu from './components/DeckBuilderMenu';
+import { CardId } from '../../lotr-common/types/lotr-card/card-blueprint.interface';
+import { useCardBlueprintStore } from '../../lotr-common/state/card-state';
+import { executeGetCollectionByFilterRequest } from '../../lotr-common/api/collection-api/collection-api.configuration';
+import { useDeckBuilderStore } from './state/deckbuilder-state';
+import { getCurrentDeck } from './state/deckbuilder-state.selectors';
+import { CardDetailsHover } from '../../lotr-common/components/CardDetailsHover/CardDetailsHover';
 
 // Note to self: this is hot ass garbage, i'm too lazy to figure how I'd rather do this.
 const locationNotBeingUsed = 'no-active-location';
@@ -25,16 +31,18 @@ const locationNotBeingUsed = 'no-active-location';
 type SiteSelectionOptions = LotrLocationNames | 'no-active-location';
 
 export default function DeckBuilderContainer() {
-  const { updateFilter, filters, results } = useCardQueryStore();
+  const { updateFilter, filters, results, setResults } = useCardQueryStore();
+  const { cardBlueprints, addCardBlueprints } = useCardBlueprintStore();
 
   const [isOpen, setIsOpen] = useState(false);
   const [currentLocation, setCurrentLocation] =
     useState<SiteSelectionOptions>(locationNotBeingUsed);
-  const [currentDeck, setCurrentDeck] = useState<Deck>(createDefaultDeck());
+  const { addCardToDeck } = useDeckBuilderStore();
+  const deck = useDeckBuilderStore(getCurrentDeck);
   const [cardModalState, setCardModalState] = useState<{
     isOpen: boolean;
-    cardId: string;
-    availableCards: Array<string>;
+    cardId: CardId;
+    availableCards: Array<CardId>;
   }>({ isOpen: false, cardId: '', availableCards: [] });
 
   const { iniatlizeModal, hoverImage } = useCardDetailStore();
@@ -42,6 +50,14 @@ export default function DeckBuilderContainer() {
   const closeModal = (): void => {
     setCardModalState({ isOpen: false, cardId: '', availableCards: [] });
   };
+
+  useEffect(() => {
+    (async () => {
+      const apiResults = await executeGetCollectionByFilterRequest(filters);
+      setResults(apiResults);
+      addCardBlueprints(apiResults);
+    })();
+  }, [filters, setResults, addCardBlueprints]);
 
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -90,26 +106,18 @@ export default function DeckBuilderContainer() {
     }
   };
 
-  // TODO: this should all be moved to a reducer. It's time....
-  const handleAddCardToDeck = (blueprintId: string): void => {
-    if (filters.activeDeckSection === 'ring') {
-      setCurrentDeck({ ...currentDeck, ringId: blueprintId });
+  const handleAddCardToDeck = (cardId: CardId): void => {
+    const card = cardBlueprints.get(cardId);
+    if (!card) {
+      return;
     }
-    if (filters.activeDeckSection === 'ring-bearer') {
-      setCurrentDeck({ ...currentDeck, ringbearerId: blueprintId });
-    }
-    if (filters.activeDeckSection === 'location') {
-      setCurrentDeck({
-        ...currentDeck,
-        locations: { ...currentDeck.locations, [currentLocation]: blueprintId },
-      });
-    }
+    addCardToDeck(card);
   };
 
-  const openCardDetails = (blueprintId: string): void => {
-    const availableCards = results.map((card) => card.blueprintId);
-    iniatlizeModal(blueprintId, availableCards);
-    setCardModalState({ isOpen: true, cardId: blueprintId, availableCards });
+  const openCardDetails = (cardId: CardId): void => {
+    const availableCards = results.map((card) => card.cardBlueprintId);
+    iniatlizeModal(cardId, availableCards);
+    setCardModalState({ isOpen: true, cardId, availableCards });
   };
 
   return (
@@ -123,7 +131,7 @@ export default function DeckBuilderContainer() {
         <Grid display="flex" flexDirection="row" sx={{ height: '100%' }}>
           <Grid sx={{ minWidth: '40%;', height: '100%' }}>
             <DeckSections
-              currentDeck={currentDeck}
+              deck={deck}
               filterRequest={handleDeckbuilderFilterUpdate}
               selectedFormat={filters.format}
             />
@@ -154,22 +162,7 @@ export default function DeckBuilderContainer() {
         </Grid>
       </Grid>
       <LotrCardDetails isOpen={cardModalState.isOpen} onClose={closeModal} />
-      {hoverImage && (
-        <Box
-          sx={{
-            position: 'absolute',
-            left: '25px',
-            bottom: '40px',
-            height: '400px',
-          }}
-        >
-          <NonInteractiveLotrCard
-            blueprintId={hoverImage}
-            height={400}
-            allowHover={false}
-          />
-        </Box>
-      )}
+      {hoverImage && <CardDetailsHover cardId={hoverImage} />}
     </>
   );
 }

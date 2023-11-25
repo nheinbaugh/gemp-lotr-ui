@@ -1,9 +1,10 @@
 import { Box } from '@mui/joy';
 import LotrCard from '../../../lotr-common/components/LotrCard/LotrCard';
 import { determineCardDimensions } from '../Card/types/card-dimension.functions';
+import { CardBlueprint } from '../../../lotr-common/types/lotr-card/card-blueprint.interface';
 
 type CardPlaceholderProps = {
-  blueprintId?: string;
+  card?: CardBlueprint;
   placeholder: string;
   vertical?: boolean;
   height?: number;
@@ -21,7 +22,7 @@ export default function PlaceholderCard({
   vertical = true,
   height = 220,
   onSelect,
-  blueprintId,
+  card,
 }: CardPlaceholderProps) {
   let dimensions = determineCardDimensions(!vertical, height, undefined);
   if (vertical) {
@@ -35,7 +36,7 @@ export default function PlaceholderCard({
       height: Math.min(dimensions.height, dimensions.width),
     };
   }
-  if (!blueprintId) {
+  if (!card) {
     return (
       <Box
         onClick={onSelect}
@@ -57,7 +58,7 @@ export default function PlaceholderCard({
   }
   return (
     <LotrCard
-      blueprintId={blueprintId}
+      card={card}
       width={dimensions.width}
       height={dimensions.height}
       allowHover

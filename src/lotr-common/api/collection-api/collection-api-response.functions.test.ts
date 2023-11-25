@@ -4,7 +4,6 @@ import {
   convertCollectionCardXmlToViewModel,
   convertGetCollectionFromXml,
 } from './collection-api-response.functions';
-import { sideMappings } from '../../types/filter-types/side.type';
 
 const mockResponse = `
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -42,15 +41,15 @@ describe('collection-api-response.functions', () => {
       const shadowActual = convertCollectionCardXmlToViewModel(data);
       const freepActual = convertCollectionCardXmlToViewModel(freepData);
 
-      expect(shadowActual.side).toBe(sideMappings.Shadow.apiName);
-      expect(freepActual.side).toBe(sideMappings.FreePeople.apiName);
+      expect(shadowActual.group).toBe('shadow');
+      expect(freepActual.group).toBe('fp');
     });
 
     it('should properly parse the blueprintId', () => {
       const actual = convertCollectionCardXmlToViewModel(freepData);
       const expected = '12_3';
 
-      expect(actual.blueprintId).toBe(expected);
+      expect(actual.cardNumber).toBe(expected);
     });
 
     it('should properly parse the count', () => {

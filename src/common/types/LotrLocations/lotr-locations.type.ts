@@ -1,3 +1,5 @@
+import { CardBlueprint } from '../../../lotr-common/types/lotr-card/card-blueprint.interface';
+
 export enum LotrLocationNames {
   SiteOne = 1,
   SiteTwo = 2,
@@ -10,4 +12,7 @@ export enum LotrLocationNames {
   SiteNine = 9,
 }
 
-export type LotrLocations = Record<LotrLocationNames, string>;
+export type LotrLocations = Record<
+  LotrLocationNames,
+  CardBlueprint | undefined
+>;

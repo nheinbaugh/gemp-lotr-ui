@@ -1,72 +1,47 @@
 import GempCard from '../../../common/components/Card/Card';
 import { notFoundImageUrl } from '../../types/image-resolver/types/card-image.constants';
-import { getBlueprintByCardId } from '../../types/lotr-card/lotr-card-formatting.functions';
+import { CardBlueprint } from '../../types/lotr-card/card-blueprint.interface';
 
 type LotrCardProps = {
-  blueprintId: string;
+  card: CardBlueprint;
   height?: number;
   width?: number;
-  onPrimaryAction: VoidFunction;
-  onSecondaryAction: VoidFunction;
-  isHorizontal?: boolean;
+  onPrimaryAction: () => void;
+  onSecondaryAction: () => void;
+  isHorizontal: boolean;
   allowHover: boolean;
 };
 
-export default function LotrCard({
-  blueprintId,
-  height,
-  width,
-  onPrimaryAction,
-  onSecondaryAction,
-  isHorizontal = false,
-  allowHover = false,
-}: LotrCardProps) {
-  const blueprint = getBlueprintByCardId(blueprintId);
+export default function LotrCard(props: LotrCardProps) {
+  const { card } = props;
 
-  if (!blueprint) {
+  if (!card) {
     return (
       <GempCard
-        cardId={blueprintId}
-        onPrimaryAction={onPrimaryAction}
-        onSecondaryAction={onSecondaryAction}
-        isHorizontal={isHorizontal}
-        imageHref={notFoundImageUrl}
         fallbackImage={notFoundImageUrl}
-        allowHover={allowHover}
         title="Unknown Card"
+        {...props}
       />
     );
   }
 
-  return (
-    <GempCard
-      cardId={blueprintId}
-      height={height}
-      width={width}
-      isHorizontal={isHorizontal}
-      imageHref={blueprint.imageUrl}
-      fallbackImage={notFoundImageUrl}
-      title=""
-      onPrimaryAction={onPrimaryAction}
-      onSecondaryAction={onSecondaryAction}
-      allowHover={allowHover}
-    />
-  );
+  return <GempCard fallbackImage={notFoundImageUrl} title="" {...props} />;
 }
 
-export function NonInteractiveLotrCard({
-  blueprintId,
-  height,
-  width,
-}: Partial<LotrCardProps>) {
+type NonInteractiveLotrCardProps = {
+  isHorizontal: boolean;
+  card: CardBlueprint;
+  height?: number;
+  width?: number;
+};
+
+export function NonInteractiveLotrCard(props: NonInteractiveLotrCardProps) {
   return (
     <LotrCard
-      blueprintId={blueprintId ?? ''}
-      height={height}
-      width={width}
       onPrimaryAction={() => {}}
       onSecondaryAction={() => {}}
       allowHover={false}
+      {...props}
     />
   );
 }

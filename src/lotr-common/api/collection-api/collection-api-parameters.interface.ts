@@ -31,9 +31,6 @@ export interface CollectionFiltersViewModel {
 
   // This is commented out until we support grabbing packs, foils, AIs etc
   // type?: Mappings;
-
-  // garbage be here
-  activeDeckSection: string;
 }
 
 /**

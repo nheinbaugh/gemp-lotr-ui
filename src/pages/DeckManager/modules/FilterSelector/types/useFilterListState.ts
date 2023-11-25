@@ -12,12 +12,7 @@ import { commonFormatsMetadata } from '../../../../../lotr-common/types/expansio
 type FilterListState = Required<
   Pick<
     CollectionFiltersViewModel,
-    | 'activeDeckSection'
-    | 'cardName'
-    | 'cardTypes'
-    | 'format'
-    | 'keywords'
-    | 'rarity'
+    'cardName' | 'cardTypes' | 'format' | 'keywords' | 'rarity'
   > & {
     freeCultures: string[];
     twilightCultures: string[];
@@ -40,7 +35,6 @@ const createDefaultFilterListState = (
   input?: CollectionFiltersViewModel
 ): FilterListState => {
   return {
-    activeDeckSection: input?.activeDeckSection ?? '',
     cardName: input?.cardName ?? '',
     cardTypes: input?.cardTypes ?? lotrCardTypeFilterMappings.All,
     format: input?.format ?? commonFormatsMetadata.All,
