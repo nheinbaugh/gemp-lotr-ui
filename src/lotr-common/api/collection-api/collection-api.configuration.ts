@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import {
   CollectionApiParameters,
   CollectionFiltersViewModel,
+  PageInformation,
 } from './collection-api-parameters.interface';
 import {
   convertViewModelToDao,
@@ -75,14 +76,14 @@ export const collectionApiConfiguration = (
 };
 
 export const executeGetCollectionByFilterRequest = async (
-  filters: CollectionFiltersViewModel
+  filters: CollectionFiltersViewModel,
+  pageInformation: PageInformation
 ): Promise<CollectionCardViewModel[]> => {
   const dao = getDefaultCollectionApiParameters(
     convertViewModelToDao(filters),
     {
-      start: 0,
-      count: 18,
-    } // currentPage
+      ...pageInformation,
+    }
   );
   const filterApiConfiguration = collectionApiConfiguration(dao);
   const result = await axios.get(

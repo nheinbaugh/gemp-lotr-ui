@@ -31,7 +31,7 @@ const locationNotBeingUsed = 'no-active-location';
 type SiteSelectionOptions = LotrLocationNames | 'no-active-location';
 
 export default function DeckBuilderContainer() {
-  const { updateFilter, filters, results, setResults } = useCardQueryStore();
+  const { updateFilter, filters, results, setResults, pageInformation } = useCardQueryStore();
   const { cardBlueprints, addCardBlueprints } = useCardBlueprintStore();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -53,11 +53,11 @@ export default function DeckBuilderContainer() {
 
   useEffect(() => {
     (async () => {
-      const apiResults = await executeGetCollectionByFilterRequest(filters);
+      const apiResults = await executeGetCollectionByFilterRequest(filters, pageInformation);
       setResults(apiResults);
       addCardBlueprints(apiResults);
     })();
-  }, [filters, setResults, addCardBlueprints]);
+  }, [filters, setResults, addCardBlueprints, pageInformation]);
 
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
