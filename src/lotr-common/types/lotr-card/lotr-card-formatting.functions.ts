@@ -39,7 +39,7 @@ export const formatSetNumber = (setNumber: number): string => {
 export const getBlueprintByCardId = (
   cardId: CardId,
   group: LotrCollectionCardGroups,
-  siteNumber?: string
+  isHorizontal = false
 ): CardBlueprint => {
   const id = cardId.toString();
   try {
@@ -63,11 +63,10 @@ export const getBlueprintByCardId = (
       formattedSetNumber: formatSetNumber(setNumber),
       imageUrl: getImageUrl(id),
     };
-    if (siteNumber) {
+    if (isHorizontal) {
       return {
         ...cardBlueprint,
         isHorizontal: true,
-        siteNumber,
       } as CardBlueprint;
     }
     return cardBlueprint;

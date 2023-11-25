@@ -11,6 +11,16 @@ import {
   CollectionCardViewModel,
   convertGetCollectionFromXml,
 } from './collection-api-response.functions';
+import { lotrCardTypeFilterMappings } from '../../types/filter-types/card-types';
+
+const doesRequestResultInHorizontalCards = (
+  filters: CollectionFiltersViewModel
+): boolean => {
+  return Boolean(
+    filters.cardTypes?.apiName === lotrCardTypeFilterMappings.Sites.apiName ||
+      filters.siteNumber
+  );
+};
 
 const createFilter = (params: CollectionApiParameters): string => {
   let encodedFilter = '';
@@ -79,5 +89,8 @@ export const executeGetCollectionByFilterRequest = async (
     filterApiConfiguration[0],
     filterApiConfiguration[1]
   );
-  return convertGetCollectionFromXml(result.data, filters.siteNumber).cards;
+  return convertGetCollectionFromXml(
+    result.data,
+    doesRequestResultInHorizontalCards(filters)
+  ).cards;
 };

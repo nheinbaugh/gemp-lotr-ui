@@ -8,6 +8,7 @@ import {
 import { createDefaultCollectionViewModel } from '../api/collection-api/collection-filter-view-model.functions';
 import { CollectionCardViewModel } from '../api/collection-api/collection-api-response.functions';
 import { createDefaultPageInformation } from '../api/collection-api/collection-api-parameters.functions';
+import { lotrCardTypeFilterMappings } from '../types/filter-types/card-types';
 
 interface CardQueryState {
   filters: CollectionFiltersViewModel;
@@ -23,19 +24,21 @@ interface CardQueryActions {
 
 type CardQueryStore = CardQueryState & CardQueryActions;
 
-const doUpdateFilter = async (
-  filters: CollectionFiltersViewModel,
-  previousState: CardQueryState,
-  set: (updatedState: Partial<CardQueryState>) => void
-): Promise<void> => {
-  const updatedFilters = {
+const doUpdateFilter = (
+  newFilters: CollectionFiltersViewModel,
+  previousState: CardQueryState
+): CollectionFiltersViewModel => {
+  const filters: CollectionFiltersViewModel = {
     ...previousState.filters,
-    ...filters,
+    ...newFilters,
   };
-  if (!updatedFilters.format) {
-    updatedFilters.format = previousState.filters.format;
+  if (filters.cardTypes?.apiName !== lotrCardTypeFilterMappings.Sites.apiName) {
+    filters.siteNumber = undefined;
   }
-  set({ filters });
+  if (!filters.format) {
+    filters.format = previousState.filters.format;
+  }
+  return filters;
 };
 
 export const useCardQueryStore = create(
@@ -56,8 +59,11 @@ export const useCardQueryStore = create(
             },
           };
         }),
-      updateFilter: async (filters: CollectionFiltersViewModel) =>
-        set(async (prevState) => doUpdateFilter(filters, prevState, set)),
+      updateFilter: (filters: CollectionFiltersViewModel) =>
+        set((prevState) => ({
+          ...prevState,
+          filters: doUpdateFilter(filters, prevState),
+        })),
     }))
   )
 );

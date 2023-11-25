@@ -15,13 +15,13 @@ export interface CollectionApiResponse {
 
 export const convertCollectionCardXmlToViewModel = (
   input: Element,
-  siteNumber?: string
+  areResultsHorizontal = false
 ): CollectionCardViewModel => {
   return {
     ...getBlueprintByCardId(
       input.attribs.blueprintId,
       input.attribs.group as LotrCollectionCardGroups,
-      siteNumber
+      areResultsHorizontal
     ),
     count: Number(input.attribs.count),
   };
@@ -29,11 +29,11 @@ export const convertCollectionCardXmlToViewModel = (
 
 export const convertCardsToViewModel = (
   cardElements: Cheerio<Element>,
-  siteNumber?: string
+  areResultsHorizontal = false
 ): CollectionCardViewModel[] => {
   const cards: CollectionCardViewModel[] = [];
   cardElements.each((_, card) => {
-    cards.push(convertCollectionCardXmlToViewModel(card, siteNumber));
+    cards.push(convertCollectionCardXmlToViewModel(card, areResultsHorizontal));
   });
 
   return cards;
@@ -41,7 +41,7 @@ export const convertCardsToViewModel = (
 
 export const convertGetCollectionFromXml = (
   xml: string,
-  siteNumber?: string
+  areResultsHorizontal = false
 ): CollectionApiResponse => {
   const data = load(xml, {
     xmlMode: true,
@@ -49,6 +49,6 @@ export const convertGetCollectionFromXml = (
   const cardsElements = data('collection').children('card');
   return {
     count: Number(data('collection').attr('count')),
-    cards: convertCardsToViewModel(cardsElements, siteNumber),
+    cards: convertCardsToViewModel(cardsElements, areResultsHorizontal),
   };
 };
