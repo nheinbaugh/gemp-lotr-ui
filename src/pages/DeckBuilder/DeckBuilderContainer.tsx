@@ -15,7 +15,6 @@ import FilterToggle from '../DeckManager/components/FilterToggle/FilterToggle';
 import CardBank from '../DeckManager/modules/CardBank/CardBank';
 import FiltersList from '../DeckManager/modules/FilterSelector/FilterList';
 import { useCardDetailStore } from '../../lotr-common/components/LotrCardDetails/card-details.state';
-import { NonInteractiveLotrCard } from '../../lotr-common/components/LotrCard/LotrCard';
 import DeckSections from './modules/DeckSections/DeckSections';
 import DeckBuilderMenu from './components/DeckBuilderMenu';
 import { CardId } from '../../lotr-common/types/lotr-card/card-blueprint.interface';
@@ -31,7 +30,8 @@ const locationNotBeingUsed = 'no-active-location';
 type SiteSelectionOptions = LotrLocationNames | 'no-active-location';
 
 export default function DeckBuilderContainer() {
-  const { updateFilter, filters, results, setResults, pageInformation } = useCardQueryStore();
+  const { updateFilter, filters, results, setResults, pageInformation } =
+    useCardQueryStore();
   const { cardBlueprints, addCardBlueprints } = useCardBlueprintStore();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -53,7 +53,10 @@ export default function DeckBuilderContainer() {
 
   useEffect(() => {
     (async () => {
-      const apiResults = await executeGetCollectionByFilterRequest(filters, pageInformation);
+      const apiResults = await executeGetCollectionByFilterRequest(
+        filters,
+        pageInformation
+      );
       setResults(apiResults);
       addCardBlueprints(apiResults);
     })();
