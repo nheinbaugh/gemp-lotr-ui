@@ -1,6 +1,6 @@
 import { Box } from '@mui/joy';
 import { CardId } from '../../types/lotr-card/card-blueprint.interface';
-import { NonInteractiveLotrCard } from '../LotrCard/LotrCard';
+import { NonInteractiveLotrCard } from '../LotrCard/NonInteractiveLotrCard';
 import { useCardBlueprintStore } from '../../state/card-state';
 
 type CardDetailsHoverProps = {

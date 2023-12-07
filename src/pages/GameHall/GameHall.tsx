@@ -1,6 +1,6 @@
 import { Box, Button, Grid } from '@mui/joy';
 import { Link, useLoaderData } from 'react-router-dom';
-import { NonInteractiveLotrCard } from '../../lotr-common/components/LotrCard/LotrCard';
+import { NonInteractiveLotrCard } from '../../lotr-common/components/LotrCard/NonInteractiveLotrCard';
 import { useWindowDimensions } from '../../common/hooks/useWindowDimensions';
 import { LoaderData } from '../../common/types/react-router/loader-data.type';
 import { gameHallLoader } from './types';

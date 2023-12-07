@@ -1,5 +1,5 @@
 import { Button, Modal, ModalClose, Sheet, Typography } from '@mui/joy';
-import { NonInteractiveLotrCard } from '../LotrCard/LotrCard';
+import { NonInteractiveLotrCard } from '../LotrCard/NonInteractiveLotrCard';
 import { useWindowDimensions } from '../../../common/hooks/useWindowDimensions';
 import { useCardDetailStore } from './card-details.state';
 import { useCardBlueprintStore } from '../../state/card-state';
