@@ -4,8 +4,9 @@ import { Deck } from '../../../../common/types/deck/Deck';
 import LocationDeckSection from './components/LocationDeckSection/LocationDeckSection';
 import RingBearerDeckSection from './components/RingBearerDeckSection';
 import TabWithStatus from './components/TabWithStatus';
-import useLotrDeckValidity from '../../../../lotr-common/types/deck-validity/useLotrDeckValidity';
-import { DeckValidityStatus } from '../../../../common/types/deck/deck-validity-status.type';
+import useLotrDeckValidity, {
+  LotrDeckValidity,
+} from '../../../../lotr-common/types/deck-validity/useLotrDeckValidity';
 import { LotrFormatMetadata } from '../../../../lotr-common/types/expansions/lotr-expansion-metadata.interface';
 import { useDeckBuilderStore } from '../../state/deckbuilder-state';
 import { PlayerSideDeckSection } from './components/PlayerSideDeckSection';
@@ -15,6 +16,25 @@ type DeckbuilderProps = {
   selectedFormat: LotrFormatMetadata;
   filterRequest: (filterName: string, additionalFilter?: string) => void;
 };
+
+const getTabNames = (isValid: LotrDeckValidity) => [
+  {
+    tabName: 'Ring and Ring-Bearer',
+    status: isValid.deckValidity.ringbearer.status,
+  },
+  {
+    tabName: 'Sites',
+    status: isValid.deckValidity.sitePath.status,
+  },
+  {
+    tabName: 'Free People',
+    status: isValid.deckValidity.freePeoples.status,
+  },
+  {
+    tabName: 'Shadow',
+    status: isValid.deckValidity.twilight.status,
+  },
+];
 
 export default function DeckSections(props: DeckbuilderProps) {
   const { deck } = props;
@@ -44,16 +64,13 @@ export default function DeckSections(props: DeckbuilderProps) {
         sx={{ height: '100%' }}
       >
         <TabList>
-          <TabWithStatus
-            tabName="Ring and Ring-Bearer"
-            status={isValid.deckValidity.ringbearer.status}
-          />
-          <TabWithStatus tabName="Site Path" status={DeckValidityStatus.Ok} />
-          <TabWithStatus
-            tabName="Free Peoples"
-            status={DeckValidityStatus.Ok}
-          />
-          <TabWithStatus tabName="Twilight" status={DeckValidityStatus.Ok} />
+          {getTabNames(isValid).map((tab) => (
+            <TabWithStatus
+              key={tab.tabName}
+              tabName={tab.tabName}
+              status={tab.status}
+            />
+          ))}
         </TabList>
         <TabPanel value={0}>
           <RingBearerDeckSection

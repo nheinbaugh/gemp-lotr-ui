@@ -6,17 +6,17 @@ export const NO_RING_MESSAGE = 'The One Ring is required.';
 export const NO_RING_OR_RINGBEARER_MESSAGE =
   'The One Ring and a Ring-bearer are required.';
 
-export const isRingbearerSectionValid: DeckValidityFunction = (deck) => {
-  if (!deck.ringbearerId && !deck.ringId) {
+export const ringbearerValidation: DeckValidityFunction = (deck) => {
+  if (!deck.ringBearer?.cardBlueprintId && !deck.ring?.cardBlueprintId) {
     return {
       status: DeckValidityStatus.NotStarted,
       message: NO_RING_OR_RINGBEARER_MESSAGE,
     };
   }
-  if (!deck.ringId) {
+  if (!deck.ring?.cardBlueprintId) {
     return { status: DeckValidityStatus.Error, message: NO_RING_MESSAGE };
   }
-  if (!deck.ringbearerId) {
+  if (!deck.ringBearer?.cardBlueprintId) {
     return { status: DeckValidityStatus.Error, message: NO_RINGBEARER_MESSAGE };
   }
   return { status: DeckValidityStatus.Ok, message: '' };

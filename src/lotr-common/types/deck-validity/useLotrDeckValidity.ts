@@ -1,21 +1,62 @@
 import { Deck } from '../../../common/types/deck/Deck';
 import { LotrFormatMetadata } from '../expansions/lotr-expansion-metadata.interface';
-import { isRingbearerSectionValid } from './ringbearer-section-validity.funciton';
+import {
+  DeckValidationResult,
+  DeckValidityFunction,
+} from './deck-validity-function.type';
+import { freePeopleValidator } from './free-peoples-section-validation.function';
+import { ringbearerValidation } from './ringbearer-section-validation.function';
+import { sitePathValidator } from './site-path-validation.function';
+import { twilightSectionValidator } from './twilight-section-validation.function';
 import { useIsDeckSectionValid } from './useIsDeckSectionValid';
+
+export type LotrDeckValidity = {
+  isDeckValid: boolean;
+  deckValidity: {
+    ringbearer: DeckValidationResult;
+    freePeoples: DeckValidationResult;
+    sitePath: DeckValidationResult;
+    twilight: DeckValidationResult;
+    errors: string[];
+    warnings: string[];
+  };
+};
 
 export default function useLotrDeckValidity(
   deck: Deck,
   format: LotrFormatMetadata
-) {
-  const ringbearerValidity = useIsDeckSectionValid(
+): LotrDeckValidity {
+  const isRingbearerSectionValid = useIsDeckSectionValid(
     deck,
     format,
-    isRingbearerSectionValid
+    ringbearerValidation
   );
+
+  const isFreePeopleSectionValid = useIsDeckSectionValid(
+    deck,
+    format,
+    freePeopleValidator
+  );
+
+  const isTwilightSectionValid = useIsDeckSectionValid(
+    deck,
+    format,
+    twilightSectionValidator
+  );
+
+  const isSitePathValid = useIsDeckSectionValid(
+    deck,
+    format,
+    sitePathValidator
+  );
+
   return {
     isDeckValid: false,
     deckValidity: {
-      ringbearer: ringbearerValidity,
+      ringbearer: isRingbearerSectionValid,
+      freePeoples: isFreePeopleSectionValid,
+      sitePath: isSitePathValid,
+      twilight: isTwilightSectionValid,
       errors: [],
       warnings: [],
     },

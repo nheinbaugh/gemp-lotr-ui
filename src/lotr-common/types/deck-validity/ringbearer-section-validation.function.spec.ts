@@ -3,8 +3,8 @@ import {
   NO_RINGBEARER_MESSAGE,
   NO_RING_MESSAGE,
   NO_RING_OR_RINGBEARER_MESSAGE,
-  isRingbearerSectionValid,
-} from './ringbearer-section-validity.funciton';
+  ringbearerValidation,
+} from './ringbearer-section-validation.function';
 import { Deck } from '../../../common/types/deck/Deck';
 import { DeckValidityStatus } from '../../../common/types/deck/deck-validity-status.type';
 import { LotrFormatMetadata } from '../expansions/lotr-expansion-metadata.interface';
@@ -16,7 +16,7 @@ describe('ringbearer-section-validity.function', () => {
       ringbearerId: '1',
       ringId: '2',
     } as Deck;
-    const result = isRingbearerSectionValid(deck, format);
+    const result = ringbearerValidation(deck, format);
 
     expect(result.status).toBe(DeckValidityStatus.Ok);
   });
@@ -26,7 +26,7 @@ describe('ringbearer-section-validity.function', () => {
       ringbearerId: '1',
       ringId: '',
     } as Deck;
-    const result = isRingbearerSectionValid(deck, format);
+    const result = ringbearerValidation(deck, format);
 
     expect(result.status).toBe(DeckValidityStatus.Error);
     expect(result.message).toBe(NO_RING_MESSAGE);
@@ -37,7 +37,7 @@ describe('ringbearer-section-validity.function', () => {
       ringId: '1_231',
       ringbearerId: '',
     } as Deck;
-    const result = isRingbearerSectionValid(deck, format);
+    const result = ringbearerValidation(deck, format);
 
     expect(result.status).toBe(DeckValidityStatus.Error);
     expect(result.message).toBe(NO_RINGBEARER_MESSAGE);
@@ -48,7 +48,7 @@ describe('ringbearer-section-validity.function', () => {
       ringId: '',
       ringbearerId: '',
     } as Deck;
-    const result = isRingbearerSectionValid(deck, format);
+    const result = ringbearerValidation(deck, format);
 
     expect(result.status).toBe(DeckValidityStatus.NotStarted);
     expect(result.message).toBe(NO_RING_OR_RINGBEARER_MESSAGE);
