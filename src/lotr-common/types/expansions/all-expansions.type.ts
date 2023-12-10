@@ -1,3 +1,4 @@
+import { Mappings } from '../../../common/types/mappings.interface';
 import {
   decipherSetExpansionMetadata,
   DecipherSets,
@@ -8,7 +9,6 @@ import {
   otherFormatMetadata,
   OtherFormats,
 } from './formats.type';
-import { LotrFormatMetadata } from './lotr-expansion-metadata.interface';
 import {
   PlayersCommitteeErrata,
   playersCommitteeErrataMetadata,
@@ -30,16 +30,15 @@ export type LotrExpansions =
 
 export type LotrFormats = CommonFormats | OtherFormats;
 
-export const allPlayableFormatsMetadata: Record<
-  LotrFormats,
-  LotrFormatMetadata
-> = { ...commonFormatsMetadata, ...otherFormatMetadata };
+export const allPlayableFormatsMetadata: Record<LotrFormats, Mappings> = {
+  ...commonFormatsMetadata,
+  ...otherFormatMetadata,
+};
 
-export const allExpansionsMetadata: Record<LotrExpansions, LotrFormatMetadata> =
-  {
-    ...decipherSetExpansionMetadata,
-    ...otherFormatMetadata,
-    ...playersCommitteeErrataMetadata,
-    ...playtestSetExpansionMetadata,
-    ...playersCommitteeExpansionMetadata,
-  };
+export const allExpansionsMetadata: Record<LotrExpansions, Mappings> = {
+  ...decipherSetExpansionMetadata,
+  ...otherFormatMetadata,
+  ...playersCommitteeErrataMetadata,
+  ...playtestSetExpansionMetadata,
+  ...playersCommitteeExpansionMetadata,
+};

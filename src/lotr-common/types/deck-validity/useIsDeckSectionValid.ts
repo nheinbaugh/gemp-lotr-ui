@@ -5,7 +5,7 @@ import {
   DeckValidationResult,
   DeckValidityFunction,
 } from './deck-validity-function.type';
-import { LotrFormatMetadata } from '../expansions/lotr-expansion-metadata.interface';
+import { Mappings } from '../../../common/types/mappings.interface';
 
 const defaultValidityState: DeckValidationResult = {
   status: DeckValidityStatus.NotStarted,
@@ -14,7 +14,7 @@ const defaultValidityState: DeckValidationResult = {
 
 export const useIsDeckSectionValid = (
   deck: Deck,
-  format: LotrFormatMetadata,
+  format: Mappings,
   validator: DeckValidityFunction
 ) => {
   const [isValid, setIsValid] = useState(defaultValidityState);

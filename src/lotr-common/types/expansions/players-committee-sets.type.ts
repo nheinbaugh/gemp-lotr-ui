@@ -1,4 +1,4 @@
-import { LotrFormatMetadata } from './lotr-expansion-metadata.interface';
+import { Mappings } from '../../../common/types/mappings.interface';
 
 export type PlayersCommitteeSets =
   | 'HobbitMain'
@@ -9,7 +9,7 @@ export type PlayersCommitteeSets =
 
 export const playersCommitteeExpansionMetadata: Record<
   PlayersCommitteeSets,
-  LotrFormatMetadata
+  Mappings
 > = {
   HobbitMain: { apiName: '30', displayName: '30 - The Hobbit: Main Deck' },
   HobbitExpansionOne: {

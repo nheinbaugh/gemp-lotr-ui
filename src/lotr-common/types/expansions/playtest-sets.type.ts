@@ -1,4 +1,4 @@
-import { LotrFormatMetadata } from './lotr-expansion-metadata.interface';
+import { Mappings } from '../../../common/types/mappings.interface';
 
 export type PlaytestSets =
   | 'AllPlaytest'
@@ -6,10 +6,7 @@ export type PlaytestSets =
   | 'FellowshipPlaytest'
   | 'MovieBlockPlaytest';
 
-export const playtestSetExpansionMetadata: Record<
-  PlaytestSets,
-  LotrFormatMetadata
-> = {
+export const playtestSetExpansionMetadata: Record<PlaytestSets, Mappings> = {
   AllPlaytest: {
     displayName: "All Player's Council Playtest Cards",
     apiName: '70-89,100,150-200',

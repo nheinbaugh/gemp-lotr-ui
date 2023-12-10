@@ -1,4 +1,3 @@
-import { LotrLocationNames } from '../../../common/types/LotrLocations/lotr-locations.type';
 import { LotrCollectionCardGroups } from '../card/lotr-card-collection-groups.type';
 import { DecipherSets, PlayersCommitteeSets } from '../expansions';
 
@@ -18,8 +17,4 @@ export interface CardBlueprint {
   formattedCardNumber: string;
   formattedSetNumber: string;
   group: LotrCollectionCardGroups;
-}
-
-export interface LotrSiteCardBlueprint extends CardBlueprint {
-  siteNumber: LotrLocationNames;
 }

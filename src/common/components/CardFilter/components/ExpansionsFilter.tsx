@@ -20,7 +20,7 @@ import {
   allExpansionsMetadata,
 } from '../../../../lotr-common/types/expansions';
 import { CardFilterDropdownProps } from './CardFilter-props.interface';
-import { LotrFormatMetadata } from '../../../../lotr-common/types/expansions/lotr-expansion-metadata.interface';
+import { Mappings } from '../../../types/mappings.interface';
 
 const sections = {
   'Common Formats': commonFormatsMetadata,
@@ -34,7 +34,7 @@ const allOptions = Object.values(allExpansionsMetadata);
 function ExpansionsFilter({
   selectedValue,
   filterChanged,
-}: CardFilterDropdownProps<LotrFormatMetadata>) {
+}: CardFilterDropdownProps<Mappings>) {
   const handleOnChange = (newValue: string): void => {
     filterChanged(allOptions.find((option) => option.displayName === newValue));
   };

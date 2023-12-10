@@ -1,4 +1,4 @@
-import { LotrFormatMetadata } from './lotr-expansion-metadata.interface';
+import { Mappings } from '../../../common/types/mappings.interface';
 
 export type OtherFormats =
   | 'EnhancedTowersStandard'
@@ -29,20 +29,19 @@ export type CommonFormats =
   | 'AllPcErrata'
   | 'AllPcVSets';
 
-export const commonFormatsMetadata: Record<CommonFormats, LotrFormatMetadata> =
-  {
-    All: { displayName: 'All Sets', apiName: '0-34,50-200' },
-    AllPc: {
-      displayName: "All Player's Council Cards",
-      apiName: '50-69,100-149',
-    },
-    DeciperSets: { displayName: 'Official Decipher Sets', apiName: '0-19' },
-    HobbitSets: { displayName: 'The Hobbit Sets', apiName: '30-33' },
-    AllPcErrata: { displayName: "All Player's Errata", apiName: '50-69,100' },
-    AllPcVSets: { displayName: "All Player's VSets", apiName: '100-149' },
-  };
+export const commonFormatsMetadata: Record<CommonFormats, Mappings> = {
+  All: { displayName: 'All Sets', apiName: '0-34,50-200' },
+  AllPc: {
+    displayName: "All Player's Council Cards",
+    apiName: '50-69,100-149',
+  },
+  DeciperSets: { displayName: 'Official Decipher Sets', apiName: '0-19' },
+  HobbitSets: { displayName: 'The Hobbit Sets', apiName: '30-33' },
+  AllPcErrata: { displayName: "All Player's Errata", apiName: '50-69,100' },
+  AllPcVSets: { displayName: "All Player's VSets", apiName: '100-149' },
+};
 
-export const otherFormatMetadata: Record<OtherFormats, LotrFormatMetadata> = {
+export const otherFormatMetadata: Record<OtherFormats, Mappings> = {
   EnhancedTowersStandard: {
     displayName: 'Enhanced Towers Standard',
     apiName: 'ts_reflections',

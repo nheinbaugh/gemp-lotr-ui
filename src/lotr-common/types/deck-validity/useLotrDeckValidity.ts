@@ -1,9 +1,6 @@
 import { Deck } from '../../../common/types/deck/Deck';
-import { LotrFormatMetadata } from '../expansions/lotr-expansion-metadata.interface';
-import {
-  DeckValidationResult,
-  DeckValidityFunction,
-} from './deck-validity-function.type';
+import { Mappings } from '../../../common/types/mappings.interface';
+import { DeckValidationResult } from './deck-validity-function.type';
 import { freePeopleValidator } from './free-peoples-section-validation.function';
 import { ringbearerValidation } from './ringbearer-section-validation.function';
 import { sitePathValidator } from './site-path-validation.function';
@@ -24,7 +21,7 @@ export type LotrDeckValidity = {
 
 export default function useLotrDeckValidity(
   deck: Deck,
-  format: LotrFormatMetadata
+  format: Mappings
 ): LotrDeckValidity {
   const isRingbearerSectionValid = useIsDeckSectionValid(
     deck,

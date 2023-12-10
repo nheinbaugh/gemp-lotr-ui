@@ -1,6 +1,5 @@
 import { Mappings } from '../../../common/types/mappings.interface';
 import { LotrExpansions, LotrFormats } from '../expansions';
-import { LotrFormatMetadata } from '../expansions/lotr-expansion-metadata.interface';
 import {
   FreePeopleCultures,
   TwilightCultures,
@@ -12,7 +11,7 @@ interface AvailableCultures {
 }
 
 export const getCulturesBySelectedSet = (
-  setSelection?: LotrFormatMetadata
+  setSelection?: Mappings
 ): AvailableCultures => {
   // TODO: Fill this out with logic for the various formats etc. We might want to have a single way to "get valid options for format" depending on how it goes
   return {

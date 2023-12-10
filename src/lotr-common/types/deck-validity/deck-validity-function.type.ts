@@ -1,6 +1,6 @@
 import { Deck } from '../../../common/types/deck/Deck';
 import { DeckValidityStatus } from '../../../common/types/deck/deck-validity-status.type';
-import { LotrFormatMetadata } from '../expansions/lotr-expansion-metadata.interface';
+import { Mappings } from '../../../common/types/mappings.interface';
 
 export interface DeckValidationResult {
   message: string;
@@ -9,5 +9,5 @@ export interface DeckValidationResult {
 
 export type DeckValidityFunction = (
   deck: Deck,
-  format: LotrFormatMetadata
+  format: Mappings
 ) => DeckValidationResult;

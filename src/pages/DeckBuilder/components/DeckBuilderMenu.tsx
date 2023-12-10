@@ -6,14 +6,13 @@ import {
   allPlayableFormatsMetadata,
   commonFormatsMetadata,
 } from '../../../lotr-common/types/expansions';
-import { LotrFormatMetadata } from '../../../lotr-common/types/expansions/lotr-expansion-metadata.interface';
 import { Mappings } from '../../../common/types/mappings.interface';
 
 export default function DeckBuilderMenu() {
   const { filters, updateFilter } = useCardQueryStore();
 
   const setFormat = (input: Mappings | undefined) => {
-    let format = input as LotrFormatMetadata;
+    let format = input as Mappings;
     if (!input) {
       format = commonFormatsMetadata.All;
     }

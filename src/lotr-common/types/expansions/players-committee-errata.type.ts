@@ -1,4 +1,4 @@
-import { LotrFormatMetadata } from './lotr-expansion-metadata.interface';
+import { Mappings } from '../../../common/types/mappings.interface';
 
 export type PlayersCommitteeErrata =
   | 'AgesEndErrata'
@@ -15,7 +15,7 @@ export type PlayersCommitteeErrata =
 
 export const playersCommitteeErrataMetadata: Record<
   PlayersCommitteeErrata,
-  LotrFormatMetadata
+  Mappings
 > = {
   AgesEndErrata: { displayName: '19E - Ages End (PC Errata)', apiName: '69' },
   BloodlinesErrata: {

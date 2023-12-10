@@ -7,13 +7,13 @@ import TabWithStatus from './components/TabWithStatus';
 import useLotrDeckValidity, {
   LotrDeckValidity,
 } from '../../../../lotr-common/types/deck-validity/useLotrDeckValidity';
-import { LotrFormatMetadata } from '../../../../lotr-common/types/expansions/lotr-expansion-metadata.interface';
 import { useDeckBuilderStore } from '../../state/deckbuilder-state';
 import { PlayerSideDeckSection } from './components/PlayerSideDeckSection';
+import { Mappings } from '../../../../common/types/mappings.interface';
 
 type DeckbuilderProps = {
   deck: Deck;
-  selectedFormat: LotrFormatMetadata;
+  selectedFormat: Mappings;
   filterRequest: (filterName: string, additionalFilter?: string) => void;
 };
 

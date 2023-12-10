@@ -7,14 +7,18 @@ import {
 } from './ringbearer-section-validation.function';
 import { Deck } from '../../../common/types/deck/Deck';
 import { DeckValidityStatus } from '../../../common/types/deck/deck-validity-status.type';
-import { LotrFormatMetadata } from '../expansions/lotr-expansion-metadata.interface';
+import { Mappings } from '../../../common/types/mappings.interface';
 
 describe('ringbearer-section-validity.function', () => {
-  const format = {} as LotrFormatMetadata;
+  const format = {} as Mappings;
   it('should return an OK status and an empty message if the deck has a ring and a ring-bearer', () => {
     const deck: Deck = {
-      ringbearerId: '1',
-      ringId: '2',
+      ringBearer: {
+        cardBlueprintId: '1',
+      },
+      ring: {
+        cardBlueprintId: '1_231',
+      },
     } as Deck;
     const result = ringbearerValidation(deck, format);
 
@@ -23,8 +27,10 @@ describe('ringbearer-section-validity.function', () => {
 
   it('should return an error message when there is no ring', () => {
     const deck: Deck = {
-      ringbearerId: '1',
-      ringId: '',
+      ringBearer: {
+        cardBlueprintId: '1',
+      },
+      ring: undefined,
     } as Deck;
     const result = ringbearerValidation(deck, format);
 
@@ -34,8 +40,10 @@ describe('ringbearer-section-validity.function', () => {
 
   it('should return an error message when there is no ringbearer', () => {
     const deck: Deck = {
-      ringId: '1_231',
-      ringbearerId: '',
+      ringBearer: undefined,
+      ring: {
+        cardBlueprintId: '1_231',
+      },
     } as Deck;
     const result = ringbearerValidation(deck, format);
 
@@ -45,8 +53,8 @@ describe('ringbearer-section-validity.function', () => {
 
   it('should return an error message when there is no ringbearer OR ring', () => {
     const deck: Deck = {
-      ringId: '',
-      ringbearerId: '',
+      ringBearer: undefined,
+      ring: undefined,
     } as Deck;
     const result = ringbearerValidation(deck, format);
 

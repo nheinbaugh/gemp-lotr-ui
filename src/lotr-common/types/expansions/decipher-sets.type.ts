@@ -1,4 +1,4 @@
-import { LotrFormatMetadata } from './lotr-expansion-metadata.interface';
+import { Mappings } from '../../../common/types/mappings.interface';
 
 export type DecipherSets =
   | 'Promo'
@@ -22,10 +22,7 @@ export type DecipherSets =
   | 'TreacheryAndDeceit'
   | 'AgesEnd';
 
-export const decipherSetExpansionMetadata: Record<
-  DecipherSets,
-  LotrFormatMetadata
-> = {
+export const decipherSetExpansionMetadata: Record<DecipherSets, Mappings> = {
   Promo: { displayName: 'Promo', apiName: '00' },
   FellowshipOfTheRing: {
     displayName: '01 - The Fellowship of the Ring',

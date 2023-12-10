@@ -1,5 +1,4 @@
 import { Mappings } from '../../../common/types/mappings.interface';
-import { LotrFormatMetadata } from '../../types/expansions/lotr-expansion-metadata.interface';
 
 export interface PageInformation {
   start: number;
@@ -15,7 +14,7 @@ export interface CollectionApiParameters extends PageInformation {
  * This is the model we use on the UI with friendly typings to allow swapping to display name etc
  */
 export interface CollectionFiltersViewModel {
-  format: LotrFormatMetadata;
+  format: Mappings;
   side?: Mappings;
 
   rarity?: Mappings;
