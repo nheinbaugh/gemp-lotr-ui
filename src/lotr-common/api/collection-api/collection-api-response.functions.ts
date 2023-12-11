@@ -17,9 +17,10 @@ export const convertCollectionCardXmlToViewModel = (
   input: Element,
   areResultsHorizontal = false
 ): CollectionCardViewModel => {
+  const bp = input.attribs.blueprintId ?? input.attribs.blueprintid;
   return {
     ...getBlueprintByCardId(
-      input.attribs.blueprintId,
+      bp,
       input.attribs.group as LotrCollectionCardGroups,
       areResultsHorizontal
     ),

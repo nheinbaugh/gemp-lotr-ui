@@ -34,8 +34,8 @@ describe('collection-api-response.functions', () => {
     const freeps =
       '<card blueprintId="12_3" count="4" group="fp" side="FREE_PEOPLE"/>';
 
-    const data = load(shadow)('card')[0];
-    const freepData = load(freeps)('card')[0];
+    const data = load(shadow, {quirksMode: true})('card')[0];
+    const freepData = load(freeps, {quirksMode: true})('card')[0];
 
     it('should properly parse the card side', () => {
       const shadowActual = convertCollectionCardXmlToViewModel(data);
@@ -49,7 +49,7 @@ describe('collection-api-response.functions', () => {
       const actual = convertCollectionCardXmlToViewModel(freepData);
       const expected = '12_3';
 
-      expect(actual.cardNumber).toBe(expected);
+      expect(actual.cardBlueprintId).toBe(expected);
     });
 
     it('should properly parse the count', () => {
