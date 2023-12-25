@@ -8,7 +8,13 @@ import {
 } from '../../../lotr-common/types/expansions';
 import { Mappings } from '../../../common/types/mappings.interface';
 
-export default function DeckBuilderMenu() {
+type DeckBuilderMenuProps = {
+  onDeckSave: VoidFunction;
+  disableDeckSave: boolean;
+};
+
+export default function DeckBuilderMenu(props: DeckBuilderMenuProps) {
+  const { onDeckSave, disableDeckSave } = props;
   const { filters, updateFilter } = useCardQueryStore();
 
   const setFormat = (input: Mappings | undefined) => {
@@ -41,7 +47,12 @@ export default function DeckBuilderMenu() {
         </IconButton>
       </Tooltip>
       <Tooltip title="Save Deck">
-        <IconButton variant="solid" color="primary">
+        <IconButton
+          variant="solid"
+          color="primary"
+          onClick={onDeckSave}
+          disabled={disableDeckSave}
+        >
           <Save />
         </IconButton>
       </Tooltip>

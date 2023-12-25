@@ -23,6 +23,7 @@ import { executeGetCollectionByFilterRequest } from '../../lotr-common/api/colle
 import { useDeckBuilderStore } from './state/deckbuilder-state';
 import { getCurrentDeck } from './state/deckbuilder-state.selectors';
 import { CardDetailsHover } from '../../lotr-common/components/CardDetailsHover/CardDetailsHover';
+import { saveDeck } from '../../lotr-common/api/deck-api/save-deck-api.function';
 
 // Note to self: this is hot ass garbage, i'm too lazy to figure how I'd rather do this.
 const locationNotBeingUsed = 'no-active-location';
@@ -130,7 +131,10 @@ export default function DeckBuilderContainer() {
         flexDirection="column"
         sx={{ height: '100%', maxHeight: '100vh' }}
       >
-        <DeckBuilderMenu />
+        <DeckBuilderMenu
+          disableDeckSave
+          onDeckSave={() => saveDeck(deck, filters.format)}
+        />
         <Grid display="flex" flexDirection="row" sx={{ height: '100%' }}>
           <Grid sx={{ minWidth: '40%;', height: '100%' }}>
             <DeckSections

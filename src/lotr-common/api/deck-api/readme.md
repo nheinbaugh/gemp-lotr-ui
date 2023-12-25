@@ -33,14 +33,22 @@
   * `POST https://play.lotrtcgpc.net/gemp-lotr-server/deck`
   * Headers
     * content-type: `application/x-www-form-urlencoded`
+  * Body
     * participantId: null
     * deckName: test-deck
-    * targetFormat: fotr_block
+    * targetFormat: 
     * notes: null
     * deckContents: 
   * Response Examples
     * 200 OK (and then pops a modal)
-
+* Rename a deck
+  * `POST https://gemp.starwarsccg.org/gemp-swccg-server/deck/rename`
+  * Headers
+    * content-type: `application/x-www-form-urlencoded`
+  * Body
+    * participantId
+    * oldDeckName
+    * deckName
 
 ## How this UI will Handle Deck Validation/Submission
 * The Save button is disabled unless validated

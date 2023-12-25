@@ -26,5 +26,6 @@ module.exports = {
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
     'import/prefer-default-export': 0,
     'no-plusplus': 0,
+    'no-param-reassign': { props: false}
   },
 };

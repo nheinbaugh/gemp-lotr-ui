@@ -4,8 +4,9 @@ import { NonInteractiveLotrCard } from '../../lotr-common/components/LotrCard/No
 import { useWindowDimensions } from '../../common/hooks/useWindowDimensions';
 import { LoaderData } from '../../common/types/react-router/loader-data.type';
 import { gameHallLoader } from './types';
-import { useClientHeartbeat } from '../../lotr-common/api/hall-api/heartbeat/hall-heartbeat';
 import { useCardBlueprintStore } from '../../lotr-common/state/card-state';
+import { useCurrentUserStore } from '../../lotr-common/state/current-user.state';
+import { useEffect } from 'react';
 
 const getCardWidth = (viewportWidth: number): number => {
   const minWidth = 75; // YEA these are rough and suck...
@@ -25,15 +26,17 @@ export default function GameHall() {
   ];
   const viewportWidth = useWindowDimensions();
   const loaderData = useLoaderData() as LoaderData<typeof gameHallLoader>;
+  const { setChannelNumber } = useCurrentUserStore();
 
-  useClientHeartbeat(loaderData.channelNumber);
+  useEffect(() => {
+    setChannelNumber(loaderData.channelNumber);
+  }, [loaderData.channelNumber]);
 
   return (
     <Box sx={{ p: 2 }}>
       <Button variant="outlined">
         <Link to="/decks">Deck Builder</Link>
       </Button>
-      {/* <Button onClick={() => beater?.stop()}>Stop!</Button> */}
       <Grid container spacing={1}>
         {cards
           .filter((card) => card !== undefined)
