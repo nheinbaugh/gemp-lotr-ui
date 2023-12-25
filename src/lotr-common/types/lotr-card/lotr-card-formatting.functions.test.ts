@@ -98,7 +98,7 @@ describe('card-formatting.functions', () => {
         formattedCardNumber: '001',
         formattedSetNumber: '01',
         isHorizontal: false,
-        imageUrl: 'https://lotrtcgwiki.com/images/lotr01001.jpg',
+        imageUrl: 'https://i.lotrtcgpc.net/decipher/LOTR01001.jpg',
       };
       expect(getBlueprintByCardId(input, group)).toStrictEqual(expected);
     });

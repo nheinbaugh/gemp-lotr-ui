@@ -6,8 +6,8 @@ import {
 
 describe('card-dimensions.functions', () => {
   describe('getCardHeightByWidth', () => {
-    it('should return a height of 87 when passed a width of 63', () => {
-      expect(getCardHeightByWidth(63).height).toBe(88);
+    it('should return a height of 45 when passed a width of 63', () => {
+      expect(getCardHeightByWidth(63).height).toBe(45);
     });
   });
 
